@@ -1,0 +1,88 @@
+//
+// Base
+//
+
+
+
+// Body
+body {
+	background: $content-bg-color;
+}
+
+@include kt-desktop {
+	// Page
+	.kt-wrapper {
+    $block: &;
+		// Fixed Header
+		&--fixed-header {
+			padding-top: kt-get($header-config, base, desktop, default, height);
+		}
+
+		// Fixed Content Head
+		&--fixed-header#{$block}--has-subheader#{$block}--fixed-subheader {
+			padding-top: kt-get($header-config, base, desktop, default, height) + kt-get($subheader-config, fixed, height);
+		}
+	}
+
+	// Wrapper
+	.kt-wrapper {
+		transition: kt-get($aside-config, base, minimize, transition);
+
+		// Fixed Aside
+		.aside--fixed & {
+			padding-left: kt-get($aside-config, base, default, width);
+		}
+
+		// Minimize Aside
+		.aside--fixed.aside--minimize & {
+			padding-left: kt-get($aside-config, base, minimize, width);
+			transition: kt-get($aside-config, base, minimize, transition);
+		}
+	}
+
+	// Subheader
+	.kt-subheader {
+		margin: 0;
+
+		// Fixed subheader mode
+		.kt-header--fixed.kt-subheader--fixed & {
+			position: fixed;
+			height: kt-get($subheader-config, fixed, height);
+			top: kt-get($header-config, base, desktop, default, height);
+			left: 0;
+			right: 0;
+			transition: all 0.3s ease;
+			z-index: kt-get($header-config, base, desktop, fixed, zindex) - 3;
+			background-color: #fff;
+			box-shadow: 0px 10px 30px 0px rgba(82,63,105,0.08);
+			padding-top: 0;
+			padding-bottom: 0;
+		}
+
+		// Fixed header, minimized header and fixed subheader
+		.kt-header--fixed.kt-header--minimize.kt-subheader--fixed & {
+			top: kt-get($header-config, base, desktop, fixed, minimizeHeight);
+			transition: top 0.3s ease;
+		}
+
+		.kt-aside--enabled.kt-subheader--fixed & {
+			left: kt-get($aside-config, base, default, width);
+		}
+
+		.kt-subheader--fixed.aside--minimize-hover &,
+		.kt-subheader--fixed.aside--minimize & {
+			left: kt-get($aside-config, base, minimize, width);
+			transition: kt-get($aside-config, base, minimize, transition);
+		}
+	}
+}
+
+@include kt-tablet-and-mobile {
+	// Page
+	.kt-wrapper {
+		// Fixed Header
+		.kt-header-mobile--fixed & {
+			padding-top: kt-get($header-config, base, mobile, self, default, height);
+		}
+	}
+}

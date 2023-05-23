@@ -1,0 +1,35 @@
+<!--<script lang="ts">-->
+<!--  import { namespace } from 'vuex-class';-->
+<!--  import UserForm from '../../../features/Admin/UsersCrud/_components/UserForm.vue';-->
+
+<!--  const { Action } = namespace('Root');-->
+
+<!--  @Component({-->
+<!--    components: {-->
+<!--      UserForm-->
+<!--    }-->
+<!--  })-->
+<!--  export default class EditUser extends Vue {-->
+<!--    @Action('setBackUrl') setBackUrl;-->
+<!--    @Action('setMenu') setMenu;-->
+<!--    @Action('setActiveClasses') setActiveClasses;-->
+
+<!--    constructor() {-->
+<!--      super();-->
+<!--    }-->
+
+<!--    mounted() {-->
+<!--      this.setBackUrl('/users');-->
+
+<!--      this.setActiveClasses({-->
+<!--        main: '/users',-->
+<!--        sub: 'edit.user',-->
+<!--        title: 'users.title'-->
+<!--      });-->
+<!--    }-->
+<!--  }-->
+<!--</script>-->
+
+<!--<template>-->
+<!--  <user-form />-->
+<!--</template>-->

@@ -1,0 +1,201 @@
+// Build Aside Skin
+.aside {
+	background-color: kt-get($layout-skins, dark);
+
+	// Scrollbar
+	@include perfect-scrollbar-skin(#637099);
+
+	// Footer
+	.aside__footer {
+		background-color: #1f2231;
+
+		.btn {
+			@include kt-transition();
+			background-color: transparent;
+
+			i {
+				@include kt-transition();
+				color: #364b8b;
+			}
+		}
+
+		.show .btn,
+		.btn:hover {
+			@include kt-transition();
+			background-color: #191b27;
+
+			i {
+				@include kt-transition();
+				color: kt-brand-color();
+			}
+		}
+	}
+}
+
+// Build Aside Menu Skin
+@include kt-menu-ver-build-skin(kt-get($aside-config, menu), dark);
+
+// Aside close button
+.aside-close {
+	background-color: rgba(#fff, 0.2);
+
+	i {
+		color: rgba(#fff, 0.7);
+	}
+
+	&:hover {
+		background-color: kt-brand-color();
+
+		i {
+			color: kt-brand-color(inverse);
+		}
+	}
+}
+
+// Modify icon color for flaticon2 icons
+.aside {
+	.aside-menu {
+		> .kt-menu__nav {
+			.kt-menu__item {
+				> .kt-menu__link:not(.kt-menu__link--active):not(.kt-menu__link--here):not(.kt-menu__link--hover) {
+					[class^="flaticon2-"],
+					[class*=" flaticon2-"] {
+						color: #434d6b;
+					}
+				}
+			}
+		}
+	}
+}
+
+.aside {
+	width: kt-get($aside-config, base, default, width);
+	transition: kt-get($aside-config, base, minimize, transition);
+
+	// Menu
+	.aside-menu {
+		margin: 15px 0;
+
+		.ps__rail-y {
+			right: 3px;
+		}
+	}
+
+	// Footer
+	.aside__footer {
+		.aside__footer-nav {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 7px 30px;
+		}
+
+		.aside__footer-item {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+
+		.btn {
+			height: 45px;
+	    	width: 45px;
+			background-color: #f0f0f6;
+			border-radius: 50%;
+
+			i {
+				@include kt-transition();
+				font-size: 1.4rem;
+				color: kt-brand-color();
+			}
+
+			&:hover {
+				background-color: kt-brand-color();
+
+				i {
+					@include kt-transition();
+					color: kt-brand-color(inverse);
+				}
+			}
+		}
+
+		// Minimize
+		.aside--minimize & {
+			.dropdown.dropdown-inline,
+			.btn {
+				display: none;
+
+				&:last-child {
+					display: inline-block;
+					opacity: 0;
+				}
+			}
+		}
+	}
+}
+
+// Desktop Mode
+@include kt-desktop {
+	.aside {
+		// Fixed
+		.aside--fixed & {
+			position: fixed;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			z-index: kt-get($aside-config, base, fixed, zindex);
+		}
+
+		.aside--static & {
+			position: relative;
+			z-index: 1;
+		}
+
+		.kt-header--fixed.aside--static & {
+			padding-top: kt-get($header-config, base, default, height);
+		}
+
+		// Minimize
+		.aside--minimize & {
+			width: kt-get($aside-config, base, minimize, width);
+			transition: kt-get($aside-config, base, minimize, transition);
+		}
+
+		.aside--minimizing & {
+			overflow: hidden;
+
+			.aside-menu {
+				.kt-menu__nav  {
+					width: kt-get($aside-config, base, default, width);
+					overflow: hidden;
+				}
+			}
+		}
+
+		// Scroll
+		@include perfect-scrollbar-ver-size( kt-get($aside-config, base, fixed, scroll, width) );
+	}
+
+	// Fixed & Minimize Aside hover
+	.aside--fixed.aside--minimize-hover {
+		.aside {
+			width: kt-get($aside-config, base, default, width);
+			transition: kt-get($aside-config, base, minimize, transition);
+		}
+
+		.kt-header {
+			transition: kt-get($aside-config, base, minimize, transition);
+			left: kt-get($aside-config, base, minimize, width);
+		}
+
+		.kt-wrapper {
+			transition: kt-get($aside-config, base, minimize, transition);
+			padding-left: kt-get($aside-config, base, minimize, width);
+		}
+	}
+}
+
+// Build aside menu
+@include kt-menu-ver-build-layout(kt-get($aside-config, menu));
+
+// Aside offcanvas panel for mobile mode
+@include kt-offcanvas-build(kt-aside, tablet-and-mobile, kt-get($aside-config, base, offcanvas-mobile));

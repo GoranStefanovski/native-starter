@@ -1,0 +1,5 @@
+FROM node:14
+
+WORKDIR /usr/app
+
+EXPOSE 3030

@@ -1,0 +1,29 @@
+{
+  "ignore": [
+    "/\\/core-js/"
+  ],
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "debug": false,
+        "modules": false,
+        "forceAllTransforms": true,
+        "corejs": "2",
+        "useBuiltIns": "usage",
+        "shippedProposals": true,
+        "targets": { "node": "current" }
+      }
+    ]
+  ],
+  "plugins": [
+    ["@babel/plugin-proposal-decorators", { "version": "legacy" }],
+    "@babel/plugin-proposal-object-rest-spread"
+  ],
+  "overrides": [
+    {
+      "test": "./node_modules",
+      "sourceType": "unambiguous"
+    }
+  ]
+}

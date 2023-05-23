@@ -1,0 +1,17 @@
+/.idea
+/.vscode
+/node_modules
+
+/server
+/docker
+/docker-windows
+/docker-compose-lamp-7.2.x
+/docker-compose-lamp-master
+ValidationDesktopApp/.vs/
+ValidationDesktopApp/packages/EPPlus.5.0.2-rc/.signature.p7s
+ValidationDesktopApp/packages/
+/ValidationDesktopApp/OfferValidator/bin/Debug
+/ValidationDesktopApp/OfferValidator/obj/Debug
+
+yarn-error.log
+yarn.lock

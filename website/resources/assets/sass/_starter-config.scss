@@ -1,0 +1,18 @@
+@import "./utils/imports";
+
+// Layout
+$aside-default-width: 265px;
+$aside-minimize-width: 70px;
+$aside-offcanvas-width: 255px;
+
+// Layout Skins
+$layout-skins: (
+	dark: #1e1e2d,
+	light: #ffffff
+);
+
+// content bg color
+$content-bg-color: #f2f3f8;
+
+// Border Radius
+$border-radius: 4px;
