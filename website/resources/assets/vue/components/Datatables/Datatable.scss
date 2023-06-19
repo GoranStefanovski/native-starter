@@ -115,14 +115,14 @@
   }
 
   &__toggle-detail {
-    > span {
+     span {
       width: 12px;
     }
-    > & {
+     & {
       display: inline-block;
       text-align: right;
 
-      > i {
+       i {
         font-size: 1.4rem;
         width: 12px;
       }

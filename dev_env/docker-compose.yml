@@ -22,6 +22,7 @@ services:
       APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT-/var/www/html}
       PMA_PORT: ${HOST_MACHINE_PMA_PORT}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+
   node:
     build:
       context: ./bin/node
@@ -40,13 +41,14 @@ services:
     working_dir: /usr/app
     environment:
       HOST: 0.0.0.0
+
   database:
     build:
       context: "./bin/${DATABASE}"
     container_name: '${COMPOSE_PROJECT_NAME}-database'
     restart: 'always'
     ports:
-      - "127.0.0.1:${HOST_MACHINE_MYSQL_PORT}:3306"
+      - "${HOST_MACHINE_MYSQL_PORT}:3306"
     networks:
       - main
     volumes:
@@ -59,6 +61,7 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_TCP_PORT: 3306
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: '${COMPOSE_PROJECT_NAME}-phpmyadmin'
@@ -87,6 +90,7 @@ services:
     # volumes:
     #   - /sessions
     #   - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
+
   redis:
     container_name: '${COMPOSE_PROJECT_NAME}-redis'
     image: redis:latest

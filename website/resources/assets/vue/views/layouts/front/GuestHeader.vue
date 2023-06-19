@@ -142,7 +142,7 @@
             </a>
           </li>
           <li class="main-header__upper__list-item">
-            <language-switcher />
+            <!-- <language-switcher /> -->
           </li>
         </ul>
       </div>
