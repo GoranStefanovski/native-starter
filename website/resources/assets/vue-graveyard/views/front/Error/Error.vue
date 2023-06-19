@@ -18,9 +18,11 @@
 </script>
 
 <template>
-  <section class="errorpage">
-    <div class="container">
-      <div class="clearer" />
-    </div>
-  </section>
+  <div>
+    <section class="errorpage">
+      <div class="container">
+        <div class="clearer" />
+      </div>
+    </section>
+  </div>
 </template>

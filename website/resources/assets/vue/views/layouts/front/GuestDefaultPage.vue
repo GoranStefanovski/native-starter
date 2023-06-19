@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref } from 'vue';
+import {ref, provide, onMounted, computed, reactive} from 'vue';
   import VueHeadful from 'vue-headful';
   import { useRouter } from 'vue-router/composables';
   import GuestHeader from '@/views/layouts/front/GuestHeader.vue';
@@ -7,6 +7,7 @@
   import { seoDefaults } from '@/utils/seoDefaults.ts';
 
   const router = useRouter();
+  const fixedHeader = ref(true);
 
   const headful = ref({
     url : `${seoDefaults.url}${router.currentRoute.path}`,
@@ -15,6 +16,10 @@
     keywords : seoDefaults.keywords,
     image : seoDefaults.image
   });
+
+  onMounted(() => {
+    console.log('test');
+  })
 </script>
 
 <template>

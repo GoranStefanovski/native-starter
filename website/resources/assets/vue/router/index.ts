@@ -6,7 +6,7 @@ import { userDashboardRouteConfig } from './user-dashboard';
 import { adminPaths } from './admin';
 import { authPaths } from './auth';
 
-const Error = () => import(/* webpackChunkName: "ErrorPage" */ '../views/front/Error/Error.vue');
+const Error = () => import(/* webpackChunkName: "ErrorPage" */ '../views/layouts/errors/ErrorPage.vue');
 
 Vue.use(VueRouter);
 
