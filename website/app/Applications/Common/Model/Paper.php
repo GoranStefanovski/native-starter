@@ -5,13 +5,13 @@ namespace App\Applications\Common\Model;
 use App\Applications\Common\Model\Ratio;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media as MediaModel;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media as MediaModel;
 
 class Paper extends Model implements HasMedia
 {
-    use HasMediaTrait;
+    use InteractsWithMedia;
     use SoftDeletes { restore as private restoreSoftDelete; }
 
     protected $table = 'papers';

@@ -181,9 +181,9 @@ return [
         /*
          * Package Service Providers...
          */
-        Zizaco\Entrust\EntrustServiceProvider::class,
+        Shanmuga\LaravelEntrust\LaravelEntrustServiceProvider::class,
         Webpatser\Countries\CountriesServiceProvider::class,
-        MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class,
+//        MartinLindhe\VueInternationalizationGenerator\GeneratorProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         \Torann\GeoIP\GeoIPServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
@@ -257,7 +257,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Entrust' => Zizaco\Entrust\EntrustFacade::class,
+        'Entrust' =>  Shanmuga\LaravelEntrust\LaravelEntrustServiceProvider::class,
         'Countries' => Webpatser\Countries\CountriesFacade::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,

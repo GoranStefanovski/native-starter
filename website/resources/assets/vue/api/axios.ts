@@ -14,6 +14,7 @@ Vue.axios.defaults.validateStatus = (status =>
   status < 300
 );
 
+Vue.axios.defaults.withCredentials = true;
 // Vue.axios.interceptors.request.use(function(config) {
 //   return config;
 // }, function (error) {

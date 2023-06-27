@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Auth\RegisteredUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +18,33 @@ Route::group([
     Route::resource('users', 'Controllers\UserController');
 });
 
-// Non auth routes
+// NON AUTHORIZED ROUTES
 Route::group([
     'middleware' => 'api',
     'prefix' => 'guest/user',
 ], function () {
+    Route::post('/tokens/create', [AuthenticatedSessionController::class,'createUserToken']);
+    Route::post('/login', [AuthenticatedSessionController::class,'login']);
+    Route::post('register', [RegisteredUserController::class, 'store']);
     Route::post('activate', 'Controllers\UserController@userActivate');
     Route::post('draw', 'Controllers\UserController@drawUserGuest');
-    Route::get('{id}/get', 'Controllers\UserController@getUserGuest');// TODO this route should probably not be available unless you are logged in
-    Route::post('new', 'Controllers\UserController@storeUserGuest');
-    Route::get('myprofile', 'Controllers\UserController@getMyProfile');// TODO Same issue as above
-    Route::post('myprofile/{id}', 'Controllers\UserController@updateMyProfile');// TODO Same issue as above
-    Route::post('avatar', 'Controllers\UserController@updateMyAvatar');
+//    Route::get('{id}/get', 'Controllers\UserController@getUserGuest');// TODO this route should probably not be available unless you are logged in
+//    Route::post('new', 'Controllers\UserController@storeUserGuest');
+//    Route::get('myprofile', 'Controllers\UserController@getMyProfile');// TODO Same issue as above
+//    Route::post('myprofile/{id}', 'Controllers\UserController@updateMyProfile');// TODO Same issue as above
+//    Route::post('avatar', 'Controllers\UserController@updateMyAvatar');
 });
 
-// Authorized routes
+// AUTHORIZED ROUTES
+Route::group([
+    'middleware' => ['auth:sanctum'],
+    'prefix' => 'usersanct'
+], function (){
+    Route::post('/logout', [AuthenticatedSessionController::class ,'logout']); //TODO: Try to move these inside the auth.php route file, test if the api middleware somehow causes problems
+    Route::get('/test',[AuthenticatedSessionController::class ,'test']);
+    Route::get('/user',[AuthenticatedSessionController::class ,'user']);
+});
+
 Route::group([
     'middleware' => ['api','jwt.renew'],
     'prefix' => 'user',

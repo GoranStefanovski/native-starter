@@ -94,5 +94,18 @@ RUN a2enmod rewrite headers
 RUN a2enmod proxy_http
 RUN a2enmod proxy
 
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libmemcached-dev \
+    curl
+
+# Install Memcached for php 8
+RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/refs/tags/v3.1.5.tar.gz" \
+    && mkdir -p /usr/src/php/ext/memcached \
+    && tar -C /usr/src/php/ext/memcached -zxvf /tmp/memcached.tar.gz --strip 1 \
+    && docker-php-ext-configure memcached --disable-memcached-sasl \
+    && docker-php-ext-install memcached \
+    && rm /tmp/memcached.tar.gz
+
 # Cleanup
 RUN rm -rf /usr/src/*

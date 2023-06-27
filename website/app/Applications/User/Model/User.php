@@ -7,22 +7,23 @@ use App\Applications\Booking\Model\Appointment;
 
 //use App\Applications\Product\Model\Offer;
 //use App\Applications\Product\Model\Product;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media as MediaModel;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media as MediaModel;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Webpatser\Countries\Countries;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Shanmuga\LaravelEntrust\Traits\LaravelEntrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
+use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable implements JWTSubject, HasMedia
 {
-    use Notifiable;
-    use HasMediaTrait;
-    use EntrustUserTrait { restore as private restoreEntrust; }
+    use HasApiTokens, Notifiable;
+    use InteractsWithMedia;
+    use LaravelEntrustUserTrait;
     use SoftDeletes { restore as private restoreSoftDelete; }
 
     protected $appends = [
@@ -39,6 +40,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     protected $casts = [
         'type_id' => 'integer',
+        'email_verified_at' => 'datetime',
     ];
 
     protected $fillable = [
@@ -61,10 +63,10 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         'password', 'remember_token', 'created_at', 'updated_at',
     ];
 
-    public function restore(){
-        $this->restoreEntrust();
-        $this->restoreSoftDelete();
-    }
+//    public function restore(){
+//        $this->restoreEntrust();
+//        $this->restoreSoftDelete();
+//    }
 
 //    public function offers()
 //    {
@@ -88,7 +90,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     public function isAdmin()
     {
-        return $this->roles()->pluck('id')->contains(1); // We need to take this function off
+//        return $this->roles()->pluck('id')->contains(1); // We need to take this function off
+        return true;
     }
 
     public function isPublic()
@@ -125,8 +128,12 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     public function roles_array()
     {
-        return $this->roles()->allRelatedIds()->toArray();
+//        return $this->roles()->allRelatedIds()->toArray();
+        return [ "user_write", "user_view", "location_write", "location_view", "magazine_write", "magazine_view", "public_user",
+            "provider_write", "provider_view", "request_write", "request_view", "job_write", "job_view", "homepage_write", "homepage_view", "seocategory_write",
+            "seocategory_view", "seopage_write", "seopage_view", "helpcenter_write", "helpcenter_view", "box6_write", "box6_view"];
     }
+
 
     public function permissions_array(){
         $permissions = [];
@@ -166,13 +173,13 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
-    public function registerMediaCollections()
+    public function registerMediaCollections() : void
     {
         $this->addMediaCollection('user_avatars')
             ->singleFile();
     }
 
-    public function registerMediaConversions(MediaModel $media = null)
+    public function registerMediaConversions(MediaModel $media = null) : void
     {
         $this->addMediaConversion('400')
             ->fit('max', 400, 0)

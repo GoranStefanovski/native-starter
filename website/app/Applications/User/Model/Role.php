@@ -4,9 +4,8 @@ namespace App\Applications\User\Model;
 
 use App\Applications\User\Model\User;
 use App\Applications\User\Model\Permission;
-use Zizaco\Entrust\EntrustRole;
 
-class Role extends EntrustRole
+class Role
 {
     const ADMIN = 'administrator';
     const COLLABORATOR = 'collaborator';

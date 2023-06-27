@@ -36,5 +36,5 @@ return [
     | You can also use Generator::VUE_I18N or Generator::VUEX_I18N
     |
     */
-    'i18nLib' => \MartinLindhe\VueInternationalizationGenerator\Generator::VUEX_I18N,
+//    'i18nLib' => \MartinLindhe\VueInternationalizationGenerator\Generator::VUEX_I18N,
 ];

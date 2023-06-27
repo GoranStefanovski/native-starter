@@ -2,9 +2,9 @@
 
 namespace App\Applications\User\Model;
 
-use Zizaco\Entrust\EntrustPermission;
 
-class Permission extends EntrustPermission
+
+class Permission
 {
     protected $fillable = ['name', 'display_name', 'description' ];
 }

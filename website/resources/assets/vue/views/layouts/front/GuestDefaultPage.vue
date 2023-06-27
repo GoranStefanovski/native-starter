@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, provide, onMounted, computed, reactive} from 'vue';
+  import {ref, provide, onMounted, computed, reactive} from 'vue';
   import VueHeadful from 'vue-headful';
   import { useRouter } from 'vue-router/composables';
   import GuestHeader from '@/views/layouts/front/GuestHeader.vue';
@@ -48,5 +48,6 @@ import {ref, provide, onMounted, computed, reactive} from 'vue';
     </div>
 
     <GuestFooter />
+    waaw
   </div>
 </template>

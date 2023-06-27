@@ -40,10 +40,13 @@ class Kernel extends HttpKernel
         ],
 
         'api' => [
+//            \App\Http\Middleware\EncryptCookies::class,
+//            \App\Http\Middleware\VerifyCsrfToken::class,
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
             'throttle:600,1',
             'bindings',
         ],
-
     ];
 
     /**
@@ -61,9 +64,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'admin' => \App\Http\Middleware\IsAdmin::class,
-        'role' => \Zizaco\Entrust\Middleware\EntrustRole::class,
-        'permission' => \Zizaco\Entrust\Middleware\EntrustPermission::class,
-        'ability' => \Zizaco\Entrust\Middleware\EntrustAbility::class,
+        'role' => \Shanmuga\LaravelEntrust\Middleware\LaravelEntrustRole::class,
+        'permission' => \Shanmuga\LaravelEntrust\Middleware\LaravelEntrustPermission::class,
+        'ability' => \Shanmuga\LaravelEntrust\Middleware\LaravelEntrustAbility::class,
         'logged' => \App\Http\Middleware\LoggedUser::class,
         'owner' => \App\Http\Middleware\CheckOwnership::class
     ];

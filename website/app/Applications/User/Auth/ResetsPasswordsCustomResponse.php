@@ -12,7 +12,7 @@ use Illuminate\Foundation\Auth\ResetsPasswords;
 
 trait ResetsPasswordsCustomResponse
 {
-    use ResetsPasswords;
+//    use ResetsPasswords;
 
     /**
      * Get the password reset validation error messages.
