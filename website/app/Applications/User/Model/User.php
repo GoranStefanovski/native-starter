@@ -7,6 +7,7 @@ use App\Applications\Booking\Model\Appointment;
 
 //use App\Applications\Product\Model\Offer;
 //use App\Applications\Product\Model\Product;
+use Laravel\Cashier\Billable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as MediaModel;
@@ -25,6 +26,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     use InteractsWithMedia;
     use LaravelEntrustUserTrait;
     use SoftDeletes { restore as private restoreSoftDelete; }
+    use Billable;
 
     protected $appends = [
         'home_path',

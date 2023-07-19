@@ -1,7 +1,7 @@
 <script lang="ts">
   import Vue, { defineComponent } from 'vue';
   import { mapState, mapActions } from "vuex";
-
+  import { onMounted } from 'vue';
   import { isTouchDevice } from "@/utils/userAgentCheck";
   import BaseAuth from './views/auth/BaseAuth.vue';
 

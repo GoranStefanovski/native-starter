@@ -38,23 +38,23 @@
     "anthonymartin/geo-location": "^1.0",
     "barryvdh/laravel-debugbar": "^3.2.3",
     "fideloper/proxy": "^4.0",
-    "shanmuga/laravel-entrust": "^3.0",
     "guzzlehttp/guzzle": "^7.5",
+    "laravel/cashier": "^13.17",
     "laravel/framework": "^v9.0.0",
     "laravel/helpers": "^1.5",
-    "laravel/tinker": "*",
     "laravel/sanctum": "2.15.1",
+    "laravel/tinker": "*",
+    "lcobucci/jwt": "^4.0.4",
     "pda/pheanstalk": "~3.0",
     "predis/predis": "^1.1",
     "propaganistas/laravel-phone": "^4.2",
+    "shanmuga/laravel-entrust": "^3.0",
     "spatie/geocoder": "^3.14",
     "spatie/laravel-medialibrary": "^10.0.0",
     "staudenmeir/belongs-to-through": "^2.5",
     "torann/geoip": "*",
     "tymon/jwt-auth": "dev-develop",
-    "webpatser/laravel-countries": "dev-master",
-    "lcobucci/jwt": "^4.0.4"
-
+    "webpatser/laravel-countries": "dev-master"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.6",

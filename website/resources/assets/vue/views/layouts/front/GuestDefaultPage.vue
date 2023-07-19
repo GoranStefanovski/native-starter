@@ -4,6 +4,7 @@
   import { useRouter } from 'vue-router/composables';
   import GuestHeader from '@/views/layouts/front/GuestHeader.vue';
   import GuestFooter from '@/views/layouts/front/GuestFooter.vue';
+  import Stripe from '@/components/Stripe/Stripe.vue';
   import { seoDefaults } from '@/utils/seoDefaults.ts';
 
   const router = useRouter();
@@ -46,6 +47,7 @@
         <RouterView :key="$route.fullPath" />
       </transition>
     </div>
+    <Stripe></Stripe>
 
     <GuestFooter />
     waaw

@@ -2,7 +2,7 @@
 <html lang="mk">
 
 <head>
-    <title>{{config('app.name', 'Freja')}}</title>
+    <title>{{config('app.name', 'Starter')}}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta id="" name="viewport" content="width=device-width, initial-scale=1">
@@ -35,6 +35,7 @@
     <meta property="og:url" content="">
     <meta property="og:description" content="">
     <link href="" rel="image_src">
+    <script src="https://js.stripe.com/v3"></script>
 
     <script type="text/javascript">
         var baseUrl = "{{url('/api')}}";

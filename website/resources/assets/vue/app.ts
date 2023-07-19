@@ -28,7 +28,7 @@ import VueFormulateAutocomplete from '@/components/VueFormulate/VueFormulateAuto
 
 import MenuLink from '@/components/Admin/Menu/MenuLink/MenuLink.vue';
 import SubMenu from '@/components/Admin/Menu/SubMenu/SubMenu.vue';
-
+import { StripePlugin } from '@vue-stripe/vue-stripe';
 // register your component with Vue
 Vue.component('VueFormulateAutocomplete', VueFormulateAutocomplete);
 // Vue.component('VueFormulateSwitch', VueFormulateSwitch);
@@ -92,6 +92,14 @@ Vue.use(VueFormulate, {
     // }
   }
 });
+const options = {
+  pk: "pk_test_51KjLshCKJEL4uCt4pLkzi0GiXlRQE8raUG6GyPCu1JGesstjo5p45p3Gi7BTVUP8Ezjh5LuMcSy3W0LpojdlCPBX00GPLEf3ky",
+  stripeAccount: process.env.STRIPE_ACCOUNT,
+  apiVersion: process.env.API_VERSION,
+  locale: process.env.LOCALE,
+};
+
+Vue.use(StripePlugin, options);
 
 // Finally create the Vue instance passing the defined routes, store and App component
 new Vue({
