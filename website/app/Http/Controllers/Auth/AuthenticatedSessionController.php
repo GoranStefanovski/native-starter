@@ -10,7 +10,9 @@ use App\Providers\RouteServiceProvider;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -61,7 +63,8 @@ class AuthenticatedSessionController extends Controller
 
     public function login(Request $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
+        if ($token = $this->guard()->attempt($request->only('email', 'password'))) {
+//            if (!Auth::attempt($request->only('email', 'password'))) {
             return $this->error('','Credentials do not match',401);
 //                response()->json([
 //                'message' => 'Invalid login details'
@@ -72,7 +75,7 @@ class AuthenticatedSessionController extends Controller
 //        dd($user->name);
         return $this->success([
             'user' => $user,
-            'token' => $user->createToken('Api token of ' . $user->name)->plainTextToken
+            'token' => $user->createToken('LOGGED ' . $user->first_name)->plainTextToken
 //            'token_type' => 'Bearer',
         ]);
     }
@@ -92,15 +95,47 @@ class AuthenticatedSessionController extends Controller
         return ['token' => $token->plainTextToken];
     }
 
+    /**
+     * @throws ValidationException
+     */
+    public function getToken(Request $request){
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+            'device_name' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user || ! Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+        return $user->createToken($request->device_name)->plainTextToken;
+}
+
     public function test(){
         return 'TEST';
     }
 
-    public function user(){
-        $obj = Auth::user();
+    public function user(Request $request){
+//        $obj = Auth::user();
 //        $obj['roles_array'] = Auth::user()->roles_array();
 //        $permissions = Auth::user()->permissions_array();
 //        $obj['permissions_array'] = $permissions;
-        return response()->json($obj);
+//       return response()->json($obj);
+        return $request->user();
     }
+
+    /**
+     * Get the guard to be used during authentication.
+     *
+     * @return \Illuminate\Contracts\Auth\Guard
+     */
+    public function guard()
+    {
+        return Auth::guard('web');
+    }
+
 }

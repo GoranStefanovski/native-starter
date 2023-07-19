@@ -25,7 +25,8 @@ Route::group([
 ], function () {
     Route::post('/tokens/create', [AuthenticatedSessionController::class,'createUserToken']);
     Route::post('/login', [AuthenticatedSessionController::class,'login']);
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register', [RegisteredUserController::class, 'register']);
+    Route::post('/sanctum/token', [AuthenticatedSessionController::class,'getToken']);
     Route::post('activate', 'Controllers\UserController@userActivate');
     Route::post('draw', 'Controllers\UserController@drawUserGuest');
 //    Route::get('{id}/get', 'Controllers\UserController@getUserGuest');// TODO this route should probably not be available unless you are logged in

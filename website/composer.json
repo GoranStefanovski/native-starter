@@ -54,6 +54,7 @@
     "tymon/jwt-auth": "dev-develop",
     "webpatser/laravel-countries": "dev-master",
     "lcobucci/jwt": "^4.0.4"
+
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.6",
@@ -64,6 +65,7 @@
     "nunomaduro/collision": "6.*",
     "nunomaduro/larastan": "2.*",
     "phpunit/phpunit": "^9.3"
+
   },
   "autoload": {
     "classmap": ["database/seeds", "database/factories"],
@@ -75,7 +77,10 @@
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/php/"
-    }
+    },
+    "classmap": [
+      "tests"
+    ]
   },
   "extra": {
     "laravel": {

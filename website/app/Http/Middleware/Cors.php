@@ -15,6 +15,11 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
+        $referer = $request->headers->get('referer');
+        if($referer == 'localhost:19006'){
+            return $next($request);
+        }
+
         return $next($request)
             ->header('Access-Control-Allow-Origin', '*')
             ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')

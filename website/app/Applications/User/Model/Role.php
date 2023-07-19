@@ -4,8 +4,9 @@ namespace App\Applications\User\Model;
 
 use App\Applications\User\Model\User;
 use App\Applications\User\Model\Permission;
+use Illuminate\Database\Eloquent\Model;
 
-class Role
+class Role extends Model
 {
     const ADMIN = 'administrator';
     const COLLABORATOR = 'collaborator';
