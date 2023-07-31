@@ -90,8 +90,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     public function isAdmin()
     {
-//        return $this->roles()->pluck('id')->contains(1); // We need to take this function off
-        return true;
+        return $this->roles()->pluck('id')->contains(1); // We need to take this function off
+//        return true;
     }
 
     public function isPublic()
@@ -128,10 +128,10 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     public function roles_array()
     {
-//        return $this->roles()->allRelatedIds()->toArray();
-        return [ "user_write", "user_view", "location_write", "location_view", "magazine_write", "magazine_view", "public_user",
-            "provider_write", "provider_view", "request_write", "request_view", "job_write", "job_view", "homepage_write", "homepage_view", "seocategory_write",
-            "seocategory_view", "seopage_write", "seopage_view", "helpcenter_write", "helpcenter_view", "box6_write", "box6_view"];
+        return $this->roles()->allRelatedIds()->toArray();
+//        return [ "user_write", "user_view", "location_write", "location_view", "magazine_write", "magazine_view", "public_user",
+//            "provider_write", "provider_view", "request_write", "request_view", "job_write", "job_view", "homepage_write", "homepage_view", "seocategory_write",
+//            "seocategory_view", "seopage_write", "seopage_view", "helpcenter_write", "helpcenter_view", "box6_write", "box6_view"];
     }
 
 

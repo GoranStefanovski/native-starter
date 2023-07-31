@@ -120,10 +120,11 @@ class AuthenticatedSessionController extends Controller
     }
 
     public function user(Request $request){
-//        $obj = Auth::user();
-//        $obj['roles_array'] = Auth::user()->roles_array();
-//        $permissions = Auth::user()->permissions_array();
-//        $obj['permissions_array'] = $permissions;
+//        dd($this->guard());
+        $obj = Auth::user();
+        $obj['roles_array'] = Auth::user()->roles_array();
+        $permissions = Auth::user()->permissions_array();
+        $obj['permissions_array'] = $permissions;
 //       return response()->json($obj);
         return $request->user();
     }
