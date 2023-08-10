@@ -77,20 +77,13 @@ class AuthenticatedSessionController extends Controller
     public function login(Request $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
-
-//            if (!Auth::attempt($request->only('email', 'password'))) {
             return $this->error('','Credentials do not match',401);
-//                response()->json([
-//                'message' => 'Invalid login details'
-//            ], 401);
         }
         $user = User::where('email', $request['email'])->firstOrFail();
-//        $token = $user->createToken('auth_token')->plainTextToken;
-//        dd($user->name);
+
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('LOGGED ' . $user->first_name)->plainTextToken
-//            'token_type' => 'Bearer',
         ]);
     }
 
@@ -105,33 +98,18 @@ class AuthenticatedSessionController extends Controller
     public function register(StoreUserRequest $request)
     {
         $request->validated($request->all());
-//        $request->validate([
-//            'name'=>['required'],
-//            'email'=>['required','email','unique:users,email'],
-//            'password'=>['required','min:8','confirmed'],
-//            'device_name'=>['required'],
-//        ]);
         $user = User::create([
             'first_name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('REGISTERED ' . $user->first_name)->plainTextToken
         ]);
-
-//        event(new Registered($user));
-//
-//        Auth::login($user);
-//
-//        return $user;
-//        return redirect(RouteServiceProvider::HOME);
     }
 
     public function editUser(Request $request){
-//        dd(Auth::user());
         $user = Auth::user();
         $data['first_name'] = $request['name'];
         $data['email'] = $request['email'];
@@ -207,7 +185,8 @@ class AuthenticatedSessionController extends Controller
 
     public function updateMyProfile($id,Request $request){
         $request_array = $request->all();
-        $user = $this->user::findOrFail($id);
+//        $user = $this->user::findOrFail($id);
+        $user = Auth::user();
         $data['first_name'] = $request_array['first_name'];
         $data['last_name'] = $request_array['last_name'];
         $data['email'] = $request_array['email'];

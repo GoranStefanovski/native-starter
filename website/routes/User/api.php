@@ -25,7 +25,7 @@ Route::group([
 ], function () {
     Route::post('/tokens/create', [AuthenticatedSessionController::class,'createUserToken']);
     Route::post('/login', [AuthenticatedSessionController::class,'login']);
-    Route::post('/register', [RegisteredUserController::class, 'register']);
+    Route::post('/register', [AuthenticatedSessionController::class, 'register']);
     Route::post('/sanctum/token', [AuthenticatedSessionController::class,'getToken']);
     Route::post('activate', 'Controllers\UserController@userActivate');
     Route::post('draw', 'Controllers\UserController@drawUserGuest');
@@ -44,7 +44,7 @@ Route::group([
     Route::post('/logout', [AuthenticatedSessionController::class ,'logout']);
     Route::get('/test',[AuthenticatedSessionController::class ,'test']);
     Route::get('/user',[AuthenticatedSessionController::class ,'user']);
-    Route::post('/user/edit',[AuthenticatedSessionController::class ,'editUser']);
+    Route::post('/user/edit',[AuthenticatedSessionController::class ,'updateMyProfile']);
 });
 
 
