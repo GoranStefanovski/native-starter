@@ -2,7 +2,6 @@
 
 namespace App\Applications\User\Model;
 
-use App\Applications\Booking\Model\Appointment;
 
 
 //use App\Applications\Product\Model\Offer;

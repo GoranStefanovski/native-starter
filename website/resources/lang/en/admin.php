@@ -54,6 +54,13 @@ return [
         'email' => 'Email',
         'first_name' => 'First name',
         'last_name' => 'Last name',
+        'post' => [
+            'country' => 'Country',
+            'desc' => 'Description',
+            'city' => 'City',
+            'rating' => 'Rating',
+            'creator' => 'Created By',
+        ],
     ],
 
     //ADMIN PAGES
@@ -119,6 +126,10 @@ return [
     'users' => [
         'add' => 'Add user',
         'export_csv' => 'Export to CSV',
+    ],
+
+    'posts' => [
+        'add' => 'Add post'
     ],
 
     'taxonomies' => [

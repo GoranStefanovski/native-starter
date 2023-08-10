@@ -90,6 +90,27 @@ class HomeController extends Controller
                         'permission' => 'user_view',
                     ],
                 ]
+            ],
+            [
+                'label' => 'posts.label',
+                'name' => 'posts',
+                'link' => 'posts.category_one',
+                'expanded' => false,
+                'permission' => 'user_view',
+                'subcategories' => [
+                    [
+                        'label' => 'strings.category.one',
+                        'name' => 'category_one',
+                        'link' => 'posts.category_one',
+                        'permission' => 'user_view',
+                    ],
+                    [
+                        'label' => 'strings.category.two',
+                        'name' => 'category_two',
+                        'link' => 'posts.category_two',
+                        'permission' => 'user_view',
+                    ],
+                ]
             ]
         ];
 

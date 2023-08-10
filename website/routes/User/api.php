@@ -36,16 +36,19 @@ Route::group([
 //    Route::post('avatar', 'Controllers\UserController@updateMyAvatar');
 });
 
-// AUTHORIZED ROUTES
+// AUTHORIZED ROUTES FOR REACT NATIVE APP
 Route::group([
     'middleware' => ['auth:sanctum'],
     'prefix' => 'usersanct'
 ], function (){
-    Route::post('/logout', [AuthenticatedSessionController::class ,'logout']); //TODO: Try to move these inside the auth.php route file, test if the api middleware somehow causes problems
+    Route::post('/logout', [AuthenticatedSessionController::class ,'logout']);
     Route::get('/test',[AuthenticatedSessionController::class ,'test']);
     Route::get('/user',[AuthenticatedSessionController::class ,'user']);
+    Route::post('/user/edit',[AuthenticatedSessionController::class ,'editUser']);
 });
 
+
+// AUTHORIZED ROUTES FOR ADMIN PANEL
 Route::group([
     'middleware' => ['api','jwt.renew'],
     'prefix' => 'user',

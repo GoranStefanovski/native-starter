@@ -1,18 +1,24 @@
 <script setup lang="ts">
-  import { computed } from 'vue';
+import {computed, inject} from 'vue';
   import 'reflect-metadata'
 
-  const props = defineProps(['form', 'value', 'id', 'isInline', 'label', 'isDisabled', 'options']);
+  const props = defineProps(['value', 'id', 'isInline', 'label', 'isDisabled', 'options','getcities']);
   const emit = defineEmits(['update:modelValue']);
   const colOneClass = props.isInline ? 'col-12' : 'col-lg-4 col-md-2';
   const colTwoClass = props.isInline || !!props.label ? 'col-12' : 'col-lg-8 col-md-10';
   const labelClass = props.isInline ? 'text-2' : 'col-form-label text-2';
   const formGroupClass = props.isInline ? 'form-group' : 'form-group form-group-inline';
+  const form = inject('form');
 
   const hasError = computed(() => props?.form?.errors?.has(props.id));
 
   const emitValue = (value) => {
-    emit('update:modelValue', value)
+    console.log(value);
+    let test = props.getcities;
+    if(props.getcities)
+      emit('update:modelValue', value, props.getcities)
+    else emit('update:modelValue', value)
+
   }
 </script>
 
@@ -37,6 +43,7 @@
             'error': hasError
           }"
           :value="value"
+          v-model="form[id]"
           :disabled="isDisabled"
           @input="emitValue($event.target.value)"
         >

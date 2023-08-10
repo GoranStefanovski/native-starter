@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 use App\Applications\User\Model\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Providers\RouteServiceProvider;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
 /**
- * 
+ *
  * @property User $user
  */
 class AuthenticatedSessionController extends Controller
@@ -38,7 +39,7 @@ class AuthenticatedSessionController extends Controller
         return view('auth.login');
     }
 
-    
+
 
     /**
      * Handle an incoming authentication request.
@@ -91,6 +92,57 @@ class AuthenticatedSessionController extends Controller
             'token' => $user->createToken('LOGGED ' . $user->first_name)->plainTextToken
 //            'token_type' => 'Bearer',
         ]);
+    }
+
+    /**
+     * Handle an incoming registration request.
+     *
+     * @param  StoreUserRequest  $request
+     * @return \Illuminate\Http\JsonResponse
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function register(StoreUserRequest $request)
+    {
+        $request->validated($request->all());
+//        $request->validate([
+//            'name'=>['required'],
+//            'email'=>['required','email','unique:users,email'],
+//            'password'=>['required','min:8','confirmed'],
+//            'device_name'=>['required'],
+//        ]);
+        $user = User::create([
+            'first_name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
+
+        return $this->success([
+            'user' => $user,
+            'token' => $user->createToken('REGISTERED ' . $user->first_name)->plainTextToken
+        ]);
+
+//        event(new Registered($user));
+//
+//        Auth::login($user);
+//
+//        return $user;
+//        return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function editUser(Request $request){
+//        dd(Auth::user());
+        $user = Auth::user();
+        $data['first_name'] = $request['name'];
+        $data['email'] = $request['email'];
+        $data['password'] = Hash::make($request['password']);
+        try{
+            $user->update($data);
+            return "User Updated";
+        }catch( \Exception $e){
+            return $e;
+        }
+//        $user = User::where('email', $request['email'])->firstOrFail();
     }
 
     public function logout(Request $request){
@@ -147,7 +199,7 @@ class AuthenticatedSessionController extends Controller
      *
      * @return \Illuminate\Contracts\Auth\Guard
      */
-    public function guard()
+    public function guard(): \Illuminate\Contracts\Auth\Guard
     {
         return Auth::guard('web');
     }

@@ -169,7 +169,6 @@ class UserDAL implements UserDALInterface
         if (array_key_exists($data['column'], self::COLUMNS_MAP)) {
             $query->orderBy(self::COLUMNS_MAP[$data['column']], $data['dir']);
         }
-
         $paginator = $query->paginate($data['length']);
         return $this->prepareDatatablesData($paginator, $data);
     }

@@ -1,7 +1,7 @@
 export type InitFormFromItem = (
   onInit ?: Function,
   resetOnSuccess ?: Boolean
-) => void
+) => Promise<any>
 
 export type OnSubmit = (
   route : String,

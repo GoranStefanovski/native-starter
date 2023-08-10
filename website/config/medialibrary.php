@@ -32,6 +32,8 @@ return [
         'domain' => 'https://'.env('AWS_BUCKET').'.s3.amazonaws.com',
     ],
 
+//    'conversions_disk' => 'public', // or the disk you're using
+
     'remote' => [
         /*
          * Any extra headers that should be included when uploading media to

@@ -87,6 +87,19 @@ const user: UserFormItem = {
   billing_details: cloneDeep(detail)
 };
 
+const post: PostFormItem = {
+  id: 0,
+  title: '',
+  description: '',
+  country_id: 0,
+  country: '',
+  city: '',
+  city_id: '',
+  is_disabled: 0,
+  uploaded_file: createFile('image/jpg'),
+  media: createFile('image/jpg')
+}
+
 const slide: SlideFormItem = {
   id: 0,
   title: '',
@@ -194,6 +207,7 @@ export {
   detail,
   cliche,
   user,
+  post,
   slide,
   shipping,
   lamination,

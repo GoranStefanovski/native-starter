@@ -3,13 +3,18 @@
   // import { DialogComponent } from 'vue-modal-dialogs';
 
   const props = defineProps(['isConfirm', 'message'])
+  const emit = defineEmits(['close']);
 
-  const cancel = () => {
-    // this.$close(false);
-  }
+  // const cancel = () => {
+  //   this.$close(false);
+  // }
+  //
+  // const ok = () => {
+  //   this.$close(true);
+  // }
 
-  const ok = () => {
-    // this.$close(true);
+  const closeWithResult = (result: boolean) => {
+    emit('close', result);
   }
 
 </script>
@@ -24,14 +29,14 @@
         <div class="modal-footer">
           <button
             variant="primary"
-            @click="ok"
+            @click="closeWithResult(true)"
           >
             {{ $t('buttons.ok') }}
           </button>
           <button
             v-if="isConfirm"
             variant="secondary"
-            @click="cancel"
+            @click="closeWithResult(false)"
           >
             {{ $t('buttons.cancel') }}
           </button>

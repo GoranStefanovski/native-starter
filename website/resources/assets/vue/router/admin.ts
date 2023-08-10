@@ -5,10 +5,12 @@ const DefaultPage = () => import(/* webpackChunkName: "DefaultPage" */ '../views
 const Dashboard = () => import(/* webpackChunkName: "AdminDashboard" */ '../views/admin/Dashboard.vue');
 const Users = () => import(/* webpackChunkName: "Users" */ '../views/admin/Users/Users.vue');
 const PublicUsers = () => import(/* webpackChunkName: "PublicUsers" */ '../views/admin/Users/PublicUsers.vue');
+const Posts = () => import(/* webpackChunkName: "PublicUsers" */ '../views/admin/Posts/Posts.vue');
 const MyProfile = () => import(/* webpackChunkName: "MyProfile" */ '../views/admin/Users/MyProfile.vue');
 // const AddUser = () => import(/* webpackChunkName: "AddUser" */ '../views/admin/Users/AddUser.vue');
 // const EditUser = () => import(/* webpackChunkName: "EditUser" */ '../views/admin/Users/EditUser.vue');
 const UserForm = () => import(/* webpackChunkName: "UserForm" */ '../features/Admin/UsersCrud/_components/UserForm.vue');
+const PostForm = () => import(/* webpackChunkName: "UserForm" */ '../features/Admin/PostsCrud/_components/PostsForm.vue');
 const NotFound = () => import(/* webpackChunkName: "AdminNotFound" */ '../components/Admin/NotFound.vue');
 const StaticContent = () => import(/* webpackChunkName: "StaticContent" */ '../features/Admin/StaticContent.vue');
 const Example = () =>  import('../features/Admin/Examples/Example.vue');
@@ -144,6 +146,51 @@ export let adminPaths: RouteConfig =
           }
         }
       },
+      {
+        path: 'posts',
+        name: 'posts.category_one',
+        component: Posts,
+        meta: {
+          title: Vue.i18n.translate('posts.title', null),
+          auth: {
+            roles: ['user_view','user_write'],
+            // forbiddenRedirect: '/'
+          }
+        }
+      },
+      {
+        path: 'posts',
+        name: 'posts.category_two',
+        component: Posts,
+        meta: {
+          title: Vue.i18n.translate('posts.title', null),
+          auth: {
+            roles: ['user_view','user_write'],
+            // forbiddenRedirect: '/'
+          }
+        }
+      },
+      {
+        path: 'post/new',
+        name: 'add.post',
+        component: PostForm,
+        meta: {
+          title: Vue.i18n.translate('users.add.post', null),
+          auth: {
+            roles: ['user_write','user_view']
+          }
+        }
+      }, {
+        path: 'postedit/:postId/edit',
+        name: 'edit.post',
+        component: PostForm,
+        meta: {
+          title: Vue.i18n.translate('users.edit_post', null),
+          auth: {
+            roles: ['user_write']
+          }
+        }
+      }
       /*INSERT NEW CONFIGURATOR OPTIONS HERE*/
     ]
   };

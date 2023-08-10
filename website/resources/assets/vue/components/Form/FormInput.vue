@@ -7,8 +7,8 @@
   const form = inject('form');
   const labelStart = inject('labelStart');
 
-  const emitValue = (value) => {
-    emit('update:modelValue', value);
+  const emitValue = (value,id) => {
+    emit('update:modelValue', value,id);
   }
 </script>
 
@@ -32,14 +32,13 @@
     </label>
     <input
       :id="id"
+      v-model="form[id]"
       type="text"
       aria-describedby="PLACEHOLDER"
-      :value="value"
       :name="id"
       :class="['form-control', {'error':form.errors.has(id)}]"
       :disabled="disabled"
-      :type="type"
-      @input="emitValue($event.target.value)"
+      @input="emitValue($event.target.value,id)"
     >
   </div>
 </template>

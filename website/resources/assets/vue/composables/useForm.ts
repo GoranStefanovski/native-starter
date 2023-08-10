@@ -46,9 +46,9 @@ export function useForm(fetchUri, data) {
     form.value.reset();
   }
 
-  const initFormFromItem : InitFormFromItem = ( onInit, resetOnSuccess = true ) => {
+  const initFormFromItem : InitFormFromItem = async ( onInit, resetOnSuccess = true ): Promise<any> => {
     loading.value = true;
-    axios.get(fetchUri)
+    return axios.get(fetchUri)
       .then((response) => {
         // For this to work correctly you need to correctly define the object type and properties in the Objects file
         // ex. if expected values from server are id and name than they need to be defined in the object in Objects.ts

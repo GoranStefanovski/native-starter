@@ -3,7 +3,6 @@
 namespace App\Applications\User\BLL;
 
 use App\Applications\Common\DAL\MediaDALInterface;
-use App\Applications\Product\BLL\ProductBLLInterface;
 use App\Applications\User\DAL\UserDALInterface;
 use App\Applications\User\Model\Details;
 use App\Jobs\QueueMailer;
@@ -20,7 +19,6 @@ use Tymon\JWTAuth\Facades\JWTAuth;
  * @property QueueMailer $mailer
  * @property MediaDALInterface $mediaDAL
  * @property Details|Model details
- * @property ProductBLLInterface productBLL
  */
 class UserBLL implements UserBLLInterface
 {
@@ -31,13 +29,11 @@ class UserBLL implements UserBLLInterface
         QueueMailer $mailer,
         MediaDALInterface $mediaDAL,
         Details $details
-//        ProductBLLInterface $productBLL
     ){
         $this->userDAL = $userDAL;
         $this->mailer = $mailer;
         $this->mediaDAL = $mediaDAL;
         $this->details = $details;
-//        $this->productBLL = $productBLL;
     }
 
     public function getAllUsers(){
