@@ -14,10 +14,20 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * 
+ * @property User $user
+ */
 class AuthenticatedSessionController extends Controller
 {
 
     use HttpResponses;
+
+    public function __construct(
+        User $user,
+    ){
+        $this->user = $user;
+    }
     /**
      * Display the login view.
      *
@@ -27,6 +37,8 @@ class AuthenticatedSessionController extends Controller
     {
         return view('auth.login');
     }
+
+    
 
     /**
      * Handle an incoming authentication request.
@@ -63,7 +75,8 @@ class AuthenticatedSessionController extends Controller
 
     public function login(Request $request)
     {
-        if ($token = $this->guard()->attempt($request->only('email', 'password'))) {
+        if (!Auth::attempt($request->only('email', 'password'))) {
+
 //            if (!Auth::attempt($request->only('email', 'password'))) {
             return $this->error('','Credentials do not match',401);
 //                response()->json([
@@ -137,6 +150,25 @@ class AuthenticatedSessionController extends Controller
     public function guard()
     {
         return Auth::guard('web');
+    }
+
+
+    public function updateMyProfile($id,Request $request){
+        $request_array = $request->all();
+        $user = $this->user::findOrFail($id);
+        $data['first_name'] = $request_array['first_name'];
+        $data['last_name'] = $request_array['last_name'];
+        $data['email'] = $request_array['email'];
+        //$data['company'] = $request_array['company'];//No field to edit this
+//        $data['phone'] = $request_array['phone'];//No field to edit this
+        // if (array_key_exists('country_id', $request_array)) $data['country_id'] = $request_array['country_id'];
+        $user->update($data);
+        // $this->userDAL->editUser($user, $data);
+        if($request_array['password']!=null){
+            $pass = Hash::make($request_array['password']);
+            $user->password = $pass;
+            $user->save();
+        }
     }
 
 }
