@@ -183,9 +183,11 @@ class AuthenticatedSessionController extends Controller
     }
 
 
-    public function updateMyProfile($id,Request $request){
+    public function updateMyProfile(Request $request){
         $request_array = $request->all();
+//        dd($request_array);
 //        $user = $this->user::findOrFail($id);
+//        dd($request);
         $user = Auth::user();
         $data['first_name'] = $request_array['first_name'];
         $data['last_name'] = $request_array['last_name'];
