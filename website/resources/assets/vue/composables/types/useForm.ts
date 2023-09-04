@@ -1,10 +1,11 @@
 export type InitFormFromItem = (
   onInit ?: Function,
   resetOnSuccess ?: Boolean
-) => Promise<any>
+) => void
 
 export type OnSubmit = (
   route : String,
   redirectRoute : String,
-  hasToRedirect ?: Boolean
+  hasToRedirect ?: Boolean,
+  data?: any,
 ) => void;

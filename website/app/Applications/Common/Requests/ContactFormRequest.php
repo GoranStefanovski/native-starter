@@ -30,8 +30,8 @@ class ContactFormRequest extends ApiFormRequest
     public function rules()
     {
         return [
-            'name' => 'required|max:255|min:2',
-            'email' => 'required|email',
+            'first_name' => 'required|max:255|min:2',
+            'first_name' => 'required|email',
             'message' => 'required|max:500',
             'subject' => 'required|max:255',
         ];
@@ -39,9 +39,9 @@ class ContactFormRequest extends ApiFormRequest
 
     public function messages(){
         return [
-            'name.required' => 'validation.name.required',
-            'name.max' => 'validation.name.max',
-            'name.min' => 'validation.name.min',
+            'first_name.required' => 'validation.name.required',
+            'first_name.max' => 'validation.name.max',
+            'first_name.min' => 'validation.name.min',
             'email.required' => 'validation.custom.email.required',
             'email.email' => 'validation.custom.email.email',
             'message.required' => 'validation.custom.message.required',

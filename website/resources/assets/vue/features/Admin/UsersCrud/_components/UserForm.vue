@@ -7,6 +7,8 @@
   import { useRouter } from 'vue-router/composables';
   import { useForm } from '@/composables';
   import { Portlet } from '@/components';
+  import axios from 'axios';
+
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
   } from '@/components/Portlet/components';
@@ -47,7 +49,7 @@
   provide('form', form.value);
   provide('labelStart', 'user');
 
-  const postUri = computed(() => edit ? `/user/${id}/edit` : '/user/new');
+  const postUri = computed(() => edit ? `/user/${id}/edit` : '/guest/user/register');
   const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'users' : 'users.public');
 
   const fetchRoles = async () => {
@@ -61,7 +63,7 @@
 
   const fetchCountries = async () => {
     try {
-      const response = await axios.get('guest/common/get-countries');
+      const response = await axios.get('dropdown/countries');
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
           countries.value.push({ id: key, name: `${response.data[key]['full_name']}` });
@@ -84,7 +86,8 @@
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    onSubmit(postUri.value, redirectRoute.value, hasToRedirect);
+    console.log(form.value);
+    onSubmit(postUri.value, redirectRoute.value, hasToRedirect, form);
   }
 
   onMounted(() => {
@@ -214,13 +217,13 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.last_name.label')}}</label>
                       <div class="col-9">
-                        <FormInput v-model="form.last_name" />
+                        <input v-model="form.last_name" class="form-control" type="text" placeholder="Last Name" required  />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.first_name.label')}}</label>
                       <div class="col-9">
-                        <FormInput v-model="form.first_name" />
+                        <input v-model="form.name" class="form-control" type="text" placeholder="First Name" required />
                       </div>
                     </div>
                     <div class="form-group row">
@@ -228,9 +231,8 @@
                       <div class="col-9">
                         <div class="input-group">
                           <div class="input-group-prepend"><span class="input-group-text"><i class="la la-at"></i></span></div>
-                          <FormInput v-model="form.email" />
-                        </div>
-                        <span class="form-text text-muted">We'll never share your email with anyone else.</span>
+                            <input v-model="form.email" class="form-control" type="text" placeholder="Email" required />
+                          </div>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -238,9 +240,8 @@
                       <div class="col-9">
                         <div class="input-group">
                           <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                          <FormInput v-model="form.phone" />
+                          <input v-model="form.phone" class="form-control" type="text" placeholder="Phone" required />
                         </div>
-                        <span class="form-text text-muted">We'll never share your phone with anyone else.</span>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -252,100 +253,7 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.company')}}</label>
                       <div class="col-9">
-                        <FormInput v-model="form.company" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-
-                <!--TODO sections below should be disabled but visible if the user role does not currently have them (Enable on switch role)-->
-                <div class="kt-section">
-                  <div class="kt-section__body">
-                    <h3 class="kt-section__title kt-section__title-lg">{{ $t('users.shipping_address') }}:</h3>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.name')}}</label>
-                      <div class="col-9">
-                        <FormInput v-model="form.shipping_details.name" :disabled="form.roles!=3" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.address')}}</label>
-                      <div class="col-9">
-                        <FormInput v-model="form.shipping_details.address" :disabled="form.roles!=3" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.city')}}</label>
-                      <div class="col-9">
-                        <FormInput v-model="form.shipping_details.city" :disabled="form.roles!=3" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.country')}}</label>
-                      <div class="col-9">
-                        <FormDropdown
-                          v-model="form.shipping_details.country_id"
-                          :is-inline="true"
-                          :options="countries"
-                          :disabled="form.roles!=3"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.phone_number')}}</label>
-                      <div class="col-9">
-                        <div class="input-group">
-                          <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                          <FormInput v-model="form.shipping_details.phone" :disabled="form.roles!=3" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-
-                <div class="kt-section">
-                  <div class="kt-section__body">
-                    <h3 class="kt-section__title kt-section__title-lg">{{ $t('users.billing_address') }}:</h3>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.name')}}</label>
-                      <div class="col-9">
-                        <FormInput v-model="form.billing_details.name" :disabled="form.roles!=3" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.address')}}</label>
-                      <div class="col-9">
-                        <FormInput v-model="form.billing_details.address" :disabled="form.roles!=3" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.city')}}</label>
-                      <div class="col-9">
-                        <FormInput v-model="form.billing_details.city" :disabled="form.roles!=3" />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.country')}}</label>
-                      <div class="col-9">
-                        <FormDropdown
-                          v-model="form.billing_details.country_id"
-                          :is-inline="true"
-                          :options="countries"
-                          :disabled="form.roles!=3"
-                        />
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('pages.user_dashboard.labels.phone_number')}}</label>
-                      <div class="col-9">
-                        <div class="input-group">
-                          <div class="input-group-prepend"><span class="input-group-text"><i class="la la-phone"></i></span></div>
-                          <FormInput v-model="form.billing_details.phone" :disabled="form.roles!=3" />
-                        </div>
+                        <input v-model="form.company" class="form-control" type="text" placeholder="Company" required />
                       </div>
                     </div>
                   </div>
@@ -359,13 +267,13 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.password.label')}}</label>
                       <div class="col-9">
-                        <FormInput v-model="form.password" />
+                        <input v-model="form.password" class="form-control" type="text" placeholder="Password" required />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.password.confirm')}}</label>
                       <div class="col-9">
-                        <FormInput v-model="form.password_confirmation" />
+                        <input v-model="form.password_confirmation" class="form-control" type="text" placeholder="Password Confirmation" required />
                       </div>
                     </div>
                   </div>

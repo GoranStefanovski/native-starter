@@ -13,14 +13,6 @@
                 <div class="auth-box card">
                   <div class="card-block">
                     <div class="text-center mb-4 logo-cont">
-                      <img
-                        alt="Porto"
-                        width="100"
-                        height="48"
-                        data-sticky-width="82"
-                        data-sticky-height="40"
-                        src="images/mousebags-logo.png"
-                      >
                     </div>
                     <router-view />
                   </div>

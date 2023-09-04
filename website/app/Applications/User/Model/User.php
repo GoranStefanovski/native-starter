@@ -195,10 +195,4 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     {
         return $this->getFirstMedia('user_avatars');
     }
-
-    /* THESE ARE FREJA RULES */
-//    public function appointments()
-//    {
-//        return $this->belongsToMany(Appointment::class,'appointments');
-//    }
 }

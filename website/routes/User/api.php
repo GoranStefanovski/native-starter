@@ -12,7 +12,7 @@ use App\Http\Controllers\Auth\RegisteredUserController;
 |
 |
 */
-Route::group([
+Route::group([  
     'middleware' => 'api',
 ], function () {
     Route::resource('users', 'Controllers\UserController');

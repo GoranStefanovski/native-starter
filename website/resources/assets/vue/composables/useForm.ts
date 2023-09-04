@@ -6,6 +6,7 @@ import { mergeWith, cloneDeep } from 'lodash-es';
 import { EventBus } from '@/utils';
 import { useRouter, onBeforeRouteLeave } from 'vue-router/composables';
 import { InitFormFromItem, OnSubmit } from './types/useForm';
+import axios from 'axios';
 
 // by convention, composable function names start with "use"
 export function useForm(fetchUri, data) {
@@ -45,10 +46,10 @@ export function useForm(fetchUri, data) {
   function resetForm(form) {
     form.value.reset();
   }
-
-  const initFormFromItem : InitFormFromItem = async ( onInit, resetOnSuccess = true ): Promise<any> => {
-    loading.value = true;
-    return axios.get(fetchUri)
+  
+    const initFormFromItem : InitFormFromItem = ( onInit, resetOnSuccess = true ) => {  
+      loading.value = true;
+      axios.get(fetchUri)
       .then((response) => {
         // For this to work correctly you need to correctly define the object type and properties in the Objects file
         // ex. if expected values from server are id and name than they need to be defined in the object in Objects.ts
@@ -62,9 +63,9 @@ export function useForm(fetchUri, data) {
       });
   }
 
-  const onSubmit : OnSubmit = (route, redirectRoute, hasToRedirect) => {
+  const onSubmit : OnSubmit = (route, redirectRoute, hasToRedirect, data) => {
     loading.value = true;
-    return form.value.post(route)
+    return form.value.post(route, data)
       .then((responseInternal) => {
         response.value = responseInternal;
         if (hasToRedirect) {

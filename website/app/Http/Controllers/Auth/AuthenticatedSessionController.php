@@ -99,7 +99,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->validated($request->all());
         $user = User::create([
-            'first_name' => $request->name,
+            'first_name' => $request->first_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -196,12 +196,13 @@ class AuthenticatedSessionController extends Controller
 //        $data['phone'] = $request_array['phone'];//No field to edit this
         // if (array_key_exists('country_id', $request_array)) $data['country_id'] = $request_array['country_id'];
         $user->update($data);
+        $user->save();
+
         // $this->userDAL->editUser($user, $data);
-        if($request_array['password']!=null){
-            $pass = Hash::make($request_array['password']);
-            $user->password = $pass;
-            $user->save();
-        }
+        // if($request_array['password'] && $request_array['password']!=null){
+        //     $pass = Hash::make($request_array['password']);
+        //     $user->password = $pass;
+        // }
     }
 
 }

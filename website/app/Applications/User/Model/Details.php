@@ -10,7 +10,7 @@ class Details extends Model
     public $timestamps = true;
 
     protected $fillable = array(
-        'name',
+        'first_name',
         'address',
         'alt_address',
         'city',

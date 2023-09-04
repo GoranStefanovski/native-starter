@@ -32,22 +32,6 @@
       lang="en"
       :url="headful.url"
     />
-    <div
-      role="main"
-      :class="['main',{
-        'main--fixed-header' : fixedHeader,
-      }]"
-    >
-      <GuestHeader :fixed-header="fixedHeader" />
-      <transition
-        name="slide-fade"
-        mode="out-in"
-      >
-        <RouterView :key="$route.fullPath" />
-      </transition>
-    </div>
-
-    <GuestFooter />
-    waaw
+    <h1>Proxy Error</h1>
   </div>
 </template>
