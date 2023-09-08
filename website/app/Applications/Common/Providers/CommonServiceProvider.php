@@ -5,6 +5,8 @@ namespace App\Applications\Common\Providers;
 
 use App\Applications\Common\BLL\LocationBLL;
 use App\Applications\Common\BLL\LocationBLLInterface;
+use App\Applications\Common\BLL\EventBLL;
+use App\Applications\Common\BLL\EventBLLInterface;
 use App\Applications\Common\BLL\TaxonomiesBLL;
 use App\Applications\Common\BLL\TaxonomiesBLLInterface;
 use App\Applications\Common\DAL\TaxonomiesDAL;
@@ -52,6 +54,7 @@ class CommonServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(MediaDALInterface::class, MediaDAL::class);
+        $this->app->bind(EventBLLInterface::class, EventBLL::class);
         $this->app->bind(LocationBLLInterface::class, LocationBLL::class);
         $this->app->bind(TaxonomiesDALInterface::class, TaxonomiesDAL::class);
         $this->app->bind(TaxonomiesBLLInterface::class, TaxonomiesBLL::class);

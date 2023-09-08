@@ -22,10 +22,7 @@ interface LocationBLLInterface{
 
     public function getPublicLocations();
 
-    /**
-     * @param array $data
-     * @return array
-     */
     public function getLocationsData($data);
 
+    public function getLocationsCollaborator();
 }

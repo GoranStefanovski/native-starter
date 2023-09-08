@@ -34,7 +34,7 @@ class LocationController extends Controller
         return $this->locationBLL->getLocationsData($request);
     }
 
-    public function allPostsPublic(Request $request){
+    public function allLocationsPublic(Request $request){
         // dd($this->postBLL->getAllPosts());
         return $this->locationBLL->getPublicLocations($request);
     }
@@ -52,5 +52,9 @@ class LocationController extends Controller
     }
     public function deleteLocation($id){
         return $this->locationBLL->deleteLocation($id);
+    }
+
+    public function getLocationsCollaborator(Request $request) {
+        return $this->locationBLL->getLocationsCollaborator($request);
     }
 }

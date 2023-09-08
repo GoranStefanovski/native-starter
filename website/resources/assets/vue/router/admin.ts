@@ -5,7 +5,10 @@ const DefaultPage = () => import(/* webpackChunkName: "DefaultPage" */ '../views
 const Dashboard = () => import(/* webpackChunkName: "AdminDashboard" */ '../views/admin/Dashboard.vue');
 const Users = () => import(/* webpackChunkName: "Users" */ '../views/admin/Users/Users.vue');
 const PublicUsers = () => import(/* webpackChunkName: "PublicUsers" */ '../views/admin/Users/PublicUsers.vue');
-const Posts = () => import(/* webpackChunkName: "PublicUsers" */ '../views/admin/Posts/Posts.vue');
+const Locations = () => import(/* webpackChunkName: "Locations" */ '../views/admin/Locations/Locations.vue');
+const Events = () => import(/* webpackChunkName: "Events" */ '../views/admin/Events/Events.vue');
+const LocationsForm = () => import(/* webpackChunkName: "LocationsForm" */ '../features/Admin/Locations/_components/LocationsForm.vue'); 
+const EventsForm = () => import(/* webpackChunkName: "EventsForm" */ '../features/Admin/Events/_components/EventsForm.vue'); 
 const MyProfile = () => import(/* webpackChunkName: "MyProfile" */ '../views/admin/Users/MyProfile.vue');
 // const AddUser = () => import(/* webpackChunkName: "AddUser" */ '../views/admin/Users/AddUser.vue');
 // const EditUser = () => import(/* webpackChunkName: "EditUser" */ '../views/admin/Users/EditUser.vue');
@@ -149,7 +152,7 @@ export let adminPaths: RouteConfig =
       {
         path: 'locations',
         name: 'locations',
-        component: Posts,
+        component: Locations,
         meta: {
           title: Vue.i18n.translate('locations.title', null),
           auth: {
@@ -159,21 +162,9 @@ export let adminPaths: RouteConfig =
         }
       },
       {
-        path: 'events',
-        name: 'events',
-        component: Posts,
-        meta: {
-          title: Vue.i18n.translate('events.title', null),
-          auth: {
-            roles: ['events_write','events_view'],
-            // forbiddenRedirect: '/'
-          }
-        }
-      },
-      {
         path: 'location/new',
         name: 'add.location',
-        component: PostForm,
+        component: LocationsForm,
         meta: {
           title: Vue.i18n.translate('users.add.post', null),
           auth: {
@@ -183,14 +174,46 @@ export let adminPaths: RouteConfig =
       }, {
         path: 'location/:locationId/edit',
         name: 'edit.location',
-        component: PostForm,
+        component: LocationsForm,
         meta: {
           title: Vue.i18n.translate('users.edit_post', null),
           auth: {
             roles: ['locations_write']
           }
         }
-      }
+      },
+      {
+        path: 'events',
+        name: 'events',
+        component: Events,
+        meta: {
+          title: Vue.i18n.translate('events.title', null),
+          auth: {
+            roles: ['events_write','events_view'],
+          }
+        }
+      },
+      {
+        path: 'event/new',
+        name: 'add.event',
+        component: EventsForm,
+        meta: {
+          title: Vue.i18n.translate('users.add.post', null),
+          auth: {
+            roles: ['events_write']
+          }
+        }
+      }, {
+        path: 'event/:eventId/edit',
+        name: 'edit.event',
+        component: EventsForm,
+        meta: {
+          title: Vue.i18n.translate('users.edit_post', null),
+          auth: {
+            roles: ['events_write']
+          }
+        }
+      },
       /*INSERT NEW CONFIGURATOR OPTIONS HERE*/
     ]
   };
