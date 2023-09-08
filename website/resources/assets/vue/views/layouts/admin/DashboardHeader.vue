@@ -65,7 +65,7 @@
         id="kt_header_menu"
         class="kt-header-menu kt-header-menu-mobile  kt-header-menu--layout-default "
       >
-        <NavMenu :data="navMenuData" />
+        <!-- <NavMenu :data="navMenuData" /> -->
       </div>
     </div>
 

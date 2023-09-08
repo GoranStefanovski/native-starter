@@ -30,7 +30,7 @@
   const setActiveClasses = (obj) => store.dispatch('Root/setActiveClasses', obj);
 
   const item = ref(cloneDeep(post));
-  const edit = router.currentRoute.name == 'edit.post';
+  const edit = router.currentRoute.name == 'edit.location';
   const id = Number(router.currentRoute.params.postId);
   const getPostUri = `guest/common/${id}/getPost`
   const fetchUri = `auth/user`;
@@ -49,7 +49,7 @@
   provide('form', form.value);
   provide('labelStart', 'post');
 
-  const postUri = computed(() => edit ? `common/post/${id}/edit` : '/common/save-post');
+  const postUri = computed(() => edit ? `common/location/${id}/edit` : '/common/save-location');
   const countriesUri = 'guest/common/getCountries';
   const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'posts.category_one' : 'posts.category_one');
 
@@ -60,20 +60,6 @@
         if (response.data.hasOwnProperty(key)) {
           countries.value.push({ id: key, name: `${response.data[key]['name']}` });
         }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  const fetchCities = async (country) => {
-    cities.value = [];
-    try {
-      const response = await axios.post('https://countriesnow.space/api/v0.1/countries/cities',{
-        "country" : country
-      },{ withCredentials: false });
-      for (let value in response.data.data) {
-        cities.value.push({ id:value, name: response.data.data[value] });
       }
     } catch (error) {
       console.error(error);
@@ -96,27 +82,13 @@
     console.log(form.value);
     form.value.city = cities.value.find(city => city.id == form.value.city_id);
     console.log(form.value);
-    onSubmit(postUri.value, 'posts.category_one', hasToRedirect);
+    onSubmit(postUri.value, 'locations', hasToRedirect, form.value);
   }
 
   const handleModelUpdate = (value, forcities) => {
     console.log("VALUE", value);
     console.log("input", forcities);
-    if(forcities){
-      let country = countries.value.find(o=> o.id == value);
-      fetchCities(country.name)
-    }
-    // form[input]=value;
-
   }
-  //
-  // const handleModelUp = (value, input, test) => {
-  //   console.log(test);
-  //   let country = countries.value.find(o=> o.id == value);
-  //   console.log("COUNTRY", country);
-  //   form[input]= country.id;
-  //   fetchCities(country.name);
-  // }
 
   onMounted(async () => {
 
@@ -126,7 +98,6 @@
       let country = form.value.country.name
       console.log(form.value);
       console.log(country);
-      fetchCities(form.value.country.name);
     }
 
   })
@@ -153,7 +124,7 @@
             <PortletHeadToolbar>
               <router-link
                 :loading="loading"
-                :to="{name:'posts.category_one'}"
+                :to="{name:'locations'}"
                 exact=""
                 class="btn btn-clean kt-margin-r-10"
               >
@@ -243,8 +214,10 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{ $t('posts.location.city') }}</label>
                       <div class="col-9">
-                        <FormDropdown
-                          id="city_id"
+                        <input
+                          placeholder="City"
+                          id="city"
+                          class="form-control"
                           v-model="form.city_id"
                           :options="cities"
                           @update:modelValue="handleModelUpdate"
@@ -282,11 +255,13 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.title') }}</label>
+                      <label class="col-3 col-form-label">Naslovot</label>
                       <div class="col-9">
-                        <FormInput
+                        <input
                           id="title"
+                          class="form-control"
                           v-model="form.title"
+                          placeholder="Title"
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>
@@ -294,8 +269,10 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
                       <div class="col-9">
-                        <FormInput
+                        <input
                           id="description"
+                          class="form-control"
+                          placeholder="Description"
                           v-model="form.description"
                           @update:modelValue="handleModelUpdate"
                         />

@@ -34,8 +34,43 @@ class PermissionTableSeeder extends Seeder
             'description' => 'Gives the user the role to view public user features section'
             ]);
 
+                 // Locations Permissions
+        Permission::create([
+            'id' => 4,
+            'name' => 'locations_write',
+            'display_name' => 'Locations Write',
+            'description' => 'Gives the user the role to add/edit/delete users on a system level'
+        ]);
+        Permission::create([
+            'id' => 5,
+            'name' => 'locations_view',
+            'display_name' => 'Locations View',
+            'description' => 'Gives the user the role to view users on a system level'
+        ]);
+
+        // Events Permissions
+        Permission::create([
+            'id' => 6,
+            'name' => 'events_write',
+            'display_name' => 'events Write',
+            'description' => 'Gives the user the role to add/edit/delete users on a system level'
+        ]);
+        Permission::create([
+            'id' => 7,
+            'name' => 'events_view',
+            'display_name' => 'events View',
+            'description' => 'Gives the user the role to view users on a system level'
+        ]);
+
+        Permission::create([
+            'id' => 8,
+            'name' => 'admin_access',
+            'display_name' => 'Admin Access',
+            'description' => 'Gives the user the role to access the admin panel'
+        ]);
+
         // Admin permissions (all permissions)
-        for($i=1; $i<=2; ++$i){
+        for($i=1; $i<=8; ++$i){
             DB::table('permission_role')->insert([
                 'permission_id' => $i,
                 'role_id' => 1,
@@ -43,7 +78,7 @@ class PermissionTableSeeder extends Seeder
         }
 
         // Collaborator permissions (just view permissions)
-        $array = [2];
+        $array = [4,5,6,7,8];
         foreach ($array as $value){
             DB::table('permission_role')->insert([
                 'permission_id' => $value,
@@ -56,6 +91,5 @@ class PermissionTableSeeder extends Seeder
             'permission_id' => 3,
             'role_id' => 3,
         ]);
-
     }
 }

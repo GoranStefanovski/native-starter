@@ -25,7 +25,7 @@ export let adminPaths: RouteConfig =
     meta: {
       title: Vue.i18n.translate('strings.home', null),
       auth: {
-        roles: ['user_view']
+        roles: ['admin_access']
       }
     },
     children: [
@@ -36,7 +36,7 @@ export let adminPaths: RouteConfig =
         meta: {
           title: Vue.i18n.translate('strings.home', null),
           auth: {
-            roles: ['user_view']
+            roles: ['admin_access']
           }
         }
       },
@@ -147,47 +147,47 @@ export let adminPaths: RouteConfig =
         }
       },
       {
-        path: 'posts',
-        name: 'posts.category_one',
+        path: 'locations',
+        name: 'locations',
         component: Posts,
         meta: {
-          title: Vue.i18n.translate('posts.title', null),
+          title: Vue.i18n.translate('locations.title', null),
           auth: {
-            roles: ['user_view','user_write'],
+            roles: ['locations_write','locations_view'],
             // forbiddenRedirect: '/'
           }
         }
       },
       {
-        path: 'posts',
-        name: 'posts.category_two',
+        path: 'events',
+        name: 'events',
         component: Posts,
         meta: {
-          title: Vue.i18n.translate('posts.title', null),
+          title: Vue.i18n.translate('events.title', null),
           auth: {
-            roles: ['user_view','user_write'],
+            roles: ['events_write','events_view'],
             // forbiddenRedirect: '/'
           }
         }
       },
       {
-        path: 'post/new',
-        name: 'add.post',
+        path: 'location/new',
+        name: 'add.location',
         component: PostForm,
         meta: {
           title: Vue.i18n.translate('users.add.post', null),
           auth: {
-            roles: ['user_write','user_view']
+            roles: ['locations_write']
           }
         }
       }, {
-        path: 'postedit/:postId/edit',
-        name: 'edit.post',
+        path: 'location/:locationId/edit',
+        name: 'edit.location',
         component: PostForm,
         meta: {
           title: Vue.i18n.translate('users.edit_post', null),
           auth: {
-            roles: ['user_write']
+            roles: ['locations_write']
           }
         }
       }

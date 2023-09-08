@@ -10,6 +10,12 @@ return [
     'next' => 'Next',
     'home' => 'Home',
     'shippiing' =>  'Shipping',
+    'locations' => [
+        'title' => 'Locations'
+    ],
+    'events' => [
+        'title' => 'Events'
+    ],
     'users' => [
         'main' => 'Users',
         'admin' => 'Admin Users',

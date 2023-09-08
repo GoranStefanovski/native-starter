@@ -87,7 +87,7 @@
           </b-dropdown-item>
         </b-dropdown>
         <router-link
-          v-if="$auth.user().permissions_array.includes('user_write') && props.addRouteName"
+          v-if="props.addRouteName"
           :to="{ name: props.addRouteName }"
           exact=""
           class="btn btn-brand btn-elevate btn-icon-sm"

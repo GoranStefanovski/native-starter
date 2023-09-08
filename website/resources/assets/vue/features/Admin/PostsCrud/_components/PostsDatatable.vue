@@ -7,7 +7,7 @@
   import PostsTableRow from "@/views/admin/Posts/PostsTableRow.vue";
 
   const props = defineProps(['columns']);
-  const endpoint: string = 'common/posts';
+  const endpoint: string = 'common/locations';
   const store = useStore();
   const homePath = computed(() => store.state.Root.homePath);
 
@@ -62,17 +62,17 @@
     :query="query"
     :loading="loading"
     :columns="columns"
-    lang-key="posts"
-    add-route-name="add.post"
+    lang-key="locations"
+    add-route-name="add.location"
     :pagination="pagination"
     @onQueryUpdate="setQuery"
   >
     <PostsTableRow
-      v-for="(post, index) in records"
-      :key="post.id"
+      v-for="(location, index) in records"
+      :key="location.id"
       :index="index"
       :columns="columns"
-      :post="post"
+      :post="location"
       @delete:modelValue="deletePost"
     />
   </Datatable>

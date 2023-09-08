@@ -46,43 +46,74 @@ class UsersTableSeeder extends Seeder
         ]);
 
 
-        foreach (range(3, 50) as $index) {
-            $companyVat = $faker->numberBetween(1233, 4002);
-            $company = $faker->company;
+        /** @var User $Public */
+        $Public = User::create([
+            'id' => 3,
+            'username' => 'public',
+            'first_name' => 'Public',
+            'last_name' => 'User',
+            'email' => 'public@example.com',
+            'is_disabled' => 0,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('role_user')->insert([
+            'user_id' => 3,
+            'role_id' => 3,
+        ]);
 
-            /** @var User $Public */
-            $Public = User::create([
-                'id' => $index,
-                'username' => 'public',
-                'first_name' => $faker->firstName,
-                'last_name' => $faker->lastName,
-                'company' => $company,
-                'company_vat' => $companyVat,
-                'email' => $faker->companyEmail,
-                'is_disabled' => 0,
-                'password' => bcrypt('password'),
-            ]);
-
-            DB::table('role_user')->insert([
-                'user_id' => $index,
-                'role_id' => 3,
-            ]);
+        /** @var User $Colaborator */
+        $Colaborator = User::create([
+            'id' => 4,
+            'username' => 'GOKIO',
+            'first_name' => 'Goran',
+            'last_name' => 'Stefanovskio',
+            'email' => 'tevidma@example.com',
+            'is_disabled' => 0,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('role_user')->insert([
+            'user_id' => 4,
+            'role_id' => 2,
+        ]);
 
 
-            DB::table('details')->insert([
-                'user_id' => $index,
-                'type' => 'SHIPPING',
-                'name' => 'Public User',
-                'city' => $faker->city,
-                'address' => $faker->address,
-                'company' => $company,
-                'company_vat' => $companyVat,
-                'country_id' => 581,
-                'phone' => $faker->phoneNumber,
-                'default' => true
-            ]);
+        // foreach (range(3, 50) as $index) {
+        //     $companyVat = $faker->numberBetween(1233, 4002);
+        //     $company = $faker->company;
 
-        }
+        //     /** @var User $Public */
+        //     $Public = User::create([
+        //         'id' => $index,
+        //         'username' => 'public',
+        //         'first_name' => $faker->firstName,
+        //         'last_name' => $faker->lastName,
+        //         'company' => $company,
+        //         'company_vat' => $companyVat,
+        //         'email' => $faker->companyEmail,
+        //         'is_disabled' => 0,
+        //         'password' => bcrypt('password'),
+        //     ]);
+
+        //     DB::table('role_user')->insert([
+        //         'user_id' => $index,
+        //         'role_id' => 3,
+        //     ]);
+
+
+        //     DB::table('details')->insert([
+        //         'user_id' => $index,
+        //         'type' => 'SHIPPING',
+        //         'name' => 'Public User',
+        //         'city' => $faker->city,
+        //         'address' => $faker->address,
+        //         'company' => $company,
+        //         'company_vat' => $companyVat,
+        //         'country_id' => 581,
+        //         'phone' => $faker->phoneNumber,
+        //         'default' => true
+        //     ]);
+
+        // }
 
 
         try {

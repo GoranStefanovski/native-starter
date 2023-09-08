@@ -3,7 +3,7 @@
   // import './HeaderTopBar.scss';
   import { navMenu } from "@/data/navMenu";
   import { mapActions, mapState } from "vuex";
-
+  import axios from 'axios';
   export default defineComponent({
     name: 'UserDropDown',
     components: {
@@ -22,9 +22,19 @@
         ]
       };
     },
+    mounted() {
+    },    
     methods: {
       toggleDropdown() {
         this.dropdownOpen = !this.dropdownOpen;
+      },
+      async fetchUser() {
+        try {
+          const response = await axios.get('usersanct/user');
+          username = response.data.username;
+        } catch (error) {
+          console.error(error);
+        } 
       }
     }
   })

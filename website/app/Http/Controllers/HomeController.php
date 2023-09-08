@@ -69,49 +69,42 @@ class HomeController extends Controller
                     ],
                 ]
             ],
+            // [
+            //     'label' => 'pagebuilder.menu.label',
+            //     'name' => 'page.builder',
+            //     'link' => 'page.builder',
+            //     'expanded' => false,
+            //     'permission' => 'user_view',
+            // ],
+            // [
+            //     'label' => 'components.label',
+            //     'name' => 'components',
+            //     'link' => 'components',
+            //     'expanded' => false,
+            //     'permission' => 'user_view',
+            //     'subcategories' => [
+            //         [
+            //             'label' => 'components.portlets.label',
+            //             'name' => 'components.portlets',
+            //             'link' => 'components.portlets',
+            //             'permission' => 'user_view',
+            //         ],
+            //     ]
+            // ],
             [
-                'label' => 'pagebuilder.menu.label',
-                'name' => 'page.builder',
-                'link' => 'page.builder',
+                'label' => 'locations.label',
+                'name' => 'locations',
+                'link' => 'locations',
                 'expanded' => false,
-                'permission' => 'user_view',
+                'permission' => 'locations_view',
             ],
             [
-                'label' => 'components.label',
-                'name' => 'components',
-                'link' => 'components',
+                'label' => 'events.label',
+                'name' => 'events',
+                'link' => 'events',
                 'expanded' => false,
-                'permission' => 'user_view',
-                'subcategories' => [
-                    [
-                        'label' => 'components.portlets.label',
-                        'name' => 'components.portlets',
-                        'link' => 'components.portlets',
-                        'permission' => 'user_view',
-                    ],
-                ]
+                'permission' => 'events_view',
             ],
-            [
-                'label' => 'posts.label',
-                'name' => 'posts',
-                'link' => 'posts.category_one',
-                'expanded' => false,
-                'permission' => 'user_view',
-                'subcategories' => [
-                    [
-                        'label' => 'strings.category.one',
-                        'name' => 'category_one',
-                        'link' => 'posts.category_one',
-                        'permission' => 'user_view',
-                    ],
-                    [
-                        'label' => 'strings.category.two',
-                        'name' => 'category_two',
-                        'link' => 'posts.category_two',
-                        'permission' => 'user_view',
-                    ],
-                ]
-            ]
         ];
 
         $data = [
