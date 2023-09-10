@@ -68,7 +68,7 @@
           >
             <TableRow v-if="tableInfo.noRecords">
               <TableColumn>
-                <span class="datatable-error">No records found</span>
+                <span class="datatable-error">No {{ langKey }} found</span>
               </TableColumn>
             </TableRow>
 

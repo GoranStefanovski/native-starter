@@ -78,7 +78,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
     console.log(form.value);
     form.value.city = cities.value.find(city => city.id == form.value.city_id);
     console.log(form.value);
-    onSubmit(postUri.value, 'locations', hasToRedirect, form.value);
+    onSubmit(postUri.value, 'events', hasToRedirect, form.value);
   }
 
   const handleModelUpdate = (value, forcities) => {
@@ -115,7 +115,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
             <PortletHeadToolbar>
               <router-link
                 :loading="loading"
-                :to="{name:'locations'}"
+                :to="{name:'events'}"
                 exact=""
                 class="btn btn-clean kt-margin-r-10"
               >

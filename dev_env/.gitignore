@@ -3,6 +3,6 @@
 /data/*
 .DS_Store
 /logs/*
-/etc-pihole
+/etc-pihole/
 /etc-pihole/*
 /etc-dnsmasq.d

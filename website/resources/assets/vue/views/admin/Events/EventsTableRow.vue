@@ -55,8 +55,8 @@ const emit = defineEmits(['delete:modelValue']);
 
     <TableColumn :width="columns[6].width">
       <router-link
-        v-if="$auth.user().permissions_array.includes('locations_write')"
-        :to="{ name: 'edit.location', params: { eventId: post.id}}"
+        v-if="$auth.user().permissions_array.includes('events_write')"
+        :to="{ name: 'edit.event', params: { eventId: post.id}}"
         exact=""
       >
         <i
@@ -69,8 +69,9 @@ const emit = defineEmits(['delete:modelValue']);
 
     <TableColumn :width="columns[7].width">
       <i
-        v-if="$auth.user().permissions_array.includes('locations_write')"
+        v-if="$auth.user().permissions_array.includes('events_write')"
         variant="link"
+        style="cursor: pointer;"
         aria-hidden="true"
         class="fa fa-trash-o"
         @click="emitValue(post,post.id)"

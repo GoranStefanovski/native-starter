@@ -61,6 +61,9 @@ return [
             'rating' => 'Rating',
             'creator' => 'Created By',
         ],
+        'location' => [
+            'creator' => 'Owner'
+        ]
     ],
 
     //ADMIN PAGES
