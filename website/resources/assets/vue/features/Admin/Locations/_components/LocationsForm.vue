@@ -274,6 +274,19 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
+                      <div class="col-9">
+                        <input
+                          id="Active"
+                          type="checkbox"
+                          class="form-control"
+                          placeholder="Active"
+                          v-model="form.is_active"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

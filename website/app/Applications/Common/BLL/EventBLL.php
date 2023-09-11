@@ -59,7 +59,20 @@ class EventBll implements EventBLLInterface
 
     public function getPublicEvents()
     {
-        return $this->event->all();
+        $query = DB::table('events')
+            ->select(
+                DB::raw('events.id as id'),
+                DB::raw('events.title as title'),
+                DB::raw('events.description as description'),
+                DB::raw('events.user_id as user_id'),
+            );
+
+
+        $query->whereNull('events.deleted_at');
+        $query->where('events.is_active',1);
+        $query->groupBy('events.id');
+
+        return $this->$query->all();
     }
 
     public function getPostsByUser()

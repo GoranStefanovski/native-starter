@@ -38,6 +38,7 @@ Route::group([
     Route::post('location/{id}/edit',[LocationController::class,'editLocation']);
     Route::post('locations/draw', [LocationController::class,'allLocations']);
     Route::post('locations/{id}/delete', [LocationController::class,'deleteLocation']);
+    Route::post('locations/user/draw', [LocationController::class,'allLocations']);
 
     // Events
     Route::post('save-event',[EventController::class,'saveEvent']);

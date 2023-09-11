@@ -26,24 +26,6 @@ const emit = defineEmits(['delete:modelValue']);
     </TableColumn>
 
     <TableColumn :width="columns[2].width">
-      {{ post.country_name }}
-    </TableColumn>
-
-    <TableColumn :width="columns[3].width">
-      {{post.city}}
-    </TableColumn>
-
-    <TableColumn :width="columns[4].width">
-<!--      <template v-if="user.is_disabled">-->
-<!--        {{ $t('users.status.disabled') }}-->
-<!--      </template>-->
-<!--      <template v-else>-->
-<!--        {{ $t('users.status.enabled') }}-->
-<!--      </template>-->
-      RATING
-    </TableColumn>
-
-    <TableColumn :width="columns[5].width">
       <!--      <template v-if="user.is_disabled">-->
       <!--        {{ $t('users.status.disabled') }}-->
       <!--      </template>-->
@@ -53,7 +35,7 @@ const emit = defineEmits(['delete:modelValue']);
       {{post.user_id}}
     </TableColumn>
 
-    <TableColumn :width="columns[6].width">
+    <TableColumn :width="columns[3].width">
       <router-link
         v-if="$auth.user().permissions_array.includes('events_write')"
         :to="{ name: 'edit.event', params: { eventId: post.id}}"
@@ -67,7 +49,7 @@ const emit = defineEmits(['delete:modelValue']);
       </router-link>
     </TableColumn>
 
-    <TableColumn :width="columns[7].width">
+    <TableColumn :width="columns[4].width">
       <i
         v-if="$auth.user().permissions_array.includes('events_write')"
         variant="link"

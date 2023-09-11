@@ -50,12 +50,12 @@
   provide('labelStart', 'event');
 
 const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
-  const locationsApi = 'locations/user/draw';
+  const locationsApi = 'common/locations/user/draw';
   const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'posts.category_one' : 'posts.category_one');
 
   const fetchCountries = async () => {
     try {
-      const response = await axios.get(locationsApi);
+      const response = await axios.post(locationsApi, postUri.value);
       console.log(response.data, ' asdadasd');
     } catch (error) {
       console.error(error);
@@ -241,6 +241,19 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                           class="form-control"
                           placeholder="Description"
                           v-model="form.description"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
+                      <div class="col-9">
+                        <input
+                          id="Active"
+                          type="checkbox"
+                          class="form-control"
+                          placeholder="Active"
+                          v-model="form.is_active"
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>

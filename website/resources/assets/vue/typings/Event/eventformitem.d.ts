@@ -6,4 +6,5 @@ declare interface EventFormItem {
   uploaded_file: File|null;
   media: File|null;
   location_id?: number; 
+  is_active?: number;
 }

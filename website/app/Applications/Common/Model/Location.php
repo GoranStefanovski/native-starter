@@ -35,7 +35,8 @@ class Location extends Model implements HasMedia
         'image',
         'user_id',
         'city',
-        'city_id'
+        'city_id',
+        'is_active'
     ];
 
     protected $casts = [

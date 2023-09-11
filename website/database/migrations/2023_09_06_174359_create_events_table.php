@@ -22,6 +22,7 @@ class CreateEventsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('location_id')->unsigned();
             $table->integer('event_type_id')->unsigned();
+            $table->integer('is_active')->unsigned();
             $table->integer('activity_going')->unsigned();
             $table->integer('activity_interested')->unsigned();
             $table->timestamps();

@@ -38,6 +38,7 @@ class Event extends Model implements HasMedia
         'activity_interested',
         'event_type_id',
         'location_id',
+        'is_active'
     ];
 
     protected $casts = [

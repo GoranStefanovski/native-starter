@@ -3,6 +3,7 @@
 namespace App\Applications\Common\BLL;
 use App\Applications\Common\DAL\MediaDALInterface;
 use App\Applications\Common\Model\Location;
+use App\Applications\User\Model\User;
 use App\Http\Requests\ApiFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -61,7 +62,20 @@ class LocationBLL implements LocationBLLInterface
 
     public function getPublicLocations()
     {
-        return $this->location->all();
+        $query = DB::table('locations')
+        ->select(
+            DB::raw('locations.id as id'),
+            DB::raw('locations.title as title'),
+            DB::raw('locations.description as description'),
+            DB::raw('locations.user_id as user_id'),
+        );
+
+
+    $query->whereNull('locations.deleted_at');
+    $query->where('locations.is_active',1);
+    $query->groupBy('locations.id');
+
+    return $this->$query->all();
     }
 
     public function getPostsByUser()
@@ -74,6 +88,7 @@ class LocationBLL implements LocationBLLInterface
         $input['description'] = $request['description'];
         $input['country_id'] = $request['country_id'];
         $input['country'] = \Countries::find($request['country_id'])->name;
+        $input['owner'] = \User::find($request['user_id'])->name;
         $input['user_id'] = Auth::user()->id;
         $input['city_id'] = $request['city_id'];
         $input['city'] = $request['city'];

@@ -236,7 +236,7 @@ Test:
 - git
 - docker https://docs.docker.com/engine/install/ubuntu/
 - docker-compose https://docs.docker.com/compose/install/
-2. git clone git clone git@bitbucket.org:stefanov/p781-eventlokale.git
+2. git clone git clone git@github.com:GoranStefanovski/native-starter.git
 3. copy dev_env/sample-linux.env or sample-windows dev_env/.env and modify if needed
 - the linux version should work without modification
 - for windows you will need to modify the DOCUMENT_ROOT and NODE_ROOT
@@ -246,13 +246,13 @@ Test:
 - docker-compose build
 - docker-compose up
 6. Test if the container volumes mounted succesfully
-- sudo docker exec -it eventlokale-php72 /bin/bash and than look for the project inside the eventlokale directory
-- sudo docker exec -it eventlokale-node /bin/bash and than look for the project inside the usr/app directory
+- sudo docker exec -it native-starter-php8 /bin/bash and than look for the project inside the native-starter directory
+- sudo docker exec -it native-starter-node /bin/bash and than look for the project inside the usr/app directory
 7. If there is some issue with the docker configuration at this point and you have previosely run an older configuration please try clearing the cache from the broken docker-compose version
 - docker system prune -a
 - and go through steps 5 and 6 again
 8. Copy website/sample-dev-env.env to website/.env
-9. Go to workbench or phpmyadmin and create database schema eventlokale
+9. Go to workbench or phpmyadmin and create database schema starter
 - import database dump from the dev server
 10. docker exec -it lamp-php72 /bin/bash
 - run: composer install && php artisan config:cache && php artisan view:clear && php artisan route:clear && composer dump-autoload && php artisan vue-i18n-custom:generate && php artisan migrate
@@ -260,13 +260,13 @@ Test:
 - echo $USER (Use the username output from this command for the next in place of $USER)
 - sudo chown -R www-data. . && sudo setfacl -R -m u:$USER:rwx .
 12. Possible errors
-- eventlokale-node | error Couldn't find a package.json file in "/usr/app" (NODE_ROOT=~/development/repositories/starter/website is missing from the env file. The path is just an example)
+- native-starter-node | error Couldn't find a package.json file in "/usr/app" (NODE_ROOT=~/development/repositories/starter/website is missing from the env file. The path is just an example)
 - Got permission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get ..... (Run the command with elevated permissions on ubuntu sudo.)
 - Command 'composer' not found, but can be installed with (did you run the command inside the container after executing the previos line?)
-- inside eventlokale-node yarn nuxt:dev fails with Unexpected token u in JSON at position ... in nuxt-config.ts (the issue here is that the .env file is missing or the variable is not defined)
+- inside native-starter-node yarn nuxt:dev fails with Unexpected token u in JSON at position ... in nuxt-config.ts (the issue here is that the .env file is missing or the variable is not defined)
 
 13. Usefull commands:
 - docker ps -a (Get a list of all running or failed containers)
-- docker exec -it eventlokale-php72 /bin/bash (execute commands inside a container)
+- docker exec -it native-starter-php8 /bin/bash (execute commands inside a container)
 - docker-compose run node /bin/bash (run a container for a service defined in the docker-compose.yaml file. You will have to execute this command from the dev_env folder)
-- docker system prune -a (clear all docker cache containers networks etc ... This will remove docker containers for other projects too not just eventlokale)
+- docker system prune -a (clear all docker cache containers networks etc ... This will remove docker containers for other projects too not just native-starter)

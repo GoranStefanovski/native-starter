@@ -107,6 +107,7 @@ const location: LocationFormItem = {
   country_id: 0,
   country: '',
   city: '',
+  is_active: 0,
   city_id: '',
   is_disabled: 0,
   uploaded_file: createFile('image/jpg'),
@@ -118,7 +119,8 @@ const event: EventFormItem = {
   title: '',
   description: '',
   is_disabled: 0,
-  location_id: 1,
+  location_id: 2,
+  is_active: 0,
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')
 }
