@@ -21,7 +21,6 @@ class CreateLocationsTable extends Migration
             $table->string('country')->nullable(false);
             $table->integer('country_id')->unsigned();
             $table->string('city')->nullable(false);
-            $table->string('city_id')->nuintegerllable(false);
             $table->integer('is_active')->nullable(false);
 
             $table->float('rating')->nullable(0.0);

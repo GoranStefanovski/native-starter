@@ -32,6 +32,10 @@ class LocationBLL implements LocationBLLInterface
         'rating' => 'locations.rating',
         'user_id' => 'locations.user_id',
         'country_id' => 'locations.country_id',
+        'country_name' => 'locations.country',
+        'owner' => 'locations.owner',
+        'city' => 'locations.city',
+        'is_active' => 'locations.is_active'
     ];
 
     public function getScrolldownPosts(Request $request)
@@ -88,9 +92,8 @@ class LocationBLL implements LocationBLLInterface
         $input['description'] = $request['description'];
         $input['country_id'] = $request['country_id'];
         $input['country'] = \Countries::find($request['country_id'])->name;
-        $input['owner'] = \User::find($request['user_id'])->name;
         $input['user_id'] = Auth::user()->id;
-        $input['city_id'] = $request['city_id'];
+        $input['owner'] = Auth::user()->first_name;
         $input['city'] = $request['city'];
         $location = $this->location->create($input);
         $this->mediaDAL->save($request,$location,'post_image');
@@ -117,8 +120,11 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.title as title'),
                 DB::raw('locations.description as description'),
                 DB::raw('locations.country_id as country_id'),
+                DB::raw('locations.city as city'),
                 DB::raw('locations.rating as rating'),
                 DB::raw('locations.user_id as user_id'),
+                DB::raw('locations.owner as owner'),
+                DB::raw('locations.is_active as is_active'),
                 DB::raw('countries.name as country_name')
             )
             ->join('countries', 'countries.id', '=', 'locations.country_id');

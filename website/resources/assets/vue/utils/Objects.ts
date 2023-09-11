@@ -94,7 +94,6 @@ const post: PostFormItem = {
   country_id: 0,
   country: '',
   city: '',
-  city_id: '',
   is_disabled: 0,
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')
@@ -108,8 +107,6 @@ const location: LocationFormItem = {
   country: '',
   city: '',
   is_active: 0,
-  city_id: '',
-  is_disabled: 0,
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')
 }

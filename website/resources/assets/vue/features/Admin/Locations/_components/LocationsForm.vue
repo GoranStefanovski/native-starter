@@ -79,9 +79,6 @@
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    console.log(form.value);
-    form.value.city = cities.value.find(city => city.id == form.value.city_id);
-    console.log(form.value);
     onSubmit(postUri.value, 'locations', hasToRedirect, form.value);
   }
 
@@ -214,7 +211,7 @@
                           placeholder="City"
                           id="city"
                           class="form-control"
-                          v-model="form.city_id"
+                          v-model="form.city"
                           :options="cities"
                           @update:modelValue="handleModelUpdate"
                         />
@@ -251,7 +248,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">Naslovot</label>
+                      <label class="col-3 col-form-label">Title</label>
                       <div class="col-9">
                         <input
                           id="title"

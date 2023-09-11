@@ -1,6 +1,7 @@
 declare interface EventFormItem {
   id?: number;
   title?: string;
+  owner?: string;
   description?: string;
   is_disabled?: number;
   uploaded_file: File|null;

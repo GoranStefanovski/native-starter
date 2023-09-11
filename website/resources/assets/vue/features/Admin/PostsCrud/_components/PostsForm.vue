@@ -255,7 +255,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">Naslovot</label>
+                      <label class="col-3 col-form-label">Title</label>
                       <div class="col-9">
                         <input
                           id="title"

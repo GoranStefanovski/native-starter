@@ -16,41 +16,28 @@ const emit = defineEmits(['delete:modelValue']);
 <template>
   <TableRow :section="'body'" :is-even="isEvenRow">
     <!--kt-datatable__row&#45;&#45;even-->
-
     <TableColumn :width="columns[0].width">
-      {{ post.title }}
+      {{ post.id }}
     </TableColumn>
 
     <TableColumn :width="columns[1].width">
-      {{ postDescription(post.description) }}
+      {{ post.title }}
     </TableColumn>
 
     <TableColumn :width="columns[2].width">
-      {{ post.country_name }}
+      {{ post.is_active == 1 ? "Active" : "Innactive" }}
     </TableColumn>
 
     <TableColumn :width="columns[3].width">
-      {{post.city}}
+      {{ post.country_name }}
     </TableColumn>
 
     <TableColumn :width="columns[4].width">
-<!--      <template v-if="user.is_disabled">-->
-<!--        {{ $t('users.status.disabled') }}-->
-<!--      </template>-->
-<!--      <template v-else>-->
-<!--        {{ $t('users.status.enabled') }}-->
-<!--      </template>-->
-      RATING
+      {{post.city}}
     </TableColumn>
 
     <TableColumn :width="columns[5].width">
-      <!--      <template v-if="user.is_disabled">-->
-      <!--        {{ $t('users.status.disabled') }}-->
-      <!--      </template>-->
-      <!--      <template v-else>-->
-      <!--        {{ $t('users.status.enabled') }}-->
-      <!--      </template>-->
-      {{post.user_id}}
+      {{post.owner}}
     </TableColumn>
 
     <TableColumn :width="columns[6].width">

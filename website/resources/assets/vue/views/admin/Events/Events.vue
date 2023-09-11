@@ -16,16 +16,18 @@
       main: 'events',
       sub: 'events',
       title: 'events.title',
-    hasFilters: 'events'
+      hasFilters: 'events'
     })
   })
 
   const columns: ColumnObject[] = [
-    { id: 0, width: '20%', label: 'admin.datatable.event.title', name: 'title', sortable: true },
-    { id: 1, width: '20%', label: 'admin.datatable.event.desc', name: 'description', sortable: true },
-    { id: 2, width: '20%', label: 'admin.datatable.event.creator', name: 'creator', sortable: true },
-    { id: 3, width: '20%', label: 'strings.actions', name: 'actions', sortable: false },
-    { id: 4, width: '20%', label: 'strings.delete', name: 'actions', sortable: false }
+    { id: 0, width: '10%', label: 'ID', name: 'id', sortable: true },
+    { id: 1, width: '15%', label: 'Title', name: 'title', sortable: true },
+    { id: 2, width: '10%', label: 'Active', name: 'is_active', sortable: true },
+    { id: 3, width: '35%', label: 'Description', name: 'description', sortable: true },
+    { id: 4, width: '5%', label: 'Admin', name: 'creator', sortable: true },
+    { id: 5, width: '10%', label: 'strings.actions', name: 'actions', sortable: false },
+    { id: 6, width: '10%', label: 'strings.delete', name: 'actions', sortable: false }
   ];
 </script>
 

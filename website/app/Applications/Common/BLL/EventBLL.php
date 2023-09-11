@@ -27,8 +27,10 @@ class EventBll implements EventBLLInterface
     private const COLUMNS_MAP = [
         'id' => 'events.id',
         'title' => 'events.title',
+        'is_active' => 'events.is_active',
         'description' => 'events.description',
         'user_id' => 'events.user_id',
+        'owner' => 'events.owner'
     ];
 
     public function getScrolldownPosts(Request $request)
@@ -84,6 +86,7 @@ class EventBll implements EventBLLInterface
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
         $input['user_id'] = Auth::user()->id;
+        $input['owner'] = Auth::user()->first_name;
         $event = $this->event->create($input);
         $this->mediaDAL->save($request,$event,'post_image');
 
@@ -108,7 +111,9 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.id as id'),
                 DB::raw('events.title as title'),
                 DB::raw('events.description as description'),
+                DB::raw('events.is_active as is_active'),
                 DB::raw('events.user_id as user_id'),
+                DB::raw('events.owner as owner')
             );
 
         $search = $data['search'];
