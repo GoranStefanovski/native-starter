@@ -86,7 +86,6 @@
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    console.log(form.value);
     onSubmit(postUri.value, redirectRoute.value, hasToRedirect, form);
   }
 
