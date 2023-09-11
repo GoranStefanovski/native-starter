@@ -100,7 +100,13 @@ class AuthenticatedSessionController extends Controller
         $request->validated($request->all());
         $user = User::create([
             'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->first_name,
+            'is_disabled' => $request->is_disabled,
+            'company' => $request->company,
             'email' => $request->email,
+            'country_id' => $request->country_id,
+            'country' => \Countries::find($request['country_id'])->name,
             'password' => Hash::make($request->password),
         ]);
         return $this->success([
@@ -113,6 +119,10 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
         $data['first_name'] = $request['first_name'];
         $data['email'] = $request['email'];
+        $data['last_name'] = $request['last_name'];
+        $data['is_disabled'] = $request['is_disabled'];
+        $data['country'] = $request['country'];
+        $data['company'] = $request['company'];
         $data['password'] = Hash::make($request['password']);
         try{
             $user->update($data);

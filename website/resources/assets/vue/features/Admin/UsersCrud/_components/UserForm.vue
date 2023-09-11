@@ -203,14 +203,9 @@
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">Customer Info:</h3>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{$t('users.avatar')}}</label>
+                      <label class="col-3 col-form-label">Username</label>
                       <div class="col-9">
-                        <file-upload
-                          :id="'uploaded_file'"
-                          v-model="form.uploaded_file"
-                          :placeholder-image="avatar"
-                          :form="form"
-                        />
+                        <input v-model="form.username" class="form-control" type="text" placeholder="Username" required  />
                       </div>
                     </div>
                     <div class="form-group row">

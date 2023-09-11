@@ -46,6 +46,7 @@ return [
     'attached' => 'Attached document',
     'attached.file' => 'Currently attached document',
     'avatar' => 'User Avatar',
+    'username' => 'Username',
     'shipping_address' => 'Shipping address',
     'billing_address' => 'Billing address',
 

@@ -108,8 +108,9 @@ class UserDAL implements UserDALInterface
                 DB::raw('users.is_disabled as is_disabled')
             )
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->whereIn('roles.name', [Role::COLLABORATOR, Role::PUBLIC]);
+            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id');
+            // Uncoment this when user role is fixed in users form
+            // ->whereIn('roles.name', [Role::COLLABORATOR, Role::PUBLIC]);
 
         $search = $data['search'];
         if($search){
