@@ -28,8 +28,8 @@
 <template>
   <PortletHead :size="'lg'">
     <PortletHeadLabel :has-icon="true">
-      Datatable header
-      <small>This is a subtitle</small>
+      {{ langKey }}
+      <small></small>
     </PortletHeadLabel>
 
     <PortletHeadToolbar>

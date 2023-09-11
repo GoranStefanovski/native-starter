@@ -50,7 +50,7 @@
   provide('labelStart', 'location');
 
   const postUri = computed(() => edit ? `common/location/${id}/edit` : '/common/save-location');
-  const countriesUri = 'guest/common/getCountries';
+  const countriesUri = 'guest/common/get-countries';
   const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'posts.category_one' : 'posts.category_one');
 
   const fetchCountries = async () => {

@@ -111,7 +111,7 @@ class AuthenticatedSessionController extends Controller
 
     public function editUser(Request $request){
         $user = Auth::user();
-        $data['first_name'] = $request['name'];
+        $data['first_name'] = $request['first_name'];
         $data['email'] = $request['email'];
         $data['password'] = Hash::make($request['password']);
         try{

@@ -109,7 +109,7 @@ class UserDAL implements UserDALInterface
             )
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->whereIn('roles.name', [Role::ADMIN, Role::COLLABORATOR]);
+            ->whereIn('roles.name', [Role::COLLABORATOR, Role::PUBLIC]);
 
         $search = $data['search'];
         if($search){

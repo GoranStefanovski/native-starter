@@ -40,24 +40,7 @@ class UserRequest extends ApiFormRequest
             'password_confirmation' => 'required_with:password|nullable|between:6,30|same:password',
             'roles' => 'required|exists:roles,id',
             'country_id' => 'required',
-//            'uploaded_file' => 'required|file|mimes:jpeg,jpg,png,gif|max:30000',
         ];
-
-        // Check condition to apply proper rules
-        if ($role == 3) {
-            $rules['shipping_details.name'] = 'required|max:255|min:2';
-            $rules['shipping_details.address'] = 'required|max:255|min:2';
-            $rules['shipping_details.city'] = 'required|max:255|min:2';
-            $rules['shipping_details.phone'] = 'required|phone:AUTO';
-            $rules['shipping_details.country_id'] = 'required';
-
-            $rules['billing_details.name'] = 'required|max:255|min:2';
-            $rules['billing_details.address'] = 'required|max:255|min:2';
-            $rules['billing_details.city'] = 'required|max:255|min:2';
-            $rules['billing_details.phone'] = 'required|phone:AUTO';
-            $rules['billing_details.country_id'] = 'required';
-        }
-
         return $rules;
     }
     public function messages(){

@@ -2,7 +2,7 @@
   import { computed, onMounted } from "vue";
   import { useStore } from '@/store';
   import { ColumnObject } from '@/components/Datatables/typings';
-  import UserDatatable from '@/features/Admin/UsersCrud/_components/PublicUserDatatable.vue';
+  import AdminUserDatatable from '@/features/Admin/UsersCrud/_components/AdminUserDatatable.vue';
 
   const store = useStore();
   const setBackUrl = (url) => store.dispatch('Root/setBackUrl', url);
@@ -32,5 +32,5 @@
 </script>
 
 <template>
-  <user-datatable :columns="columns" />
+  <admin-user-datatable :columns="columns" />
 </template>

@@ -56,12 +56,6 @@ class HomeController extends Controller
                 'permission' => 'user_view',
                 'subcategories' => [
                     [
-                        'label' => 'strings.users.admin',
-                        'name' => 'item_users',
-                        'link' => 'users',
-                        'permission' => 'user_view',
-                    ],
-                    [
                         'label' => 'strings.users.public',
                         'name' => 'item_users_public',
                         'link' => 'users.public',
@@ -92,14 +86,14 @@ class HomeController extends Controller
             //     ]
             // ],
             [
-                'label' => 'locations.label',
+                'label' => 'strings.locations.label',
                 'name' => 'locations',
                 'link' => 'locations',
                 'expanded' => false,
                 'permission' => 'locations_view',
             ],
             [
-                'label' => 'events.label',
+                'label' => 'strings.events.label',
                 'name' => 'events',
                 'link' => 'events',
                 'expanded' => false,

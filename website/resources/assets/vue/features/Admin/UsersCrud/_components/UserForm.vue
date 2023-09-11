@@ -63,7 +63,7 @@
 
   const fetchCountries = async () => {
     try {
-      const response = await axios.get('dropdown/countries');
+      const response = await axios.get('guest/common/get-countries');
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
           countries.value.push({ id: key, name: `${response.data[key]['full_name']}` });
@@ -182,7 +182,7 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.roles.label')}}</label>
                       <div class="col-9">
-                        <FormDropdown v-model="form.roles" :options="roles" />
+                        <FormDropdown v-model="form.roles" :options="roles" id="roles"/>
                       </div>
                     </div>
                     <div class="form-group row">
@@ -223,7 +223,7 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.first_name.label')}}</label>
                       <div class="col-9">
-                        <input v-model="form.name" class="form-control" type="text" placeholder="First Name" required />
+                        <input v-model="form.first_name" class="form-control" type="text" placeholder="First Name" required />
                       </div>
                     </div>
                     <div class="form-group row">
@@ -247,7 +247,7 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.country.label')}}</label>
                       <div class="col-9">
-                        <FormDropdown v-model="form.country_id" :options="countries" />
+                        <FormDropdown v-model="form.country_id" :options="countries" id="country_id" />
                       </div>
                     </div>
                     <div class="form-group row">

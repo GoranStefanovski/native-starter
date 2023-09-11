@@ -66,7 +66,7 @@ Route::group([
     Route::post('{id}/edit', 'Controllers\UserController@updateUser')->middleware('permission:user_write', 'role:administrator');
     Route::post('edit/myprofile/{id}', 'Controllers\UserController@updateMyProfile');
     Route::post('draw', 'Controllers\UserController@drawUser');
-    Route::post('public/draw', 'Controllers\UserController@drawPublicUser');
+    Route::post('public/draw', 'Controllers\UserController@drawUserGuest');
     Route::post('public/export', 'Controllers\UserController@exportPublicUser');
     Route::post('public/{id}/delete', 'Controllers\UserController@deleteUser');
     Route::post('export', 'Controllers\UserController@exportAdminUser');
