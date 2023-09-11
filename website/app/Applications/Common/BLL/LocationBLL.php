@@ -179,6 +179,6 @@ class LocationBLL implements LocationBLLInterface
     }
 
     function getLocationsCollaborator() {
-        return $this->location->get()->where('locations.user_id','=',Auth::user()->id);
+       return $this->location->where('user_id', Auth::user()->id)->get();
     }
 }

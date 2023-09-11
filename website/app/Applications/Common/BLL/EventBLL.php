@@ -85,6 +85,7 @@ class EventBll implements EventBLLInterface
     public function saveEvent($request){
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
+        $input['location_id'] = $request['location_id'];
         $input['user_id'] = Auth::user()->id;
         $input['owner'] = Auth::user()->first_name;
         $event = $this->event->create($input);

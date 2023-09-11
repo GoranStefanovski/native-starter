@@ -116,7 +116,7 @@ const event: EventFormItem = {
   title: '',
   description: '',
   is_disabled: 0,
-  location_id: 2,
+  location_id: 0,
   is_active: 0,
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')

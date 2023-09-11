@@ -51,12 +51,16 @@
 
 const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
   const locationsApi = 'common/locations/user/draw';
-  const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'posts.category_one' : 'posts.category_one');
 
   const fetchCountries = async () => {
     try {
-      const response = await axios.post(locationsApi, postUri.value);
-      console.log(response.data, ' asdadasd');
+      const response = await axios.post(locationsApi);
+      for (let key in response.data) {
+        if (response.data.hasOwnProperty(key)) {
+          locations.value.push({ id: key, name: `${response.data[key]['title']}` });
+          console.log(locations);
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -75,9 +79,6 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    console.log(form.value);
-    form.value.city = cities.value.find(city => city.id == form.value.city_id);
-    console.log(form.value);
     onSubmit(postUri.value, 'events', hasToRedirect, form.value);
   }
 
@@ -193,10 +194,10 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                   </div>
                 </div>
                 <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.location.country') }}</label>
+                      <label class="col-3 col-form-label">Location Name:</label>
                       <div class="col-9">
                         <FormDropdown
-                          id="country_id"
+                          id="location_id"
                           v-model="form.location_id"
                           :options="locations"
                           :getcities="true"
