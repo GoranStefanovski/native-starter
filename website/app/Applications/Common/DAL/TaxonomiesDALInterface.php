@@ -49,4 +49,9 @@ interface TaxonomiesDALInterface
      */
     public function getCountries();
 
+    /**
+     * @return array
+     */
+    public function getLocationTypes();
+
 }

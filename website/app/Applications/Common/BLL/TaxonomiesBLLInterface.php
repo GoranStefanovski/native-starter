@@ -40,4 +40,9 @@ interface TaxonomiesBLLInterface
      */
     public function getCountries();
 
+    /**
+    * @return mixed[]|null
+    */
+    public function getLocationTypes();
+
 }

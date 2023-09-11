@@ -3,6 +3,7 @@
 namespace App\Applications\Common\DAL;
 
 use App\Applications\Common\DAL\TaxonomiesDALInterface;
+use App\Applications\Common\Model\Location;
 //use App\Applications\Common\Model\Format;
 //use App\Applications\Common\Model\Color;
 //use App\Applications\Common\Model\Handle;
@@ -10,6 +11,7 @@ use App\Applications\Common\DAL\TaxonomiesDALInterface;
 //use App\Applications\Common\Model\Paper;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Countries\Countries;
+use App\Applications\Common\Model\LocationTypes;
 
 /*INSERT NEW IMPORTS HERE*/
 
@@ -17,17 +19,23 @@ use Webpatser\Countries\Countries;
 /**
  * @property Countries countries
  */
+
+ /**
+ * @property LocationTypes locationTypes
+ */
+
 class TaxonomiesDAL implements TaxonomiesDALInterface
 {
 
     public function __construct(
 
         Countries $countries,
+        LocationTypes $locationTypes
 
     ){
 
         $this->countries = $countries;
-
+        $this->locationTypes = $locationTypes;
 		/*SET DEPENDENCY HERE*/
     }
 
@@ -69,6 +77,10 @@ class TaxonomiesDAL implements TaxonomiesDALInterface
 
     public function getCountries(){
         return $this->countries->getList();
+    }
+
+    public function getLocationTypes() {
+        return $this->locationTypes->get();
     }
 
 }

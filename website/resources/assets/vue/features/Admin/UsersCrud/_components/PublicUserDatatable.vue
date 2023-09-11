@@ -21,6 +21,13 @@
     sortKey: 'first_name'
   });
 
+  const options: Array<any> = [
+    {value: '', 'label': 'All'},
+    {value: 'ADMIN', 'label': 'Admin'},
+    {value: 'COLLABORATOR', 'label': 'Colaborator'},
+    {value: 'PUBLIC', 'label': 'Public'},
+
+  ];
   const roles: Ref<any[]> = ref([]);
   const statuses: any[] = [
     { id: 3, name: 'All status' },
@@ -57,6 +64,8 @@
 </script>
 <template>
   <Datatable
+    :isFilter="true"
+    :options="options"
     :tableInfo="tableInfo"
     :query="query"
     :loading="loading"

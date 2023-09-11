@@ -35,6 +35,7 @@
   const getPostUri = `guest/common/${id}/getLocation`
   const fetchUri = `auth/user`;
   const countries = ref([]);
+  const location_types = ref([]);
   const cities = ref([]);
   const {
     form,
@@ -51,6 +52,7 @@
 
   const postUri = computed(() => edit ? `common/location/${id}/edit` : '/common/save-location');
   const countriesUri = 'guest/common/get-countries';
+  const locationTypesUri = 'guest/common/location-types';
   const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'posts.category_one' : 'posts.category_one');
 
   const fetchCountries = async () => {
@@ -61,6 +63,15 @@
           countries.value.push({ id: key, name: `${response.data[key]['name']}` });
         }
       }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchLocationTypes = async () => {
+    try {
+      const response = await axios.get(locationTypesUri);
+      console.log(response.data);
     } catch (error) {
       console.error(error);
     }
@@ -91,7 +102,7 @@
 
     await fetchCountries();
     await initFormFromItem();
-
+    // await fetchLocationTypes();
 
   })
 </script>
@@ -204,6 +215,18 @@
                         />
                       </div>
                     </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">{{ $t('posts.location.country') }}</label>
+                      <div class="col-9">
+                        <FormDropdown
+                          id="location_type_id"
+                          v-model="form.location_type_id"
+                          :options="location_types"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
+                    <!-- location_types -->
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{ $t('posts.location.city') }}</label>
                       <div class="col-9">

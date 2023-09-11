@@ -35,5 +35,14 @@ class TaxonomiesController extends Controller
         }
     }
 
+    public function getLocationTypes() {
+        try{
+            return $this->taxonomiesBLL->getLocationTypes();
+        }
+        catch(Exception $e){
+            return $e;
+        }
+    }
+ 
 
 }

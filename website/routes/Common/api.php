@@ -22,6 +22,8 @@ Route::group([
 //    Route::get('get-handle-types', 'Controllers\TaxonomiesController@getHandleTypes');
     Route::get('{id}/fetch', [LocationController::class,'getPostByIdNonAuth']);
     Route::get('get-countries', 'Controllers\TaxonomiesController@getCountries');
+    Route::get('location-types', 'Controllers\TaxonomiesController@getLocationTypes');
+    // 
     Route::post('allLocationsPublic', [LocationController::class,'allLocationsPublic']);
     Route::post('allEventsPublic', [EventController::class,'allEventsPublic']);
     Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');

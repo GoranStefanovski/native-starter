@@ -20,6 +20,8 @@
     'loading',
     'columns',
     'pagination',
+    'isFilter',
+    'options',
     'langKey', //TODO: Find better solution to avoid duplications in translations
     'addRouteName', //TODO: Send all these as single object to be used by Datatable
   ])
@@ -38,7 +40,7 @@
 <template>
   <Portlet>
     <DatatableHeader :lang-key="langKey" :add-route-name="addRouteName" />
-    <DatatableFilters />
+    <DatatableFilters :is-filter="isFilter" :options="options"/>
     <PortletBody :is-unpdadded="true">
       <div
         class="kt-datatable kt-datatable--default kt-datatable--brand"

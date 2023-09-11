@@ -39,4 +39,8 @@ class TaxonomiesBLL implements TaxonomiesBLLInterface
     public function getCountries(){
         return $this->taxonomiesDAL->getCountries()/*->toJson()*/;
     }
+
+    public function getLocationTypes(){
+        return $this->taxonomiesDAL->getLocationTypes()/*->toJson()*/;
+    }
 }

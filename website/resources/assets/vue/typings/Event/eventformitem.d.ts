@@ -6,6 +6,6 @@ declare interface EventFormItem {
   is_disabled?: number;
   uploaded_file: File|null;
   media: File|null;
-  location_id?: number; 
+  location_id?: number|null; 
   is_active?: number;
 }

@@ -29,6 +29,7 @@ class EventRequest extends ApiFormRequest
 
         $rules = [
             'title' => 'required|max:255|min:2',
+            'location_id' => 'required',
             'description' => 'required',
             'uploaded_file' => 'file|mimes:jpeg,jpg,png,gif|max:30000',
         ];

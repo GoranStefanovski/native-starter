@@ -93,6 +93,7 @@ class LocationBLL implements LocationBLLInterface
         $input['country_id'] = $request['country_id'];
         $input['country'] = \Countries::find($request['country_id'])->name;
         $input['user_id'] = Auth::user()->id;
+        $input['location_type_id'] = $request['location_type_id'];
         $input['owner'] = Auth::user()->first_name;
         $input['city'] = $request['city'];
         $location = $this->location->create($input);
