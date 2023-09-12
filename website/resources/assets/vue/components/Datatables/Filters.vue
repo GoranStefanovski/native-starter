@@ -24,6 +24,8 @@
   const onQueryUpdate = inject(onQueryUpdateKey, () => {});
 
   const searchValue: Ref<string> = ref('');
+  const filterValue: Ref<string> = ref('');
+
   const handleSearchChange = (event: HTMLInputElementEvent) => {
     onQueryUpdate({
       search: event.target.value
@@ -65,6 +67,8 @@
                   <select
                     id="kt_form_status"
                     class="form-control bootstrap-select"
+                    v-model="filterValue"
+                    @change="handleSearchChange"
                   >
                     <option v-for="option,index in options" :key="index" :value="option.value">
                       {{option.label}}
