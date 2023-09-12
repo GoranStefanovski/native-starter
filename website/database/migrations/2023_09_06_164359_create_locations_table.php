@@ -27,8 +27,7 @@ class CreateLocationsTable extends Migration
             $table->string('image')->nullable();
             $table->text('description')->nullable(false);
             $table->integer('user_id')->unsigned();
-            $table->integer('location_type')->nullable(false);
-            $table->integer('location_type_id')->unsigned();
+            $table->json('location_types')->nullable();
             $table->integer('activity_going_total')->unsigned();
             $table->integer('activity_interested_total')->unsigned();
             $table->timestamps();

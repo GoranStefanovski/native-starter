@@ -110,8 +110,7 @@ class LocationBLL implements LocationBLLInterface
         $input['is_active'] = $request['is_active'];
         $input['country'] = \Countries::find($request['country_id'])->name;
         $input['user_id'] = Auth::user()->id;
-        $input['location_type_id'] = $request['location_type_id'];
-        $input['location_type'] = locationTypes::find($request['location_type_id'])->name;
+        $input['location_types'] = json_encode($request->input('location_types'));
         $input['owner'] = Auth::user()->first_name;
         $input['city'] = $request['city'];
         $location = $this->location->create($input);
@@ -145,8 +144,7 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.owner as owner'),
                 DB::raw('locations.is_active as is_active'),
                 DB::raw('countries.name as country_name'),
-                DB::raw('locations.location_type_id as location_type_id'),
-                DB::raw('locations.location_type as location_type'),
+                DB::raw('locations.location_types as location_types'),
                 DB::raw('locations.image as image'),
             )
             ->join('countries', 'countries.id', '=', 'locations.country_id');

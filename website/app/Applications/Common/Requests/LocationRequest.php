@@ -31,7 +31,7 @@ class LocationRequest extends ApiFormRequest
             'title' => 'required|max:255|min:2',
             'description' => 'required',
             'country_id' => 'required',
-            'location_type_id' => 'required',
+            'location_types' => 'required',
             // 'user_id' => 'required',
             // 'password_confirmation' => 'required_with:password|nullable|between:6,30|same:password',
             // 'roles' => 'required|exists:roles,id',

@@ -8,6 +8,7 @@
   import { useForm } from '@/composables';
   import { Portlet } from '@/components';
   import FileUpload from "@/components/Form/FileUpload.vue";
+  import Multiselect from 'vue-multiselect';
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
   } from '@/components/Portlet/components';
@@ -107,7 +108,15 @@
     await initFormFromItem();
     await fetchLocationTypes();
 
+    if(edit) {
+      form.value.location_types = JSON.parse(form.value.location_types)
+    } 
+
   })
+
+  const customLabel = (option) => {
+    return option.name
+  }
 </script>
 
 <template>
@@ -221,12 +230,15 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Location Type</label>
                       <div class="col-9">
-                        <FormDropdown
-                          id="location_type_id"
-                          v-model="form.location_type_id"
+                        <multiselect
+                          v-model="form.location_types"
                           :options="location_types"
+                          track-by="id"
+                          multiple
+                          :custom-label="customLabel"
                           @update:modelValue="handleModelUpdate"
-                        />
+                          >
+                        </multiselect>
                       </div>
                     </div>
                     <!-- location_types -->

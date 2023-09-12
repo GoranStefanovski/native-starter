@@ -7,8 +7,7 @@ declare interface LocationFormItem {
   country?: string|null;
   city?: string|null;
   is_active?: number|null;
-  location_type_id?: number|null;
-  location_type?: string|null;
+  location_types?: Array<any>;
   uploaded_file: File|null;
   media: File|null;
 }
