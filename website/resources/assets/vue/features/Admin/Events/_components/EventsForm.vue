@@ -223,7 +223,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">Location Name:</label>
+                      <label class="col-3 col-form-label">Music Genre:</label>
                       <div class="col-9">
                         <FormDropdown
                           id="music_type_id"

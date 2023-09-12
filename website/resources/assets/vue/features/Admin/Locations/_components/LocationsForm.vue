@@ -220,7 +220,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.location.country') }}</label>
+                      <label class="col-3 col-form-label">Location Type:</label>
                       <div class="col-9">
                         <FormDropdown
                           id="location_type_id"
