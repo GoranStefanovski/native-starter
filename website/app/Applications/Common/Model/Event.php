@@ -60,7 +60,7 @@ class Event extends Model implements HasMedia
 
     public function registerMediaCollections() : void
     {
-        $this->addMediaCollection('post_image')
+        $this->addMediaCollection('event_image')
             ->singleFile();
     }
 
@@ -69,17 +69,17 @@ class Event extends Model implements HasMedia
         $this->addMediaConversion('400')
             ->fit('max', 400, 0)
             ->optimize()->keepOriginalImageFormat()
-            ->performOnCollections('post_image');
+            ->performOnCollections('event_image');
 
         $this->addMediaConversion('200')
             ->fit('max', 200, 0)
             ->optimize()->keepOriginalImageFormat()
-            ->performOnCollections('post_image');
+            ->performOnCollections('event_image');
     }
 
     public function image()
     {
-        return $this->getFirstMedia('post_image');
+        return $this->getFirstMedia('event_image');
     }
 
 }

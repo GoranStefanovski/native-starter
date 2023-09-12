@@ -34,7 +34,7 @@ class MediaDAL implements MediaDALInterface
         if ($request->hasFile($property_name)) {
             if(is_array($request->{$property_name})){
                 foreach ($request->{$property_name} as $uploaded_file) {
-                    //$uploaded_file = $request->file($property_name);
+                    $uploaded_file = $request->file($property_name);
                     $properties = [];
                     if ($request->has('comment')) $properties['comment'] = $request->get('comment');
                     $new_media = $media->addMedia($uploaded_file)

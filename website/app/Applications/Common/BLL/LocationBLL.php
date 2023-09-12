@@ -97,14 +97,14 @@ class LocationBLL implements LocationBLLInterface
         $input['owner'] = Auth::user()->first_name;
         $input['city'] = $request['city'];
         $location = $this->location->create($input);
-        $this->mediaDAL->save($request,$location,'post_image');
+        $this->mediaDAL->save($request,$location,'location_image');
 
     }
     public function editLocation($request,$id){
         $location_data = $request->all();
 //        dd($post_data);
         $location = $this->location->find($id);
-        $this->mediaDAL->save($request,$location,'post_image');
+        $this->mediaDAL->save($request,$location,'location_image');
         return $location->update($location_data);
     }
     public function deleteLocation($id){
@@ -127,7 +127,8 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.owner as owner'),
                 DB::raw('locations.is_active as is_active'),
                 DB::raw('countries.name as country_name'),
-                DB::raw('locations.location_type_id as location_type_id')
+                DB::raw('locations.location_type_id as location_type_id'),
+                DB::raw('locations.image as image'),
             )
             ->join('countries', 'countries.id', '=', 'locations.country_id');
 

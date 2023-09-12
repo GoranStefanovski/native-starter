@@ -58,7 +58,7 @@ class Location extends Model implements HasMedia
 
     public function registerMediaCollections() : void
     {
-        $this->addMediaCollection('post_image')
+        $this->addMediaCollection('location_image')
             ->singleFile();
     }
 
@@ -67,17 +67,17 @@ class Location extends Model implements HasMedia
         $this->addMediaConversion('400')
             ->fit('max', 400, 0)
             ->optimize()->keepOriginalImageFormat()
-            ->performOnCollections('post_image');
+            ->performOnCollections('location_image');
 
         $this->addMediaConversion('200')
             ->fit('max', 200, 0)
             ->optimize()->keepOriginalImageFormat()
-            ->performOnCollections('post_image');
+            ->performOnCollections('location_image');
     }
 
     public function image()
     {
-        return $this->getFirstMedia('post_image');
+        return $this->getFirstMedia('location_image');
     }
 
 }

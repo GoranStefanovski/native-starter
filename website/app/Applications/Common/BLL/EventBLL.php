@@ -90,14 +90,14 @@ class EventBll implements EventBLLInterface
         $input['user_id'] = Auth::user()->id;
         $input['owner'] = Auth::user()->first_name;
         $event = $this->event->create($input);
-        $this->mediaDAL->save($request,$event,'post_image');
+        $this->mediaDAL->save($request,$event,'event_image');
 
     }
     public function editEvent($request,$id){
         $event_data = $request->all();
 //        dd($post_data);
         $event = $this->event->find($id);
-        $this->mediaDAL->save($request,$event,'post_image');
+        $this->mediaDAL->save($request,$event,'event_image');
         return $event->update($event_data);
     }
     public function deleteEvent($id){
@@ -116,7 +116,8 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.is_active as is_active'),
                 DB::raw('events.user_id as user_id'),
                 DB::raw('events.owner as owner'),
-                DB::raw('events.music_type_id as music_type_id')
+                DB::raw('events.music_type_id as music_type_id'),
+                
             );
 
         $search = $data['search'];

@@ -86,7 +86,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
     console.log(form.value.media[0]);
     const { media } = form.value.media[0];
     if (media != undefined) {
-      const postImage = media.find(o => o.collection_name === 'post_image');
+      const postImage = media.find(o => o.collection_name === 'event_image');
       if (!!postImage) {
         return getPhotoPath(postImage, 400);
       }

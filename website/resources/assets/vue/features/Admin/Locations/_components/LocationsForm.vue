@@ -85,7 +85,7 @@
     console.log(form.value.media[0]);
     const { media } = form.value.media[0];
     if (media != undefined) {
-      const postImage = media.find(o => o.collection_name === 'post_image');
+      const postImage = media.find(o => o.collection_name === 'location_image');
       if (!!postImage) {
         return getPhotoPath(postImage, 400);
       }
@@ -266,8 +266,8 @@
                       <label class="col-3 col-form-label">{{ $t('posts.image') }}</label>
                       <div class="col-9">
                         <file-upload
-                          :id="'uploaded_file'"
-                          v-model="form.uploaded_file"
+                          :id="'image'"
+                          v-model="form.image"
                           :placeholder-image="postImg"
                           :form="form"
                           component-type="image"
