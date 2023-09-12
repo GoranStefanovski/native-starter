@@ -105,6 +105,7 @@ class AuthenticatedSessionController extends Controller
             'is_disabled' => $request->is_disabled,
             'company' => $request->company,
             'email' => $request->email,
+            'phone' => $request->phone,
             'country_id' => $request->country_id,
             'country' => \Countries::find($request['country_id'])->name,
             'password' => Hash::make($request->password),
@@ -123,6 +124,7 @@ class AuthenticatedSessionController extends Controller
         $data['is_disabled'] = $request['is_disabled'];
         $data['country'] = $request['country'];
         $data['company'] = $request['company'];
+        $data['phone'] = $request['phone'];
         $data['password'] = Hash::make($request['password']);
         try{
             $user->update($data);

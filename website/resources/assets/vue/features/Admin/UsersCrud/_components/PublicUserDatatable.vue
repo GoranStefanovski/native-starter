@@ -82,6 +82,7 @@
       :key="user.id"
       :columns="columns"
       :user="user"
+      @delete:modelValue="deleteUser"
     />
   </Datatable>
 </template>

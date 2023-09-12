@@ -2,6 +2,11 @@
   import { TableColumn, TableRow } from '@/components/Datatables'
   const props = defineProps(['value', 'columns', 'user', 'index']);
   const isEvenRow = props.index % 2 === 0;
+  const emit = defineEmits(['delete:modelValue']);
+
+  const emitValue = (user,user_id) => {
+    emit('delete:modelValue', user,user_id);
+  }
 </script>
 
 <template>
@@ -52,9 +57,10 @@
       <i
         v-if="$auth.user().permissions_array.includes('user_write')"
         variant="link"
+        style="cursor: pointer;"
         aria-hidden="true"
         class="fa fa-trash-o"
-        @click="deleteUser(user, user.id)"
+        @click="emitValue(user, user.id)"
       />
     </TableColumn>
   </TableRow>

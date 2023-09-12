@@ -6,7 +6,7 @@ declare interface UserFormItem {
   last_name?: string;
   roles?: any;
   roles_array?: any;
-  is_disabled?: number;
+  is_disabled?: number|null;
   country_id?: number|null;
   uploaded_file: File|null;
   password?: string;

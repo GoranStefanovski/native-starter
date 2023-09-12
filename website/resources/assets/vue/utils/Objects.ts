@@ -75,7 +75,7 @@ const user: UserFormItem = {
   password_confirmation: '',
   roles: [],
   roles_array: [],
-  is_disabled: 0,
+  is_disabled: 1,
   country_id: '',
   uploaded_file: createFile('image/jpg'),
   json_data: '',

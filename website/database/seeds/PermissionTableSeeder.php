@@ -70,9 +70,11 @@ class PermissionTableSeeder extends Seeder
         ]);
 
         // Admin permissions (all permissions)
-        for($i=1; $i<=8; ++$i){
+
+        $arrayAdmin = [1,2,4,5,6,7,8];
+        foreach ($arrayAdmin as $value){
             DB::table('permission_role')->insert([
-                'permission_id' => $i,
+                'permission_id' => $value,
                 'role_id' => 1,
             ]);
         }

@@ -52,7 +52,9 @@
   const postUri = computed(() => edit ? `/user/${id}/edit` : '/guest/user/register');
   const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'users' : 'users.public');
 
-  const fetchRoles = async () => {
+  const optionsIsDisabled: Array<any> = [{'id': 0, 'name':'Enabled'},{'id': 1, 'name':'Disabled'}];
+
+    const fetchRoles = async () => {
     try {
       const response = await axios.get('user/roles/get');
       roles.value = response.data;
@@ -186,12 +188,17 @@
                     </div>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.status')}}</label>
-                      <div class="col-9">
-                        <FormInputRadio
-                          :id="'enabled'"
+                      <div class="col-9" style="display: grid;">
+                        <span v-for="option, index in optionsIsDisabled" :key="index">
+                        <label :for="option.name">{{ option.name }}</label>
+                        <input
+                          :value="option.id"
+                          type="radio"
+                          :placeholder="option.name"
+                          :id="'is_disabled'"
                           v-model="form.is_disabled"
-                          :options="[{'id': 0, 'name':'Enabled'},{'id': 1, 'name':'Disabled'}]"
                         />
+                      </span>
                       </div>
                     </div>
                   </div>

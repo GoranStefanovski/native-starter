@@ -25,8 +25,8 @@ Route::group([
     Route::get('location-types', 'Controllers\TaxonomiesController@getLocationTypes');
     Route::get('music-types', 'Controllers\TaxonomiesController@getMusicTypes');
     // 
-    Route::post('allLocationsPublic', [LocationController::class,'allLocationsPublic']);
-    Route::post('allEventsPublic', [EventController::class,'allEventsPublic']);
+    Route::post('all-locations', [LocationController::class,'allLocationsPublic']);
+    Route::post('all-events', [EventController::class,'allEventsPublic']);
     Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');
     Route::get('{id}/getEvent', 'Controllers\EventController@getPostById');
 });
@@ -48,9 +48,4 @@ Route::group([
     Route::post('event/{id}/edit',[EventController::class,'editEvent']);
     Route::post('events/draw', [EventController::class,'allEvents']);
     Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);
-
-    //   Route::get('getScrolldownPosts', 'Controllers\LocationController@getScrolldownPosts');
-//   Route::get('index','Controllers\LocationController@index');
-//    Route::post('posts/draw', [LocationController::class,'allPosts']);
-//   Route::get('latestPosts', 'Controllers\LocationController@latestPosts'); //function(){ return PostResource::collection(Posts::all());})Route::get('{id}/fetch', 'Controllers\LocationController@getPostByIdNonAuth');
 });
