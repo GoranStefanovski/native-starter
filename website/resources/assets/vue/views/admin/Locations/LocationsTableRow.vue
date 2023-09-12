@@ -29,18 +29,14 @@ const emit = defineEmits(['delete:modelValue']);
     </TableColumn>
 
     <TableColumn :width="columns[3].width">
-      {{ post.country_name }}
-    </TableColumn>
-
-    <TableColumn :width="columns[4].width">
       {{post.city}}
     </TableColumn>
 
-    <TableColumn :width="columns[5].width">
+    <TableColumn :width="columns[4].width">
       {{post.owner}}
     </TableColumn>
 
-    <TableColumn :width="columns[6].width">
+    <TableColumn :width="columns[5].width">
       <router-link
         v-if="$auth.user().permissions_array.includes('locations_write')"
         :to="{ name: 'edit.location', params: { locationId: post.id}}"
@@ -54,7 +50,7 @@ const emit = defineEmits(['delete:modelValue']);
       </router-link>
     </TableColumn>
 
-    <TableColumn :width="columns[7].width">
+    <TableColumn :width="columns[6].width">
       <i
         v-if="$auth.user().permissions_array.includes('locations_write')"
         variant="link"

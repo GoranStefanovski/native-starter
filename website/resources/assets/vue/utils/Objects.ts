@@ -105,7 +105,7 @@ const location: LocationFormItem = {
   description: '',
   location_types: [],
   country_id: 0,
-  country: '',
+  country: 'Bulgaria',
   city: '',
   is_active: null,
   uploaded_file: createFile('image/jpg'),

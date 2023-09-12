@@ -35,8 +35,6 @@ class LocationBLL implements LocationBLLInterface
         'description' => 'locations.description',
         'rating' => 'locations.rating',
         'user_id' => 'locations.user_id',
-        'country_id' => 'locations.country_id',
-        'country_name' => 'locations.country',
         'owner' => 'locations.owner',
         'city' => 'locations.city',
         'is_active' => 'locations.is_active'
@@ -108,7 +106,6 @@ class LocationBLL implements LocationBLLInterface
         $input['description'] = $request['description'];
         $input['country_id'] = $request['country_id'];
         $input['is_active'] = $request['is_active'];
-        $input['country'] = \Countries::find($request['country_id'])->name;
         $input['user_id'] = Auth::user()->id;
         $input['location_types'] = json_encode($request->input('location_types'));
         $input['owner'] = Auth::user()->first_name;
@@ -137,18 +134,14 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.id as id'),
                 DB::raw('locations.title as title'),
                 DB::raw('locations.description as description'),
-                DB::raw('locations.country_id as country_id'),
                 DB::raw('locations.city as city'),
                 DB::raw('locations.rating as rating'),
                 DB::raw('locations.user_id as user_id'),
                 DB::raw('locations.owner as owner'),
                 DB::raw('locations.is_active as is_active'),
-                DB::raw('countries.name as country_name'),
                 DB::raw('locations.location_types as location_types'),
                 DB::raw('locations.image as image'),
-            )
-            ->join('countries', 'countries.id', '=', 'locations.country_id');
-
+            );
         $search = $data['search'];
         if($search){
             $query->where(function($subquery) use ($search) {

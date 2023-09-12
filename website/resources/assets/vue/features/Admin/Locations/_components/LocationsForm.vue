@@ -218,11 +218,23 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Country</label>
                       <div class="col-9">
-                        <FormDropdown
-                          id="country_id"
-                          v-model="form.country_id"
-                          :options="countries"
-                          :getcities="true"
+                        <input
+                          id="country"
+                          class="form-control"
+                          v-model="form.country"
+                          :disabled="true"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">City</label>
+                      <div class="col-9">
+                        <input
+                          placeholder="City"
+                          id="city"
+                          class="form-control"
+                          v-model="form.city"
+                          :options="cities"
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>
@@ -241,33 +253,9 @@
                         </multiselect>
                       </div>
                     </div>
-                    <!-- location_types -->
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">City</label>
-                      <div class="col-9">
-                        <input
-                          placeholder="City"
-                          id="city"
-                          class="form-control"
-                          v-model="form.city"
-                          :options="cities"
-                          @update:modelValue="handleModelUpdate"
-                        />
-                      </div>
-                    </div>
-                    <!--                    <div class="form-group row">-->
-                    <!--                      <label class="col-3 col-form-label">{{ $t('users.status') }}</label>-->
-                    <!--                      <div class="col-9">-->
-                    <!--                        <FormInputRadio-->
-                    <!--                          :id="'enabled'"-->
-                    <!--                          v-model="form.is_disabled"-->
-                    <!--                          :options="[{'id': 0, 'name':'Enabled'},{'id': 1, 'name':'Disabled'}]"-->
-                    <!--                        />-->
-                    <!--                      </div>-->
-                    <!--                    </div>-->
                   </div>
                 </div>
-                <!--                <div class="kt-separator kt-separator&#45;&#45;border-dashed kt-separator&#45;&#45;space-lg" />-->
+                <div class="kt-separator kt-separator&#45;&#45;border-dashed kt-separator&#45;&#45;space-lg" />
                 <div class="kt-section">
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">

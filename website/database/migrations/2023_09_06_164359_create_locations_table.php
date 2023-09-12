@@ -18,7 +18,7 @@ class CreateLocationsTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('owner')->nullable(false);
             $table->string('title')->nullable(false);
-            $table->string('country')->nullable(false);
+            $table->string('country')->nullable(false)->default('Bulgaria');
             $table->integer('country_id')->unsigned();
             $table->string('city')->nullable(false);
             $table->integer('is_active')->nullable(false)->default(0);

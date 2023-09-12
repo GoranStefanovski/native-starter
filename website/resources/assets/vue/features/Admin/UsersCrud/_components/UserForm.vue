@@ -100,8 +100,6 @@
     initFormFromItem();
     fetchCountries();
     fetchRoles();
-    // form.populate(item.value);
-    // form.setInitialValues(item.value);
   })
 </script>
 
