@@ -12,6 +12,7 @@ use App\Applications\Common\Model\Location;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Countries\Countries;
 use App\Applications\Common\Model\LocationTypes;
+use App\Applications\Common\Model\MusicTypes;
 
 /*INSERT NEW IMPORTS HERE*/
 
@@ -24,18 +25,24 @@ use App\Applications\Common\Model\LocationTypes;
  * @property LocationTypes locationTypes
  */
 
+  /**
+ * @property MusicTypes musicTypes
+ */
+
 class TaxonomiesDAL implements TaxonomiesDALInterface
 {
 
     public function __construct(
 
         Countries $countries,
-        LocationTypes $locationTypes
+        LocationTypes $locationTypes,
+        MusicTypes $musicTypes
 
     ){
 
         $this->countries = $countries;
         $this->locationTypes = $locationTypes;
+        $this->musicTypes = $musicTypes;
 		/*SET DEPENDENCY HERE*/
     }
 
@@ -81,6 +88,10 @@ class TaxonomiesDAL implements TaxonomiesDALInterface
 
     public function getLocationTypes() {
         return $this->locationTypes->whereNull('location_types.deleted_at')->get();
+    }
+
+    public function getMusicTypes() {
+        return $this->musicTypes->whereNull('music_types.deleted_at')->get();
     }
 
 }

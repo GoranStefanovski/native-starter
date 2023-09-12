@@ -35,6 +35,7 @@
   const getPostUri = `guest/common/${id}/getEvent`
   const fetchUri = `auth/user`;
   const locations = ref([]);
+  const musicTypes = ref([]);
   const cities = ref([]);
   const {
     form,
@@ -51,6 +52,7 @@
 
 const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
   const locationsApi = 'common/locations/user/draw';
+  const musicTypesUri = 'guest/common/music-types';
 
   const fetchCountries = async () => {
     try {
@@ -59,6 +61,20 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
         if (response.data.hasOwnProperty(key)) {
           locations.value.push({ id: key, name: `${response.data[key]['title']}` });
           console.log(locations);
+        }
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchMusicTypes = async () => {
+    try {
+      const response = await axios.get(musicTypesUri);
+      for (let key in response.data) {
+        if (response.data.hasOwnProperty(key)) {
+          musicTypes.value.push({ id: key, name: `${response.data[key]['name']}` });
+          console.log(musicTypes);
         }
       }
     } catch (error) {
@@ -91,6 +107,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
 
     await fetchCountries();
     await initFormFromItem();
+    await fetchMusicTypes();
 
   })
 </script>
@@ -200,6 +217,18 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                           id="location_id"
                           v-model="form.location_id"
                           :options="locations"
+                          :getcities="true"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Location Name:</label>
+                      <div class="col-9">
+                        <FormDropdown
+                          id="music_type_id"
+                          v-model="form.music_type_id"
+                          :options="musicTypes"
                           :getcities="true"
                           @update:modelValue="handleModelUpdate"
                         />

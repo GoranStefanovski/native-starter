@@ -20,6 +20,7 @@ class CreateEventsTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('owner')->nullable(false);
             $table->integer('user_id')->unsigned();
+            $table->integer('music_type_id')->nullable(null);
             $table->integer('location_id')->nullable(null);
             $table->integer('event_type_id')->unsigned();
             $table->integer('is_active')->unsigned();

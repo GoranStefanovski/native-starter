@@ -45,4 +45,11 @@ interface TaxonomiesBLLInterface
     */
     public function getLocationTypes();
 
+    /**
+    * @return mixed[]|null
+    */
+    public function getMusicTypes();
+
+    
+
 }

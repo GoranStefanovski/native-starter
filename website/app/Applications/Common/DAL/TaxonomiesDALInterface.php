@@ -55,4 +55,9 @@ interface TaxonomiesDALInterface
      */
     public function getLocationTypes();
 
+        /**
+     * @return Model
+     */
+    public function getMusicTypes();
+
 }

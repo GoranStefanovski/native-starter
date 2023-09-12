@@ -86,6 +86,7 @@ class EventBll implements EventBLLInterface
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
         $input['location_id'] = $request['location_id'];
+        $input['music_type_id'] = $request['music_type_id'];
         $input['user_id'] = Auth::user()->id;
         $input['owner'] = Auth::user()->first_name;
         $event = $this->event->create($input);
@@ -114,7 +115,8 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.description as description'),
                 DB::raw('events.is_active as is_active'),
                 DB::raw('events.user_id as user_id'),
-                DB::raw('events.owner as owner')
+                DB::raw('events.owner as owner'),
+                DB::raw('events.music_type_id as music_type_id')
             );
 
         $search = $data['search'];

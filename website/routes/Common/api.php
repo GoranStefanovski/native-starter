@@ -23,6 +23,7 @@ Route::group([
     Route::get('{id}/fetch', [LocationController::class,'getPostByIdNonAuth']);
     Route::get('get-countries', 'Controllers\TaxonomiesController@getCountries');
     Route::get('location-types', 'Controllers\TaxonomiesController@getLocationTypes');
+    Route::get('music-types', 'Controllers\TaxonomiesController@getMusicTypes');
     // 
     Route::post('allLocationsPublic', [LocationController::class,'allLocationsPublic']);
     Route::post('allEventsPublic', [EventController::class,'allEventsPublic']);

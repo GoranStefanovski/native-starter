@@ -43,6 +43,14 @@ class TaxonomiesController extends Controller
             return $e;
         }
     }
- 
+
+    public function getMusicTypes() {
+        try{
+            return $this->taxonomiesBLL->getMusicTypes();
+        }
+        catch(Exception $e){
+            return $e;
+        }
+    }
 
 }
