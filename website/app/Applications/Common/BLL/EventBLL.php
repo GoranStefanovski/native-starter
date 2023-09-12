@@ -63,7 +63,7 @@ class EventBll implements EventBLLInterface
         // TODO: Implement getPostByIdNonAuth() method.
     }
 
-    public function getPublicEvents()
+    public function getPublicEvents(Request $request)
     {
         $query = DB::table('events')
             ->select(
@@ -71,6 +71,8 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.title as title'),
                 DB::raw('events.description as description'),
                 DB::raw('events.user_id as user_id'),
+                DB::raw('events.music_types as music_types'),
+                DB::raw('events.location_id as location_id')
             );
 
 
@@ -78,7 +80,7 @@ class EventBll implements EventBLLInterface
         $query->where('events.is_active',1);
         $query->groupBy('events.id');
 
-        return $this->$query->all();
+        return $query->get();
     }
 
     public function getPostsByUser()
@@ -133,7 +135,7 @@ class EventBll implements EventBLLInterface
         }
 
         // If user is collaborator it will show only its locations
-        if(Auth::user()->isCollaborator()) {
+        if(Auth::user() && Auth::user()->isCollaborator()) {
             $query->where('events.user_id','=',Auth::user()->id);
         }
 

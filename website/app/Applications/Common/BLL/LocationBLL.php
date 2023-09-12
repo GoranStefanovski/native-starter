@@ -74,7 +74,7 @@ class LocationBLL implements LocationBLLInterface
             DB::raw('locations.title as title'),
             DB::raw('locations.description as description'),
             DB::raw('locations.user_id as user_id'),
-            DB::raw('locations.location_type as location_type'),
+            DB::raw('locations.location_types as location_types'),
             DB::raw('locations.city as city')
         );
         
@@ -93,7 +93,7 @@ class LocationBLL implements LocationBLLInterface
     $query->where('locations.is_active',1);
     $query->groupBy('locations.id');
 
-    return $this->$query->all();
+    return $query->get();
     }
 
     public function getPostsByUser()

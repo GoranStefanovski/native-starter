@@ -1,5 +1,7 @@
 <?php
 namespace App\Applications\Common\BLL;
+
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 interface EventBLLInterface{
@@ -20,7 +22,12 @@ interface EventBLLInterface{
 
     public function deleteEvent($id);
 
-    public function getPublicEvents();
+    /**
+     * Summary of getPublicEvents
+     * @param \Illuminate\Http\Request $request
+     * @return Collection
+     */
+    public function getPublicEvents(Request $request);
 
     /**
      * @param array $data
