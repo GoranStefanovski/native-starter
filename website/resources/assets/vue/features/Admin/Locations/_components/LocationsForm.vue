@@ -71,7 +71,11 @@
   const fetchLocationTypes = async () => {
     try {
       const response = await axios.get(locationTypesUri);
-      console.log(response.data);
+      for (let key in response.data) {
+        if (response.data.hasOwnProperty(key)) {
+          location_types.value.push({ id: key, name: `${response.data[key]['name']}` });
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -102,7 +106,7 @@
 
     await fetchCountries();
     await initFormFromItem();
-    // await fetchLocationTypes();
+    await fetchLocationTypes();
 
   })
 </script>

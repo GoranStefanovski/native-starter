@@ -126,7 +126,8 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.user_id as user_id'),
                 DB::raw('locations.owner as owner'),
                 DB::raw('locations.is_active as is_active'),
-                DB::raw('countries.name as country_name')
+                DB::raw('countries.name as country_name'),
+                DB::raw('locations.location_type_id as location_type_id')
             )
             ->join('countries', 'countries.id', '=', 'locations.country_id');
 

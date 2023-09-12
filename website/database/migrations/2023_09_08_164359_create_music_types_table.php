@@ -17,6 +17,7 @@ class CreateMusicTypesTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable(false);
             $table->integer('order')->unsigned();
+            $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
 

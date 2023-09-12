@@ -36,7 +36,8 @@ class Location extends Model implements HasMedia
         'owner',
         'user_id',
         'city',
-        'is_active'
+        'is_active',
+        'location_type_id'
     ];
 
     protected $casts = [

@@ -103,7 +103,7 @@ const location: LocationFormItem = {
   id: 0,
   title: '',
   description: '',
-  location_type_id: 0,
+  location_type_id: null,
   country_id: 0,
   country: '',
   city: '',

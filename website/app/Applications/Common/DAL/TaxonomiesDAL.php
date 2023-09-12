@@ -80,7 +80,7 @@ class TaxonomiesDAL implements TaxonomiesDALInterface
     }
 
     public function getLocationTypes() {
-        return $this->locationTypes->get();
+        return $this->locationTypes->whereNull('location_types.deleted_at')->get();
     }
 
 }

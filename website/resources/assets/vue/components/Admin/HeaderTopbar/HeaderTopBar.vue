@@ -27,19 +27,38 @@
         ],
       };
     },  
+    computed: {
+      ...mapState('Root', [
+        'csrfToken',
+      ]),
+    },
     methods: {
       toggleDropdown() {
         this.dropdownOpen = !this.dropdownOpen;
       },
-     async fetchUser () {
-    try {
-      const response = await axios.get('/auth/user');
-      this.user = response.data;
-      console.log(user);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+      async fetchUser () {
+        try {
+          const response = await axios.get('/auth/user');
+          this.user = response.data;
+          console.log(user);
+        } catch (error) {
+          console.error(error);
+        }
+      },
+      logOutUser () {
+        try {
+          const csrfToken = this.csrfToken;
+          console.log(csrfToken);
+          const response = axios.post('/usersanct/logout', null, {
+            headers: {
+              'X-CSRF-TOKEN': csrfToken,
+            },
+          });
+          console.log(response);
+        } catch (error) {
+          console.error(error);
+        }
+      }
     },
     mounted() {
       this.fetchUser()
@@ -113,11 +132,10 @@
           </a>
 
           <div class="kt-notification__custom kt-space-between">
-            <a
-              href="demo1/custom/user/login-v2.html"
-              target="_blank"
+            <span
+              @click="logOutUser()"
               class="btn btn-label btn-label-brand btn-sm btn-bold"
-            >Sign Out</a>
+            >Sign Out</span>
             <a
               href="demo1/custom/user/login-v2.html"
               target="_blank"
