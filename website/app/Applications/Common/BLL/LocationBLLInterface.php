@@ -20,7 +20,7 @@ interface LocationBLLInterface{
 
     public function deleteLocation($id);
 
-    public function getPublicLocations();
+    public function getPublicLocations($request);
 
     public function getLocationsData($data);
 

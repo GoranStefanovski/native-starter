@@ -5,6 +5,7 @@ use App\Applications\Common\DAL\MediaDALInterface;
 use App\Applications\Common\Model\Event;
 use App\Http\Requests\ApiFormRequest;
 use Illuminate\Http\Request;
+use App\Applications\Common\Model\MusicTypes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -12,16 +13,19 @@ use Illuminate\Support\Facades\DB;
 /**
  * @property MediaDALInterface $mediaDAL
  * @property Event $event
+ * @property MusicTypes $musicTypes
  */
 class EventBll implements EventBLLInterface
 {
 
     public function __construct(
         MediaDALInterface $mediaDAL,
-        Event $event
+        Event $event,
+        MusicTypes $musicTypes
     ){
         $this->mediaDAL = $mediaDAL;
         $this->event = $event;
+        $this->musicTypes = $musicTypes;
     }
 
     private const COLUMNS_MAP = [
@@ -86,16 +90,16 @@ class EventBll implements EventBLLInterface
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
         $input['location_id'] = $request['location_id'];
-        $input['music_type_id'] = $request['music_type_id'];
+        $input['is_active'] = $request['is_active'];
         $input['user_id'] = Auth::user()->id;
         $input['owner'] = Auth::user()->first_name;
+        $input['music_types'] = json_encode($request->input('music_types'));
         $event = $this->event->create($input);
         $this->mediaDAL->save($request,$event,'event_image');
 
     }
     public function editEvent($request,$id){
         $event_data = $request->all();
-//        dd($post_data);
         $event = $this->event->find($id);
         $this->mediaDAL->save($request,$event,'event_image');
         return $event->update($event_data);
@@ -107,7 +111,6 @@ class EventBll implements EventBLLInterface
     }
 
     public function getEventsData($data){
-        // TODO: Refactor this segment
         $query = DB::table('events')
             ->select(
                 DB::raw('events.id as id'),
@@ -116,7 +119,7 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.is_active as is_active'),
                 DB::raw('events.user_id as user_id'),
                 DB::raw('events.owner as owner'),
-                DB::raw('events.music_type_id as music_type_id'),
+                DB::raw('events.music_types as music_types')
                 
             );
 

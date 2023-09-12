@@ -18,7 +18,7 @@
     endpoint,
     redirectRoute: homePath,
     columns: props.columns,
-    sortKey: 'id'
+    sortKey: 'id',
   });
 
   const roles: Ref<any[]> = ref([]);

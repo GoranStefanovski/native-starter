@@ -4,6 +4,7 @@ namespace App\Applications\Common\BLL;
 use App\Applications\Common\DAL\MediaDALInterface;
 use App\Applications\Common\Model\Location;
 use App\Applications\User\Model\User;
+use App\Applications\Common\Model\LocationTypes;
 use App\Http\Requests\ApiFormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,16 +14,19 @@ use Illuminate\Support\Facades\DB;
 /**
  * @property MediaDALInterface $mediaDAL
  * @property Location $location
+ * @property LocationTypes $locationTypes
  */
 class LocationBLL implements LocationBLLInterface
 {
 
     public function __construct(
         MediaDALInterface $mediaDAL,
-        Location $location
+        Location $location,
+        LocationTypes $locationTypes
     ){
         $this->mediaDAL = $mediaDAL;
         $this->location = $location;
+        $this->locationTypes = $locationTypes;
     }
 
     private const COLUMNS_MAP = [
@@ -64,7 +68,7 @@ class LocationBLL implements LocationBLLInterface
         // TODO: Implement getPostByIdNonAuth() method.
     }
 
-    public function getPublicLocations()
+    public function getPublicLocations($request)
     {
         $query = DB::table('locations')
         ->select(
@@ -72,8 +76,20 @@ class LocationBLL implements LocationBLLInterface
             DB::raw('locations.title as title'),
             DB::raw('locations.description as description'),
             DB::raw('locations.user_id as user_id'),
+            DB::raw('locations.location_type as location_type'),
+            DB::raw('locations.city as city')
         );
-
+        
+        $search = $request['search'];
+        if($search){
+            $query->where(function($subquery) use ($search) {
+                $subquery->where('locations.title', 'like', '%'.$search.'%');
+                $subquery->orWhere('locations.description', 'like', '%'.$search.'%');
+                $subquery->orWhere('locations.rating', 'like', '%'.$search.'%');
+                $subquery->orWhere('locations.user_id', 'like', '%'.$search.'%');
+                $subquery->orWhere('countries.full_name', 'like', '%'.$search.'%');
+            });
+        }
 
     $query->whereNull('locations.deleted_at');
     $query->where('locations.is_active',1);
@@ -91,9 +107,11 @@ class LocationBLL implements LocationBLLInterface
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
         $input['country_id'] = $request['country_id'];
+        $input['is_active'] = $request['is_active'];
         $input['country'] = \Countries::find($request['country_id'])->name;
         $input['user_id'] = Auth::user()->id;
         $input['location_type_id'] = $request['location_type_id'];
+        $input['location_type'] = locationTypes::find($request['location_type_id'])->name;
         $input['owner'] = Auth::user()->first_name;
         $input['city'] = $request['city'];
         $location = $this->location->create($input);
@@ -128,6 +146,7 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.is_active as is_active'),
                 DB::raw('countries.name as country_name'),
                 DB::raw('locations.location_type_id as location_type_id'),
+                DB::raw('locations.location_type as location_type'),
                 DB::raw('locations.image as image'),
             )
             ->join('countries', 'countries.id', '=', 'locations.country_id');

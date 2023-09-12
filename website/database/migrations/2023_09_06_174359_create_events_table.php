@@ -20,10 +20,10 @@ class CreateEventsTable extends Migration
             $table->string('name')->nullable(false);
             $table->string('owner')->nullable(false);
             $table->integer('user_id')->unsigned();
-            $table->integer('music_type_id')->nullable(null);
+            $table->json('music_types')->nullable();
             $table->integer('location_id')->nullable(null);
             $table->integer('event_type_id')->unsigned();
-            $table->integer('is_active')->unsigned();
+            $table->integer('is_active')->nullable(false)->default(0);
             $table->integer('activity_going')->unsigned();
             $table->integer('activity_interested')->unsigned();
             $table->timestamps();

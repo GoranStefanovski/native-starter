@@ -16,7 +16,13 @@ return [
         'public' => 'Public Users',
     ],
     'locations' => [
-        'label' => 'Locations'
+        'label' => 'Locations',
+        'country' => 'Country',
+        'location_type' => 'Location Type',
+        'city' => 'City',
+        'title' => 'Title',
+        'desc' => 'Description',
+        'is_active' => 'Active'
     ],
     'events' => [
         'label' => 'Events'

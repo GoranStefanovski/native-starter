@@ -31,7 +31,7 @@ class EventRequest extends ApiFormRequest
             'title' => 'required|max:255|min:2',
             'location_id' => 'required',
             'description' => 'required',
-            'music_type_id' => 'required',
+            'music_types' => 'required',
             'uploaded_file' => 'file|mimes:jpeg,jpg,png,gif|max:30000',
         ];
 

@@ -15,7 +15,7 @@ const initQueryData: TableQuery = {
   draw: 1,
   length: 10,
   search: '',
-  dir: 'asc',
+  dir: 'desc',
 }
 
 const initPagination: PaginationObject = {

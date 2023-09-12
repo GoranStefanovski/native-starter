@@ -21,12 +21,13 @@ class CreateLocationsTable extends Migration
             $table->string('country')->nullable(false);
             $table->integer('country_id')->unsigned();
             $table->string('city')->nullable(false);
-            $table->integer('is_active')->nullable(false);
+            $table->integer('is_active')->nullable(false)->default(0);
 
             $table->float('rating')->nullable(0.0);
             $table->string('image')->nullable();
             $table->text('description')->nullable(false);
             $table->integer('user_id')->unsigned();
+            $table->integer('location_type')->nullable(false);
             $table->integer('location_type_id')->unsigned();
             $table->integer('activity_going_total')->unsigned();
             $table->integer('activity_interested_total')->unsigned();

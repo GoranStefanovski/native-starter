@@ -12,7 +12,7 @@
   const homePath = computed(() => store.state.Root.homePath);
 
   onMounted(() => {
-    setBackUrl('/');
+    setBackUrl('/locations');
     setActiveClasses({
       main: 'locations',
       sub: 'locations',

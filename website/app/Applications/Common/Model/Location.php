@@ -6,6 +6,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media as MediaModel;
 use Webpatser\Countries\Countries;
+use App\Applications\Common\Model\LocationTypes;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
@@ -37,7 +38,8 @@ class Location extends Model implements HasMedia
         'user_id',
         'city',
         'is_active',
-        'location_type_id'
+        'location_type_id',
+        'location_type'
     ];
 
     protected $casts = [

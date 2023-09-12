@@ -8,6 +8,7 @@
   import { useForm } from '@/composables';
   import { Portlet } from '@/components';
   import FileUpload from "@/components/Form/FileUpload.vue";
+  import Multiselect from 'vue-multiselect';
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
   } from '@/components/Portlet/components';
@@ -60,7 +61,6 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
           locations.value.push({ id: key, name: `${response.data[key]['title']}` });
-          console.log(locations);
         }
       }
     } catch (error) {
@@ -74,12 +74,15 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
           musicTypes.value.push({ id: key, name: `${response.data[key]['name']}` });
-          console.log(musicTypes);
         }
       }
     } catch (error) {
       console.error(error);
     }
+  }
+
+  const customLabel = (option) => {
+    return option.name
   }
 
   const postImg = (() => {
@@ -109,6 +112,9 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
     await initFormFromItem();
     await fetchMusicTypes();
 
+    if(edit) {
+      form.value.music_types = JSON.parse(form.value.music_types)
+    }    
   })
 </script>
 
@@ -225,13 +231,15 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Music Genre:</label>
                       <div class="col-9">
-                        <FormDropdown
-                          id="music_type_id"
-                          v-model="form.music_type_id"
+                        <multiselect
+                          v-model="form.music_types"
                           :options="musicTypes"
-                          :getcities="true"
+                          track-by="id"
+                          multiple
+                          :custom-label="customLabel"
                           @update:modelValue="handleModelUpdate"
-                        />
+                          >
+                        </multiselect>
                       </div>
                     </div>
                 <div class="kt-section">
@@ -240,7 +248,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                       Post information:
                     </h3>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.image') }}</label>
+                      <label class="col-3 col-form-label">Event Image</label>
                       <div class="col-9">
                         <file-upload
                           :id="'uploaded_file'"
@@ -264,7 +272,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
+                      <label class="col-3 col-form-label">Description</label>
                       <div class="col-9">
                         <input
                           id="description"
@@ -276,7 +284,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
+                      <label class="col-3 col-form-label">Active</label>
                       <div class="col-9">
                         <input
                           id="Active"

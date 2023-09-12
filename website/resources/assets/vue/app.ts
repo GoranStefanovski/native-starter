@@ -29,6 +29,9 @@ import VueFormulateAutocomplete from '@/components/VueFormulate/VueFormulateAuto
 import MenuLink from '@/components/Admin/Menu/MenuLink/MenuLink.vue';
 import SubMenu from '@/components/Admin/Menu/SubMenu/SubMenu.vue';
 
+// MultiSelect CSS
+import 'vue-multiselect/dist/vue-multiselect.min.css'; 
+
 // register your component with Vue
 Vue.component('VueFormulateAutocomplete', VueFormulateAutocomplete);
 // Vue.component('VueFormulateSwitch', VueFormulateSwitch);

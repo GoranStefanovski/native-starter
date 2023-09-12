@@ -11,7 +11,7 @@
   const homePath = computed(() => store.state.Root.homePath);
 
   onMounted(() => {
-    setBackUrl('/');
+    setBackUrl('/users');
     setActiveClasses({
       main: 'users',
       sub: 'users',

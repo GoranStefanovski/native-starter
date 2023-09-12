@@ -53,7 +53,6 @@
   const postUri = computed(() => edit ? `common/location/${id}/edit` : '/common/save-location');
   const countriesUri = 'guest/common/get-countries';
   const locationTypesUri = 'guest/common/location-types';
-  const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'posts.category_one' : 'posts.category_one');
 
   const fetchCountries = async () => {
     try {
@@ -73,7 +72,7 @@
       const response = await axios.get(locationTypesUri);
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
-          location_types.value.push({ id: key, name: `${response.data[key]['name']}` });
+          location_types.value.push({ id: `${response.data[key]['id']}`, name: `${response.data[key]['name']}` });
         }
       }
     } catch (error) {
@@ -208,7 +207,7 @@
                       {{ $t('posts.post_status') }}:
                     </h3>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.location.country') }}</label>
+                      <label class="col-3 col-form-label">Country</label>
                       <div class="col-9">
                         <FormDropdown
                           id="country_id"
@@ -220,7 +219,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">Location Type:</label>
+                      <label class="col-3 col-form-label">Location Type</label>
                       <div class="col-9">
                         <FormDropdown
                           id="location_type_id"
@@ -232,7 +231,7 @@
                     </div>
                     <!-- location_types -->
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.location.city') }}</label>
+                      <label class="col-3 col-form-label">City</label>
                       <div class="col-9">
                         <input
                           placeholder="City"
@@ -263,7 +262,7 @@
                       Post information:
                     </h3>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.image') }}</label>
+                      <label class="col-3 col-form-label">Location Image</label>
                       <div class="col-9">
                         <file-upload
                           :id="'image'"
@@ -287,7 +286,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
+                      <label class="col-3 col-form-label">Description</label>
                       <div class="col-9">
                         <input
                           id="description"
@@ -299,7 +298,7 @@
                       </div>
                     </div>
                     <div class="form-group row">
-                      <label class="col-3 col-form-label">{{ $t('posts.description') }}</label>
+                      <label class="col-3 col-form-label">Active</label>
                       <div class="col-9">
                         <input
                           id="Active"
