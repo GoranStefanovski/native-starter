@@ -14,6 +14,10 @@
       type: Array,
       required: false,
       default: function() { return [] },
+    },
+    filterTitle: {
+      type: String,
+      required: false,
     }
   })
 
@@ -55,7 +59,7 @@
             <div v-if="isFilter" class="col-md-4 kt-margin-b-20-tablet-and-mobile">
               <div class="kt-form__group kt-form__group--inline">
                 <div class="kt-form__label">
-                  <label>Role:</label>
+                  <label>{{filterTitle}}</label>
                 </div>
                 <div class="kt-form__control">
                   <select

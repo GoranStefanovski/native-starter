@@ -66,6 +66,7 @@
   <Datatable
     :isFilter="true"
     :options="options"
+    :filterTitle="'Role:'"
     :tableInfo="tableInfo"
     :query="query"
     :loading="loading"
