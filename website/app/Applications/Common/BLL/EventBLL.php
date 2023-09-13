@@ -76,7 +76,12 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.description as description'),
                 DB::raw('events.user_id as user_id'),
                 DB::raw('events.music_types as music_types'),
-                DB::raw('events.location_id as location_id')
+                DB::raw('events.location_id as location_id'),
+                DB::raw('events.location_name as location_name'),
+                DB::raw('events.start_date as start_date'),
+                DB::raw('events.end_date as end_date'),
+                DB::raw('events.start_time as start_time'),
+                DB::raw('events.end_time as end_time')
             );
 
 
@@ -94,12 +99,17 @@ class EventBll implements EventBLLInterface
 
     public function saveEvent($request){
         $location = DB::table('locations')->where('id', $request['location_id'])->first();
+        
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
+        $input['start_date'] = $request['start_date'];
+        $input['end_date'] = $request['end_date'];
         $input['location_id'] = $request['location_id'];
         $input['is_active'] = $request['is_active'];
         $input['user_id'] = Auth::user()->id;
         $input['owner'] = Auth::user()->first_name;
+        $input['start_time'] = json_encode($request->input('start_time'));
+        $input['end_time'] = json_encode($request->input('end_time'));
         $input['music_types'] = json_encode($request->input('music_types'));
 
         if ($location) {

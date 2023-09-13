@@ -9,4 +9,8 @@ declare interface EventFormItem {
   location_id?: number|null; 
   is_active?: number|null;
   music_types?: Array<any>;
+  start_date: null;
+  end_date: null;
+  start_time: null;
+  end_time: null;
 }

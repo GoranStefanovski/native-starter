@@ -39,6 +39,10 @@ class Event extends Model implements HasMedia
         'event_type_id',
         'location_name',
         'location_id',
+        'start_date',
+        'end_date',
+        'start_time',
+        'end_time',
         'is_active',
         'music_types'
     ];

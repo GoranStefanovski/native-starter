@@ -9,6 +9,8 @@
   import { Portlet } from '@/components';
   import FileUpload from "@/components/Form/FileUpload.vue";
   import Multiselect from 'vue-multiselect';
+  import Datepicker from 'vue2-datepicker';
+  import VueTimepicker from 'vue2-timepicker';
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
   } from '@/components/Portlet/components';
@@ -281,6 +283,20 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                           v-model="form.description"
                           @update:modelValue="handleModelUpdate"
                         />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Event Start:</label>
+                      <div class="col-9">
+                        <datepicker v-model="form.start_date" format="DD/MM/YYYY" placeholder="Start Date"></datepicker>
+                        <vue-timepicker v-model="form.start_time" format="HH:mm" placeholder="Start Time"></vue-timepicker>
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Event End:</label>
+                      <div class="col-9">
+                        <datepicker v-model="form.end_date" format="DD/MM/YYYY" placeholder="End Date"></datepicker>
+                        <vue-timepicker v-model="form.end_time" format="HH:mm" placeholder="End Time"></vue-timepicker>
                       </div>
                     </div>
                     <div class="form-group row">

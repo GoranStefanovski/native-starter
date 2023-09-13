@@ -21,12 +21,16 @@ class CreateEventsTable extends Migration
             $table->string('owner')->nullable(false);
             $table->integer('user_id')->unsigned();
             $table->json('music_types')->nullable();
-            $table->integer('location_id')->nullable(null);
+            $table->integer('location_id')->nullable(false);
             $table->string('location_name')->nullable(false);
             $table->integer('event_type_id')->unsigned();
-            $table->integer('is_active')->nullable(false)->default(0);
+            $table->integer('is_active')->nullable();
             $table->integer('activity_going')->unsigned();
             $table->integer('activity_interested')->unsigned();
+            $table->date('start_date')->nullable(false);
+            $table->date('end_date')->nullable(false);
+            $table->json('start_time')->nullable(false);
+            $table->json('end_time')->nullable(false);
             $table->timestamps();
             $table->softDeletes();
             // 

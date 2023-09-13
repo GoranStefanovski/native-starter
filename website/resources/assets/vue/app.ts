@@ -32,6 +32,12 @@ import SubMenu from '@/components/Admin/Menu/SubMenu/SubMenu.vue';
 // MultiSelect CSS
 import 'vue-multiselect/dist/vue-multiselect.min.css'; 
 
+// Vue2Datepicker CSS
+import 'vue2-datepicker/index.css';
+
+// Vue2TimePicker CSS
+import 'vue2-timepicker/dist/VueTimepicker.css';
+
 // register your component with Vue
 Vue.component('VueFormulateAutocomplete', VueFormulateAutocomplete);
 // Vue.component('VueFormulateSwitch', VueFormulateSwitch);

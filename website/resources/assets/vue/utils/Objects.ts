@@ -121,6 +121,10 @@ const event: EventFormItem = {
   is_disabled: 0,
   location_id: null,
   is_active: null,
+  start_date: null,
+  end_date: null,
+  start_time: null,
+  end_time: null,
   music_types: [],
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')
