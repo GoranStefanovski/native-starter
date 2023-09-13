@@ -6,6 +6,7 @@ use App\Applications\Common\Model\Event;
 use App\Http\Requests\ApiFormRequest;
 use Illuminate\Http\Request;
 use App\Applications\Common\Model\MusicTypes;
+use App\Applications\Common\Model\Location;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\DB;
  * @property MediaDALInterface $mediaDAL
  * @property Event $event
  * @property MusicTypes $musicTypes
+ * @property Location $location
  */
 class EventBll implements EventBLLInterface
 {
@@ -21,11 +23,13 @@ class EventBll implements EventBLLInterface
     public function __construct(
         MediaDALInterface $mediaDAL,
         Event $event,
-        MusicTypes $musicTypes
+        MusicTypes $musicTypes,
+        Location $location
     ){
         $this->mediaDAL = $mediaDAL;
         $this->event = $event;
         $this->musicTypes = $musicTypes;
+        $this->location = $location;
     }
 
     private const COLUMNS_MAP = [
@@ -89,6 +93,7 @@ class EventBll implements EventBLLInterface
     }
 
     public function saveEvent($request){
+        $location = DB::table('locations')->where('id', $request['location_id'])->first();
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
         $input['location_id'] = $request['location_id'];
@@ -96,6 +101,14 @@ class EventBll implements EventBLLInterface
         $input['user_id'] = Auth::user()->id;
         $input['owner'] = Auth::user()->first_name;
         $input['music_types'] = json_encode($request->input('music_types'));
+
+        if ($location) {
+            $input['location_name'] = $location->title;
+        } else {
+            // Handle the case where the location is not found
+            $input['location_name'] = 'Unknown Location';
+        }
+
         $event = $this->event->create($input);
         $this->mediaDAL->save($request,$event,'event_image');
 

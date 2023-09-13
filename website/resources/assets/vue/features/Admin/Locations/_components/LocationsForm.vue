@@ -60,7 +60,7 @@
       const response = await axios.get(countriesUri);
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
-          countries.value.push({ id: key, name: `${response.data[key]['name']}` });
+          countries.value.push({ id: `${response.data[key]['id']}`, name: `${response.data[key]['name']}` });
         }
       }
     } catch (error) {
@@ -234,7 +234,18 @@
                           id="city"
                           class="form-control"
                           v-model="form.city"
-                          :options="cities"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Address</label>
+                      <div class="col-9">
+                        <input
+                          placeholder="Address"
+                          id="address"
+                          class="form-control"
+                          v-model="form.address"
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>

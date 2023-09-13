@@ -60,7 +60,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
       const response = await axios.post(locationsApi);
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
-          locations.value.push({ id: key, name: `${response.data[key]['title']}` });
+          locations.value.push({ id: `${response.data[key]['id']}`, name: `${response.data[key]['title']}` });
         }
       }
     } catch (error) {
@@ -73,7 +73,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
       const response = await axios.get(musicTypesUri);
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
-          musicTypes.value.push({ id: key, name: `${response.data[key]['name']}` });
+          musicTypes.value.push({ id: `${response.data[key]['id']}`, name: `${response.data[key]['name']}` });
         }
       }
     } catch (error) {

@@ -10,4 +10,6 @@ declare interface LocationFormItem {
   location_types?: Array<any>;
   uploaded_file: File|null;
   media: File|null;
+  address: string;
+  location_name: string;
 }

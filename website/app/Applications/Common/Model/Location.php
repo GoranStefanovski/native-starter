@@ -34,6 +34,7 @@ class Location extends Model implements HasMedia
         'country_id',
         'country',
         'image',
+        'address',
         'owner',
         'user_id',
         'city',

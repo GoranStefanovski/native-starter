@@ -37,6 +37,7 @@ class Event extends Model implements HasMedia
         'activity_going',
         'activity_interested',
         'event_type_id',
+        'location_name',
         'location_id',
         'is_active',
         'music_types'
