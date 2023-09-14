@@ -72,7 +72,17 @@ class LocationBLL implements LocationBLLInterface
             DB::raw('locations.user_id as user_id'),
             DB::raw('locations.location_types as location_types'),
             DB::raw('locations.city as city'),
-            DB::raw('locations.address as address')
+            DB::raw('locations.address as address'),
+            DB::raw('locations.location_types as location_types'),
+            DB::raw('locations.image as image'),
+            DB::raw('locations.website as website'),
+            DB::raw('locations.website_second as website_second'),
+            DB::raw('locations.contact_person as contact_person'),
+            DB::raw('locations.contact_person_second as contact_person_second'),
+            DB::raw('locations.contact_person_phone as contact_person_phone'),
+            DB::raw('locations.contact_person_phone_second as contact_person_phone_second'),
+            DB::raw('locations.contact_person_email as contact_person_email'),
+            DB::raw('locations.contact_person_email_second as contact_person_email_second')
         );
         
         $search = $request['search'];
