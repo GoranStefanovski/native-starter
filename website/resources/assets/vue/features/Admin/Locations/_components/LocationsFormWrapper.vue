@@ -1,12 +1,12 @@
 <script lang="ts" setup>
   import 'bootstrap';
   import { useRouter } from 'vue-router/composables';
-  import "./EventsForm.scss";
+  import "./LocationsForm.scss";
   const router = useRouter();
 
   const menuItems = [
-    {id: 0, toName: 'edit.event.info', value: 'Info'},
-    {id: 1, toName: 'edit.event.timeline', value: 'Timeline'},
+    {id: 0, toName: 'edit.location.info', value: 'Info'},
+    {id: 1, toName: 'edit.location.contact', value: 'Contact'},
   ]
 
 </script>

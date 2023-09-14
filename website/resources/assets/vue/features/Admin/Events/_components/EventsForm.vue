@@ -52,7 +52,7 @@
   provide('form', form.value);
   provide('labelStart', 'event');
 
-const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event/info');
+const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
   const locationsApi = 'common/locations/user/draw';
   const musicTypesUri = 'guest/common/music-types';
 
@@ -181,21 +181,21 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">Music Genre:</label>
-                      <div class="col-9">
-                        <multiselect
-                          v-model="form.music_types"
-                          :options="musicTypes"
-                          track-by="id"
-                          multiple
-                          :custom-label="customLabel"
-                          @update:modelValue="handleModelUpdate"
-                          >
-                        </multiselect>
-                      </div>
-                    </div>
+                </div>
+                <div class="form-group row">
+                  <label class="col-3 col-form-label">Music Genre:</label>
+                  <div class="col-9">
+                    <multiselect
+                      v-model="form.music_types"
+                      :options="musicTypes"
+                      track-by="id"
+                      multiple
+                      :custom-label="customLabel"
+                      @update:modelValue="handleModelUpdate"
+                      >
+                    </multiselect>
+                  </div>
+                </div>
                 <div class="kt-section">
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">
@@ -278,3 +278,28 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
     <!--    />-->
   </CustomForm>
 </template>
+
+<style>
+  .multiselect__tag {
+    background: #505ae2 !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 5px 25px 5px 10px;
+    width: max-content !important;
+  }
+
+  .multiselect__tag-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .multiselect__tag-icon:after {
+    color: white !important;
+  }
+
+  .multiselect__tag-icon:hover {
+    background: red !important;
+}
+
+</style>

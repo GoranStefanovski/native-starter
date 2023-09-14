@@ -34,7 +34,7 @@
   const setActiveClasses = (obj) => store.dispatch('Root/setActiveClasses', obj);
 
   const item = ref(cloneDeep(event));
-  const edit = router.currentRoute.name == 'edit.event';
+  const edit = router.currentRoute.fullPath.includes('/edit/');
   const id = Number(router.currentRoute.params.eventId);
   const getPostUri = `guest/common/${id}/getEvent`
   const {
@@ -52,7 +52,7 @@
 
   const sections: Array<any> = [{ name: 'Section 1', inputs: [{ value: '' }] }]
 
-  const postUri = computed(() => edit ? `common/event/${id}/edit` : `/common/save-event/timeline`);
+  const postUri = computed(() => `common/event/${id}/edit/timeline`);
 
   const beforeSubmit = (hasToRedirect = true) => {
     onSubmit(postUri.value, 'events', hasToRedirect, form.value);
@@ -80,7 +80,7 @@
   onMounted(async () => {
 
     await initFormFromItem();
-  
+
   })
   
 </script>
@@ -129,6 +129,13 @@
             <div class="row">
               <div class="col-xl-3" />
               <div class="col-xl-6">
+                <div class="kt-section kt-section-first">
+                  <div class="kt-section__body">
+                    <h3 class="kt-section__title kt-section__title-lg">
+                      Timeline
+                    </h3>
+                  </div>
+                </div>
                 <div class="kt-section">
                   <div class="kt-section__body">
                     <div class="form-group row">
@@ -145,6 +152,13 @@
                         <vue-timepicker v-model="form.end_time" @update:modelValue="handleModelUpdate" format="HH:mm" placeholder="End Time"></vue-timepicker>
                       </div>
                     </div>
+                    <div class="kt-section kt-section-first">
+                  <div class="kt-section__body">
+                    <h3 class="kt-section__title kt-section__title-lg">
+                      Halls & DJ's
+                    </h3>
+                  </div>
+                </div>
                       <div class="form-group row" v-for="(section, index) in sections" :key="index">
                       <label class="col-3 col-form-label">Section {{ index + 1 }}</label>
                       <div class="col-9">

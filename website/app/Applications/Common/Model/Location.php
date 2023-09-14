@@ -39,7 +39,15 @@ class Location extends Model implements HasMedia
         'user_id',
         'city',
         'is_active',
-        'location_types'
+        'location_types',
+        'website',
+        'website_second',
+        'contact_person',
+        'contact_person_second',
+        'contact_person_phone',
+        'contact_person_phone_second',
+        'contact_person_email',
+        'contact_person_email_second',
     ];
 
     protected $casts = [

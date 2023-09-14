@@ -30,6 +30,16 @@ class CreateLocationsTable extends Migration
             $table->json('location_types')->nullable();
             $table->integer('activity_going_total')->unsigned();
             $table->integer('activity_interested_total')->unsigned();
+
+            // Locations Contact/Owner
+            $table->string('website')->nullable();
+            $table->string('website_second')->nullable();
+            $table->string('contact_person')->nullable()->unique();
+            $table->string('contact_person_second')->nullable();
+            $table->string('contact_person_phone')->nullable()->unique();
+            $table->string('contact_person_phone_second')->nullable();
+            $table->string('contact_person_email')->nullable()->unique();
+            $table->string('contact_person_email_second')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

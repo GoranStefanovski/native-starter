@@ -8,10 +8,11 @@ const PublicUsers = () => import(/* webpackChunkName: "PublicUsers" */ '../views
 const Locations = () => import(/* webpackChunkName: "Locations" */ '../views/admin/Locations/Locations.vue');
 const Events = () => import(/* webpackChunkName: "Events" */ '../views/admin/Events/Events.vue');
 const LocationsForm = () => import(/* webpackChunkName: "LocationsForm" */ '../features/Admin/Locations/_components/LocationsForm.vue'); 
+const LocationsFormWrapper = () => import(/* webpackChunkName: "LocationsFormWrapper" */ '../features/Admin/Locations/_components/LocationsFormWrapper.vue'); 
+const LocationsFormContact = () => import(/* webpackChunkName: "LocationsFormContact" */ '../features/Admin/Locations/_components/LocationsFormContact.vue'); 
 const EventsForm = () => import(/* webpackChunkName: "EventsForm" */ '../features/Admin/Events/_components/EventsForm.vue'); 
 const EventsFormWrapper = () => import(/* webpackChunkName: "EventsFormWrapper" */ '../features/Admin/Events/_components/EventsFormWrapper.vue'); 
 const EventsFormTimeline = () => import(/* webpackChunkName: "EventsFormTimeline" */ '../features/Admin/Events/_components/EventsFormTimeline.vue'); 
-const EventsFormContact = () => import(/* webpackChunkName: "EventsFormContact" */ '../features/Admin/Events/_components/EventsFormContact.vue'); 
 const MyProfile = () => import(/* webpackChunkName: "MyProfile" */ '../views/admin/Users/MyProfile.vue');
 // const AddUser = () => import(/* webpackChunkName: "AddUser" */ '../views/admin/Users/AddUser.vue');
 // const EditUser = () => import(/* webpackChunkName: "EditUser" */ '../views/admin/Users/EditUser.vue');
@@ -177,13 +178,38 @@ export let adminPaths: RouteConfig =
       }, {
         path: 'location/:locationId/edit',
         name: 'edit.location',
-        component: LocationsForm,
+        component: LocationsFormWrapper,
         meta: {
           title: Vue.i18n.translate('users.edit_post', null),
           auth: {
             roles: ['locations_write']
           }
-        }
+        },
+        children: 
+          [
+            {
+              path: 'info',
+              name: 'edit.location.info',
+              component: LocationsForm,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['locations_write']
+                }
+              },
+            },
+            {
+              path: 'contact',
+              name: 'edit.location.contact',
+              component: LocationsFormContact,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['locations_write']
+                }
+              },
+            },
+          ],
       },
       {
         path: 'events',
@@ -233,17 +259,6 @@ export let adminPaths: RouteConfig =
               path: 'timeline',
               name: 'edit.event.timeline',
               component: EventsFormTimeline,
-              meta: {
-                title: Vue.i18n.translate('users.edit_post', null),
-                auth: {
-                roles: ['events_write']
-                }
-              },
-            },
-            {
-              path: 'contact',
-              name: 'edit.event.contact',
-              component: EventsFormContact,
               meta: {
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {

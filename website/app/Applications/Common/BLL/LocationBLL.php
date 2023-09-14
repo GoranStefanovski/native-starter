@@ -119,6 +119,20 @@ class LocationBLL implements LocationBLLInterface
         $this->mediaDAL->save($request,$location,'location_image');
         return $location->update($location_data);
     }
+
+    public function editLocationContact($request, $id){
+        $input['website'] = $request['website'];
+        $input['website_second'] = $request['website_second'];
+        $input['contact_person'] = $request['contact_person'];
+        $input['contact_person_second'] = $request['contact_person_second'];
+        $input['contact_person_phone'] = $request['contact_person_phone'];
+        $input['contact_person_phone_second'] = $request['contact_person_phone_second'];
+        $input['contact_person_email'] = $request['contact_person_email'];
+        $input['contact_person_email_second'] = $request['contact_person_email_second'];
+
+        $location = $this->location->find($id);
+        return $location->update($input);
+    }
     public function deleteLocation($id){
         return $this->location
             ->where('id', $id)
@@ -140,6 +154,14 @@ class LocationBLL implements LocationBLLInterface
                 DB::raw('locations.is_active as is_active'),
                 DB::raw('locations.location_types as location_types'),
                 DB::raw('locations.image as image'),
+                DB::raw('locations.website as website'),
+                DB::raw('locations.website_second as website_second'),
+                DB::raw('locations.contact_person as contact_person'),
+                DB::raw('locations.contact_person_second as contact_person_second'),
+                DB::raw('locations.contact_person_phone as contact_person_phone'),
+                DB::raw('locations.contact_person_phone_second as contact_person_phone_second'),
+                DB::raw('locations.contact_person_email as contact_person_email'),
+                DB::raw('locations.contact_person_email_second as contact_person_email_second'),
             );
         $search = $data['search'];
         if($search){

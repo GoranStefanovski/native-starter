@@ -18,6 +18,8 @@ interface LocationBLLInterface{
 
     public function editLocation($id, $request);
 
+    public function editLocationContact($request, $id);
+
     public function deleteLocation($id);
 
     public function getPublicLocations($request);

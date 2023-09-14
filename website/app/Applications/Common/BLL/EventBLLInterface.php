@@ -16,11 +16,9 @@ interface EventBLLInterface{
 
     public function getPostsByUser();
 
-    public function saveEventInfo($request);
+    public function saveEvent($request);
 
-    public function saveEventTimeline($request);
-
-    public function saveEventContact($request);
+    public function editEventTimeline($request, $id);
 
     public function editEvent($id, $request);
 

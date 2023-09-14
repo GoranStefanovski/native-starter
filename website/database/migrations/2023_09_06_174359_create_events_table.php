@@ -37,18 +37,9 @@ class CreateEventsTable extends Migration
             // Events Timeline & Halls
             $table->date('start_date')->nullable(false);
             $table->date('end_date')->nullable(false);
-            $table->json('start_time')->nullable(false);
-            $table->json('end_time')->nullable(false);
-            
-            // Events Contact/Owner
-            $table->string('website')->nullable();
-            $table->string('website_second')->nullable();
-            $table->string('contact_person')->nullable()->unique();
-            $table->string('contact_person_second')->nullable();
-            $table->string('contact_person_phone')->nullable()->unique();
-            $table->string('contact_person__phone_second')->nullable();
-            $table->string('contact_person_email')->nullable()->unique();
-            $table->string('contact_person_email_second')->nullable();
+            $table->string('start_time')->nullable(false);
+            $table->string('end_time')->nullable(false);
+        
             
             $table->timestamps();
             $table->softDeletes();

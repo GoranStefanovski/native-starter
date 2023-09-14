@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Applications\Common\BLL\LocationBLLInterface;
 use App\Applications\Common\Requests\LocationRequest;
+use App\Applications\Common\Requests\LocationContactRequest;
 
 /**
  * @property LocationBLLInterface $locationBLL
@@ -50,6 +51,11 @@ class LocationController extends Controller
     public function editLocation(LocationRequest $request, $id){
         return $this->locationBLL->editLocation($request,$id);
     }
+
+    public function editLocationContact(LocationContactRequest $request, $id) {
+        return $this->locationBLL->editLocationContact($request,$id); 
+    }
+
     public function deleteLocation($id){
         return $this->locationBLL->deleteLocation($id);
     }

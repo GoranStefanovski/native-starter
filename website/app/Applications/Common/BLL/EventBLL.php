@@ -98,12 +98,13 @@ class EventBll implements EventBLLInterface
     }
 
     // Save Event Info (1)
-    public function saveEventInfo($request){
+    public function saveEvent($request){
         $location = DB::table('locations')->where('id', $request['location_id'])->first();
         
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
         $input['location_id'] = $request['location_id'];
+        $input['name'] = $request['name'];
         $input['is_active'] = $request['is_active'];
         $input['user_id'] = Auth::user()->id;
         $input['user_username'] = Auth::user()->username;
@@ -124,31 +125,46 @@ class EventBll implements EventBLLInterface
 
     }
 
-    // Save Event Timeline & Halls (2)
-    public function saveEventTimeline($request){
+    // Edit Event Timeline & Halls (2)
+    public function editEventTimeline($request, $id){
         $input['start_date'] = $request['start_date'];
         $input['end_date'] = $request['end_date'];
-        $input['start_time'] = json_encode($request->input('start_time'));
-        $input['end_time'] = json_encode($request->input('end_time'));
+        $input['start_time'] = $request['start_time'];
+        $input['end_time'] = $request['end_time'];
 
-        return $this->event->update($input);
-    }
-
-    public function saveEventContact($request){
-        $input['start_date'] = $request['start_date'];
-        $input['end_date'] = $request['end_date'];
-        $input['start_time'] = json_encode($request->input('start_time'));
-        $input['end_time'] = json_encode($request->input('end_time'));
-
-        return $this->event->update($input);
-    }
-
-    public function editEvent($request,$id){
-        $event_data = $request->all();
         $event = $this->event->find($id);
-        $this->mediaDAL->save($request,$event,'event_image');
-        return $event->update($event_data);
+        return $event->update($input);
     }
+
+    // Edit Event Info
+    public function editEvent($request,$id){
+        $location = DB::table('locations')->where('id', $request['location_id'])->first();
+        
+        $input['title'] = $request['title'];
+        $input['description'] = $request['description'];
+        $input['location_id'] = $request['location_id'];
+        $input['name'] = $request['name'];
+        $input['is_active'] = $request['is_active'];
+        $input['user_id'] = Auth::user()->id;
+        $input['user_username'] = Auth::user()->username;
+        $input['owner'] = Auth::user()->first_name;
+        
+        $input['music_types'] = json_encode($request->input('music_types'));
+
+        if ($location) {
+            $input['location_name'] = $location->title;
+            $input['location_address'] = $location->address;
+        } else {
+            $input['location_name'] = 'Unknown Location';
+            $input['location_address'] = 'Unknown Address';
+        }
+
+        $event = $this->event->find($id);
+
+        $this->mediaDAL->save($request,$event,'event_image');
+        return $event->update($input);
+    }
+
     public function deleteEvent($id){
         return $this->event
             ->where('id', $id)

@@ -46,14 +46,6 @@ class Event extends Model implements HasMedia
         'end_time',
         'is_active',
         'music_types',
-        'website',
-        'website_second',
-        'contact_person',
-        'contact_person_second',
-        'contact_person_phone',
-        'contact_person_phone_second',
-        'contact_person_email',
-        'contact_person_email_second',
     ];
 
     protected $casts = [

@@ -31,7 +31,7 @@
   const setActiveClasses = (obj) => store.dispatch('Root/setActiveClasses', obj);
 
   const item = ref(cloneDeep(location));
-  const edit = router.currentRoute.name == 'edit.location';
+  const edit = router.currentRoute.fullPath.includes('/edit/');
   const id = Number(router.currentRoute.params.locationId);
   const getPostUri = `guest/common/${id}/getLocation`
   const fetchUri = `auth/user`;

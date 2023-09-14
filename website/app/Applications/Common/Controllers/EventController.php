@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Applications\Common\BLL\EventBLLInterface;
 use App\Applications\Common\Requests\EventRequest;
+use App\Applications\Common\Requests\EventTimelineRequest;
+use App\Applications\Common\Requests\EventContactRequest;
 
 /**
  * @property EventBLLInterface $eventBLL
@@ -42,16 +44,12 @@ class EventController extends Controller
     public function getPostById($id){
         return $this->eventBLL->getPostById($id);
     }
-    public function saveEventInfo(EventRequest $request){
-        return $this->eventBLL->saveEventInfo($request);
+    public function saveEvent(EventRequest $request){
+        return $this->eventBLL->saveEvent($request);
     }
 
-    public function saveEventTimeline(EventRequest $request){
-        return $this->eventBLL->saveEventTimeline($request);
-    }
-
-    public function saveEventContact(EventRequest $request) {
-        return $this->eventBLL->saveEventContact($request);
+    public function editEventTimeline(EventTimelineRequest $request, $id){
+        return $this->eventBLL->editEventTimeline($request, $id);
     }
     
     public function editEvent(EventRequest $request, $id){
