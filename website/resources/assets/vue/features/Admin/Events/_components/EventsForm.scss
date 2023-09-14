@@ -1,0 +1,21 @@
+.events-edit-header {
+    display: flex;
+    align-items: center;
+
+    & > span {
+        padding: 10px 20px;
+
+        & > a {
+            font-size: 15px;
+            font-weight: 600;
+        }
+    }
+
+    &__menu-active {
+        border-radius: 4px;
+        background: #6c83e1;
+        & > a {
+            color: white;
+        }
+    }
+}

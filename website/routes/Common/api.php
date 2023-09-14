@@ -44,7 +44,9 @@ Route::group([
     Route::post('locations/user/draw', [LocationController::class,'getLocationsCollaborator']);
 
     // Events
-    Route::post('save-event',[EventController::class,'saveEvent']);
+    Route::post('save-event/info',[EventController::class,'saveEventInfo']);
+    Route::post('save-event/timeline',[EventController::class,'saveEventTimeline']);
+    Route::post('save-event/contact', [EventController::class,'saveEventContact']);
     Route::post('event/{id}/edit',[EventController::class,'editEvent']);
     Route::post('events/draw', [EventController::class,'allEvents']);
     Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);

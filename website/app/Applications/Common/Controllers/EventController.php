@@ -42,11 +42,18 @@ class EventController extends Controller
     public function getPostById($id){
         return $this->eventBLL->getPostById($id);
     }
-    public function saveEvent(EventRequest $request){
-//         dd($request->all());
-//        dd($request);
-        return $this->eventBLL->saveEvent($request);
+    public function saveEventInfo(EventRequest $request){
+        return $this->eventBLL->saveEventInfo($request);
     }
+
+    public function saveEventTimeline(EventRequest $request){
+        return $this->eventBLL->saveEventTimeline($request);
+    }
+
+    public function saveEventContact(EventRequest $request) {
+        return $this->eventBLL->saveEventContact($request);
+    }
+    
     public function editEvent(EventRequest $request, $id){
         return $this->eventBLL->editEvent($request,$id);
     }

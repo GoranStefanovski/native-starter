@@ -98,18 +98,26 @@ class AuthenticatedSessionController extends Controller
     public function register(StoreUserRequest $request)
     {
         $request->validated($request->all());
+        // ALl this data will be editable on edit profile
+        // $user = User::create([
+        //     'first_name' => $request->first_name,
+        //     'last_name' => $request->last_name,
+        //     'username' => $request->first_name,
+        //     'is_disabled' => $request->is_disabled,
+        //     'company' => $request->company,
+        //     'email' => $request->email,
+        //     'phone' => $request->phone,
+        //     'country_id' => $request->country_id,
+        //     'country' => \Countries::find($request['country_id'])->name,
+        //     'password' => Hash::make($request->password),
+        // ]);
+
         $user = User::create([
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
             'username' => $request->first_name,
-            'is_disabled' => $request->is_disabled,
-            'company' => $request->company,
             'email' => $request->email,
-            'phone' => $request->phone,
-            'country_id' => $request->country_id,
-            'country' => \Countries::find($request['country_id'])->name,
             'password' => Hash::make($request->password),
         ]);
+
         return $this->success([
             'user' => $user,
             'token' => $user->createToken('REGISTERED ' . $user->first_name)->plainTextToken

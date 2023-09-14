@@ -9,8 +9,7 @@
   import { Portlet } from '@/components';
   import FileUpload from "@/components/Form/FileUpload.vue";
   import Multiselect from 'vue-multiselect';
-  import Datepicker from 'vue2-datepicker';
-  import VueTimepicker from 'vue2-timepicker';
+
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
   } from '@/components/Portlet/components';
@@ -33,7 +32,7 @@
   const setActiveClasses = (obj) => store.dispatch('Root/setActiveClasses', obj);
 
   const item = ref(cloneDeep(event));
-  const edit = router.currentRoute.name == 'edit.event';
+  const edit = router.currentRoute.fullPath.includes('/edit/');
   const id = Number(router.currentRoute.params.eventId);
   const getPostUri = `guest/common/${id}/getEvent`
   const fetchUri = `auth/user`;
@@ -53,7 +52,7 @@
   provide('form', form.value);
   provide('labelStart', 'event');
 
-const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
+const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event/info');
   const locationsApi = 'common/locations/user/draw';
   const musicTypesUri = 'guest/common/music-types';
 
@@ -136,7 +135,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
         >
           <PortletHead :size="'lg'">
             <PortletHeadLabel>
-              {{ $t('posts.basic.information') }}
+              Basic Information
             </PortletHeadLabel>
             <PortletHeadToolbar>
               <router-link
@@ -157,53 +156,6 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                   <i class="fa fa-save mr-1" />
                   {{ $t('buttons.save') }}
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-brand dropdown-toggle dropdown-toggle-split"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                />
-                <div class="dropdown-menu dropdown-menu-right">
-                  <ul class="kt-nav">
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-reload" />
-                        <span class="kt-nav__link-text">Save & continue</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-power" />
-                        <span class="kt-nav__link-text">Save & exit</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-edit-interface-symbol-of-pencil-tool" />
-                        <span class="kt-nav__link-text">Save & edit</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-add-1" />
-                        <span class="kt-nav__link-text">Save & add new</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </PortletHeadToolbar>
           </PortletHead>
@@ -274,6 +226,18 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                       </div>
                     </div>
                     <div class="form-group row">
+                      <label class="col-3 col-form-label">Name</label>
+                      <div class="col-9">
+                        <input
+                          id="name"
+                          class="form-control"
+                          v-model="form.name"
+                          placeholder="Name"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
+                    <div class="form-group row">
                       <label class="col-3 col-form-label">Description</label>
                       <div class="col-9">
                         <input
@@ -285,20 +249,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                         />
                       </div>
                     </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">Event Start:</label>
-                      <div class="col-9">
-                        <datepicker v-model="form.start_date" format="DD/MM/YYYY" placeholder="Start Date"></datepicker>
-                        <vue-timepicker v-model="form.start_time" format="HH:mm" placeholder="Start Time"></vue-timepicker>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <label class="col-3 col-form-label">Event End:</label>
-                      <div class="col-9">
-                        <datepicker v-model="form.end_date" format="DD/MM/YYYY" placeholder="End Date"></datepicker>
-                        <vue-timepicker v-model="form.end_time" format="HH:mm" placeholder="End Time"></vue-timepicker>
-                      </div>
-                    </div>
+                    
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Active</label>
                       <div class="col-9">

@@ -9,6 +9,9 @@ const Locations = () => import(/* webpackChunkName: "Locations" */ '../views/adm
 const Events = () => import(/* webpackChunkName: "Events" */ '../views/admin/Events/Events.vue');
 const LocationsForm = () => import(/* webpackChunkName: "LocationsForm" */ '../features/Admin/Locations/_components/LocationsForm.vue'); 
 const EventsForm = () => import(/* webpackChunkName: "EventsForm" */ '../features/Admin/Events/_components/EventsForm.vue'); 
+const EventsFormWrapper = () => import(/* webpackChunkName: "EventsFormWrapper" */ '../features/Admin/Events/_components/EventsFormWrapper.vue'); 
+const EventsFormTimeline = () => import(/* webpackChunkName: "EventsFormTimeline" */ '../features/Admin/Events/_components/EventsFormTimeline.vue'); 
+const EventsFormContact = () => import(/* webpackChunkName: "EventsFormContact" */ '../features/Admin/Events/_components/EventsFormContact.vue'); 
 const MyProfile = () => import(/* webpackChunkName: "MyProfile" */ '../views/admin/Users/MyProfile.vue');
 // const AddUser = () => import(/* webpackChunkName: "AddUser" */ '../views/admin/Users/AddUser.vue');
 // const EditUser = () => import(/* webpackChunkName: "EditUser" */ '../views/admin/Users/EditUser.vue');
@@ -205,14 +208,50 @@ export let adminPaths: RouteConfig =
         }
       }, {
         path: 'event/:eventId/edit',
-        name: 'edit.event',
-        component: EventsForm,
+        name: 'edit.event.wrapper',
+        component: EventsFormWrapper,
         meta: {
           title: Vue.i18n.translate('users.edit_post', null),
           auth: {
             roles: ['events_write']
           }
-        }
+        },
+        children: 
+          [
+            {
+              path: 'info',
+              name: 'edit.event.info',
+              component: EventsForm,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['events_write']
+                }
+              },
+            },
+            {
+              path: 'timeline',
+              name: 'edit.event.timeline',
+              component: EventsFormTimeline,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['events_write']
+                }
+              },
+            },
+            {
+              path: 'contact',
+              name: 'edit.event.contact',
+              component: EventsFormContact,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['events_write']
+                }
+              },
+            },
+          ],
       },
       /*INSERT NEW CONFIGURATOR OPTIONS HERE*/
     ]

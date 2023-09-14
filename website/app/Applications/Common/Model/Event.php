@@ -37,6 +37,7 @@ class Event extends Model implements HasMedia
         'activity_going',
         'activity_interested',
         'event_type_id',
+        'location_address',
         'location_name',
         'location_id',
         'start_date',
@@ -44,7 +45,15 @@ class Event extends Model implements HasMedia
         'start_time',
         'end_time',
         'is_active',
-        'music_types'
+        'music_types',
+        'website',
+        'website_second',
+        'contact_person',
+        'contact_person_second',
+        'contact_person_phone',
+        'contact_person_phone_second',
+        'contact_person_email',
+        'contact_person_email_second',
     ];
 
     protected $casts = [

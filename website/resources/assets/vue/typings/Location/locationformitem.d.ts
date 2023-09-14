@@ -11,5 +11,4 @@ declare interface LocationFormItem {
   uploaded_file: File|null;
   media: File|null;
   address: string;
-  location_name: string;
 }

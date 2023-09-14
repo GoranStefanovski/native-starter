@@ -47,17 +47,13 @@ class LocationBLL implements LocationBLLInterface
 
     public function getAllLocations()
     {
-//        dd($this->post->all());
         $data['records'] =$this->location->all();
         $data['draw'] = 2;
         return $data;
-//        return Post::all();
-        // TODO: Implement getAllPosts() method.
     }
 
 
     public function getPostById($id){
-//        dd($this->post->find($id));
         return $this->location::find($id);
     }
 

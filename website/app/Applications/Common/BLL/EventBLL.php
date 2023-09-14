@@ -97,32 +97,52 @@ class EventBll implements EventBLLInterface
         // TODO: Implement getPostsByUser() method.
     }
 
-    public function saveEvent($request){
+    // Save Event Info (1)
+    public function saveEventInfo($request){
         $location = DB::table('locations')->where('id', $request['location_id'])->first();
         
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
-        $input['start_date'] = $request['start_date'];
-        $input['end_date'] = $request['end_date'];
         $input['location_id'] = $request['location_id'];
         $input['is_active'] = $request['is_active'];
         $input['user_id'] = Auth::user()->id;
+        $input['user_username'] = Auth::user()->username;
         $input['owner'] = Auth::user()->first_name;
-        $input['start_time'] = json_encode($request->input('start_time'));
-        $input['end_time'] = json_encode($request->input('end_time'));
+        
         $input['music_types'] = json_encode($request->input('music_types'));
 
         if ($location) {
             $input['location_name'] = $location->title;
+            $input['location_address'] = $location->address;
         } else {
-            // Handle the case where the location is not found
             $input['location_name'] = 'Unknown Location';
+            $input['location_address'] = 'Unknown Address';
         }
 
         $event = $this->event->create($input);
         $this->mediaDAL->save($request,$event,'event_image');
 
     }
+
+    // Save Event Timeline & Halls (2)
+    public function saveEventTimeline($request){
+        $input['start_date'] = $request['start_date'];
+        $input['end_date'] = $request['end_date'];
+        $input['start_time'] = json_encode($request->input('start_time'));
+        $input['end_time'] = json_encode($request->input('end_time'));
+
+        return $this->event->update($input);
+    }
+
+    public function saveEventContact($request){
+        $input['start_date'] = $request['start_date'];
+        $input['end_date'] = $request['end_date'];
+        $input['start_time'] = json_encode($request->input('start_time'));
+        $input['end_time'] = json_encode($request->input('end_time'));
+
+        return $this->event->update($input);
+    }
+
     public function editEvent($request,$id){
         $event_data = $request->all();
         $event = $this->event->find($id);
