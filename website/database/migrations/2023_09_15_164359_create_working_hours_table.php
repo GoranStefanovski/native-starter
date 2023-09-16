@@ -37,7 +37,7 @@ class CreateWorkingHoursTable extends Migration
             $table->string('sunday_start')->nullable();
             $table->string('sunday_end')->nullable();
             $table->integer('sunday_working')->nullable();
-            $table->integer('open_24')->nullable();
+            $table->integer('always_open')->nullable();
 
             $table->foreign('location_id')->references('id')->on('locations');
 

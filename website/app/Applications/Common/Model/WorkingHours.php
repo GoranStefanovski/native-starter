@@ -40,7 +40,7 @@ class WorkingHours extends Model
         'sunday_start',
         'sunday_end',
         'sunday_working',
-        'open_24',
+        'always_open',
     ];
 
     protected $casts = [

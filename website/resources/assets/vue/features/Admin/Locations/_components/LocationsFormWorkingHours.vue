@@ -46,9 +46,8 @@
     clearErrors
   } = useForm(getUri, working_hours);
 
-  const daysOfWeek = [{checked: false, name: 'Monday', value: 'monday'}, {checked: false, name: 'Tuesday', value: "tuesday" }, {checked: false, name: 'Wednesday', value: 'wednesday'}, {checked: false,name:'Thursday', value: 'thursday'}, {checked: false, name: 'Friday', value: 'friday'}, {checked: false, name:'Saturday', value: 'saturday'}, {checked: false, name: 'Sunday', value: 'sunday'}]
+  const daysOfWeek = [{ name: 'Monday', value: 'monday'}, { name: 'Tuesday', value: "tuesday" }, { name: 'Wednesday', value: 'wednesday'}, {name:'Thursday', value: 'thursday'}, { name: 'Friday', value: 'friday'}, { name:'Saturday', value: 'saturday'}, { name: 'Sunday', value: 'sunday'}]
   
-  id: 6
   provide('form', form.value);
   provide('labelStart', 'location');
 
@@ -118,7 +117,7 @@
               <div class="col-xl-6">
                 <div class="kt-section">
                   <div class="kt-section__body">
-                    <div class="form-group row working-hour-wrapper" v-for="day, index in daysOfWeek" :key="index" :class="{'disabled':form.open_24}">
+                    <div class="form-group row working-hour-wrapper" v-for="day, index in daysOfWeek" :key="index">
                       <label class="col-3 col-form-label">{{day.name}}</label> 
                         <input type="checkbox" v-model="form[day.value + '_working']" @update:modelValue="handleModelUpdate" placeholder="Working"/>
                         <vue-timepicker v-model="form[day.value + '_start']" @update:modelValue="handleModelUpdate" format="HH:mm" placeholder="Opening Time" :class="{'disabled':!form[day.value + '_working']}"></vue-timepicker>
@@ -128,11 +127,11 @@
                       <label class="col-3 col-form-label">Open 24/7</label>
                       <div class="col-9">
                         <input
-                          id="open_24"
+                          id="always_open"
                           type="checkbox"
                           class="form-control"
                           placeholder="Open 24/7"
-                          v-model="form.open_24"
+                          v-model="form.always_open"
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>

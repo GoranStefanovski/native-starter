@@ -50,7 +50,7 @@
   provide('form', form.value);
   provide('labelStart', 'event');
 
-  const sections: Array<any> = [{ name: 'Section 1', inputs: [{ value: '' }] }]
+  const sections: Array<any> = [{ name: 'Hall 1', inputs: [{ value: '' }] }]
 
   const postUri = computed(() => `common/event/${id}/edit/timeline`);
 
@@ -159,20 +159,24 @@
                     </h3>
                   </div>
                 </div>
-                      <div class="form-group row" v-for="(section, index) in sections" :key="index">
-                      <label class="col-3 col-form-label">Section {{ index + 1 }}</label>
-                      <div class="col-9">
-                        <div class="row">
-                          <input class="form-control" v-model="section.name" placeholder="Section Name" />
-                          <button @click="addInputField(index)">Add Input</button>
-                          <button @click="addSection(index)">Add Section</button>
+                <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
+                       <div class="form-group row halls-wrapper" v-for="(section, index) in sections" :key="index">
+                      <label class="col-3 col-form-label">Hall {{ index + 1 }}</label>
+                      <div class="col-6">
+                        <div class="row halls-wrapper_inputs">
+                          <input class="form-control" v-model="section.name" placeholder="Hall Name" />
+                          <div v-for="(input, i) in section.inputs" :key="i">
+                          <input v-model="input.value" :placeholder="'DJ ' + (i + 1)" />
                         </div>
                       </div>
-                        <div class="row" v-for="(input, i) in section.inputs" :key="i">
-                          <input v-model="input.value" :placeholder="'Input ' + (i + 1)" />
-                        </div>
-                        <button @click="removeSection(index)">Remove Section</button>
                       </div>
+                        <div class="col-3 halls-wrapper_buttons">
+                          <button class="btn btn-brand" @click="addInputField(index)">Add DJ</button>
+                          <button class="btn btn-brand" @click="removeSection(index)">Remove Hall</button>
+                        </div>
+                      </div>
+                      <button class="btn btn-brand" @click="addSection(sections.length)">Add Hall</button>
+                <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
                   </div>
                 </div>
               </div>
@@ -188,3 +192,40 @@
     <!--    />-->
   </CustomForm>
 </template>
+
+<style lang="scss">
+.halls-wrapper {
+  &_buttons {
+    text-align: right;
+
+    & > button {
+      margin-bottom: 3px;
+    }
+  }
+
+  &_inputs {
+    & > input {
+      margin-bottom: 8px;
+    }
+
+    & > div {
+      & > input {
+        margin-bottom: 5px;
+        display: block;
+        width: 67%;
+        height: calc(1.5em + 1.3rem + -6px);
+        padding: 0.65rem 1rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #e2e5ec;
+        border-radius: 4px;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+      }
+    }
+  }
+}
+</style>

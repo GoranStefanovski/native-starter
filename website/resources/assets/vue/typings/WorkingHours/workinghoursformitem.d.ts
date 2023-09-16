@@ -22,5 +22,5 @@ declare interface WorkingHoursFormItem {
     sunday_start: String,
     sunday_end: String,
     sunday_working: number | null;
-    open_24: number|null;
+    always_open: number | null;
 }

@@ -164,7 +164,7 @@ const working_hours: WorkingHoursFormItem = {
   sunday_start: '',
   sunday_end: '',
   sunday_working: null,
-  open_24: null,
+  always_open: null,
 }
 
 
