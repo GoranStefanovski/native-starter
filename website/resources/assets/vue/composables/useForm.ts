@@ -53,7 +53,9 @@ export function useForm(fetchUri, data) {
       .then((response) => {
         // For this to work correctly you need to correctly define the object type and properties in the Objects file
         // ex. if expected values from server are id and name than they need to be defined in the object in Objects.ts
+
         item.value = mergeWith({}, item.value, response.data, (a, b) => b === null ? a : undefined);
+        console.log(response.data);
         onInit?.();
         prepareValidation();
         form.value.populate(item.value);

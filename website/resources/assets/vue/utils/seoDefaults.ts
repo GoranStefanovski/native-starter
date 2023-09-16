@@ -2,9 +2,9 @@ declare const baseMetaUrl;
 
 const seoDefaults = {
   url : baseMetaUrl,
-  title : 'Freja',
-  description : 'This is freja application',
-  keywords : 'Freja, Kozmeticko, Laravel, Vue',
+  title : 'Events BG',
+  description : 'This is EVENTS BG application',
+  keywords : 'Events BG',
   image : baseMetaUrl + '/images/logo.png'
 }
 

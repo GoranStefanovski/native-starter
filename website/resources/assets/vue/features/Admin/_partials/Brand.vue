@@ -7,14 +7,7 @@
 
 <template>
   <div class="kt-aside__brand kt-grid__item">
-    <div class="kt-aside__brand-logo">
-      <a href="demo1/index.html">
-        <img
-          alt="Logo"
-          src="images/starter-kit-logo-light.png"
-        >
-      </a>
-    </div>
+    
     <div class="kt-aside__brand-tools">
       <button
         class="kt-aside__brand-aside-toggler"

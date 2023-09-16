@@ -20,6 +20,7 @@
   } from '@/components/Form';
   import { getPhotoPath } from '@/utils/imageProcessing';
   import { location } from '@/utils/Objects';
+  import VueTimepicker from 'vue2-timepicker';
 
   const router = useRouter();
   const store = useStore();
@@ -31,7 +32,7 @@
   const setActiveClasses = (obj) => store.dispatch('Root/setActiveClasses', obj);
 
   const item = ref(cloneDeep(location));
-  const edit = router.currentRoute.fullPath.includes('/edit/');
+  const edit = router.currentRoute.fullPath.includes('/edit/') ? true : false;
   const id = Number(router.currentRoute.params.locationId);
   const getPostUri = `guest/common/${id}/getLocation`
   const fetchUri = `auth/user`;
@@ -213,7 +214,7 @@
                 <div class="kt-section kt-section--first">
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">
-                      {{ $t('posts.post_status') }}:
+                      Location:
                     </h3>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Country</label>
@@ -270,7 +271,7 @@
                 <div class="kt-section">
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">
-                      Post information:
+                      information:
                     </h3>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Location Image</label>

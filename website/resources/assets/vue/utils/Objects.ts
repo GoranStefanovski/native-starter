@@ -140,6 +140,33 @@ const event: EventFormItem = {
   media: createFile('image/jpg')
 }
 
+const working_hours: WorkingHoursFormItem = {
+  id: 0,
+  location_id: null,
+  monday_start: '',
+  monday_end: '',
+  monday_working: null,
+  tuesday_start: '',
+  tuesday_end: '',
+  tuesday_working: null,
+  wednesday_start: '',
+  wednesday_end: '',
+  wednesday_working: null,
+  thursday_start: '',
+  thursday_end: '',
+  thursday_working: null,
+  friday_start: '',
+  friday_end: '',
+  friday_working: null,
+  saturday_start: '',
+  saturday_end: '',
+  saturday_working: null,
+  sunday_start: '',
+  sunday_end: '',
+  sunday_working: null,
+  open_24: null,
+}
+
 
 const slide: SlideFormItem = {
   id: 0,
@@ -261,5 +288,6 @@ export {
   parameter,
   handle,
   appointment,
-  staticContent
+  staticContent,
+  working_hours
 };

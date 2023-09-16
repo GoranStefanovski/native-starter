@@ -3,6 +3,7 @@
 //use Illuminate\Http\Request;
 use \App\Applications\Common\Controllers\LocationController;
 use \App\Applications\Common\Controllers\EventController;
+use \App\Applications\Common\Controllers\WorkingHoursController;
 //
 ///*
 //|--------------------------------------------------------------------------
@@ -44,10 +45,16 @@ Route::group([
     Route::post('locations/{id}/delete', [LocationController::class,'deleteLocation']);
     Route::post('locations/user/draw', [LocationController::class,'getLocationsCollaborator']);
 
+    // Working Hours
+    Route::get('location/{id}/get-working-hours', [WorkingHoursController::class,'getWorkingHours']);
+    Route::post('location/{id}/save-working-hours', [WorkingHoursController::class,'saveWorkingHours']);
+
     // Events
     Route::post('save-event',[EventController::class,'saveEvent']);
     Route::post('event/{id}/edit',[EventController::class,'editEvent']);
     Route::post('event/{id}/edit/timeline',[EventController::class,'editEventTimeline']);
     Route::post('events/draw', [EventController::class,'allEvents']);
     Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);
+
+    
 });

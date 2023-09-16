@@ -24,6 +24,7 @@ class Location extends Model implements HasMedia
     protected $with = [
         'country',
         'media',
+        'working_hours',
     ];
 
 
@@ -63,6 +64,10 @@ class Location extends Model implements HasMedia
 
     public function user(){
         return $this->belongsTo(User::class);
+    }
+
+    public function working_hours() {
+        return $this->hasOne(WorkingHours::class);
     }
 
 

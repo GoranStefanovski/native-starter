@@ -3,12 +3,6 @@
 namespace App\Applications\Common\DAL;
 
 use App\Applications\Common\DAL\TaxonomiesDALInterface;
-use App\Applications\Common\Model\Location;
-//use App\Applications\Common\Model\Format;
-//use App\Applications\Common\Model\Color;
-//use App\Applications\Common\Model\Handle;
-//use App\Applications\Common\Model\Lamination;
-//use App\Applications\Common\Model\Paper;
 use Illuminate\Support\Facades\DB;
 use Webpatser\Countries\Countries;
 use App\Applications\Common\Model\LocationTypes;

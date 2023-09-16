@@ -192,7 +192,7 @@
 <!--            @click.native="closeMobileMenu"-->
 <!--          >-->
 <!--            <img-->
-<!--              alt="Freja logo"-->
+<!--              alt="Events BG logo"-->
 <!--              src="images/freja/freja-web-logo.png"-->
 <!--            >-->
 <!--          </router-link>-->

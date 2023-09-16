@@ -10,6 +10,7 @@ const Events = () => import(/* webpackChunkName: "Events" */ '../views/admin/Eve
 const LocationsForm = () => import(/* webpackChunkName: "LocationsForm" */ '../features/Admin/Locations/_components/LocationsForm.vue'); 
 const LocationsFormWrapper = () => import(/* webpackChunkName: "LocationsFormWrapper" */ '../features/Admin/Locations/_components/LocationsFormWrapper.vue'); 
 const LocationsFormContact = () => import(/* webpackChunkName: "LocationsFormContact" */ '../features/Admin/Locations/_components/LocationsFormContact.vue'); 
+const LocationsFormWorkingHours = () => import(/* webpackChunkName: "LocationsFormWorkingHours" */ '../features/Admin/Locations/_components/LocationsFormWorkingHours.vue'); 
 const EventsForm = () => import(/* webpackChunkName: "EventsForm" */ '../features/Admin/Events/_components/EventsForm.vue'); 
 const EventsFormWrapper = () => import(/* webpackChunkName: "EventsFormWrapper" */ '../features/Admin/Events/_components/EventsFormWrapper.vue'); 
 const EventsFormTimeline = () => import(/* webpackChunkName: "EventsFormTimeline" */ '../features/Admin/Events/_components/EventsFormTimeline.vue'); 
@@ -206,6 +207,17 @@ export let adminPaths: RouteConfig =
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {
                 roles: ['locations_write']
+                }
+              },
+            },
+            {
+              path: 'working_hours',
+              name: 'edit.location.working_hours',
+              component: LocationsFormWorkingHours,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['events_write']
                 }
               },
             },
