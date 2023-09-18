@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Applications\User\Model\Role;
 use App\Applications\User\Model\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
@@ -99,18 +100,28 @@ class AuthenticatedSessionController extends Controller
     {
         $request->validated($request->all());
         // ALl this data will be editable on edit profile
-        // $user = User::create([
-        //     'first_name' => $request->first_name,
-        //     'last_name' => $request->last_name,
-        //     'username' => $request->first_name,
-        //     'is_disabled' => $request->is_disabled,
-        //     'company' => $request->company,
-        //     'email' => $request->email,
-        //     'phone' => $request->phone,
-        //     'country_id' => $request->country_id,
-        //     'country' => \Countries::find($request['country_id'])->name,
-        //     'password' => Hash::make($request->password),
-        // ]);
+        $user = User::create([
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'username' => $request->first_name,
+            'is_disabled' => $request->is_disabled,
+            'company' => $request->company,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'country_id' => $request->country_id,
+            'country' => \Countries::find($request['country_id'])->name,
+            'password' => Hash::make($request->password),
+        ]);
+         
+        $user->roles()->attach($request->roles);
+
+        return $this->success([
+            'user' => $user,
+            'token' => $user->createToken('REGISTERED ' . $user->first_name)->plainTextToken
+        ]);
+    }
+
+    public function registerPublic(StoreUserRequest $request) {
 
         $user = User::create([
             'username' => $request->first_name,
@@ -203,11 +214,9 @@ class AuthenticatedSessionController extends Controller
     }
 
 
-    public function updateMyProfile(Request $request){
+    public function updateProfile(Request $request)
+    {
         $request_array = $request->all();
-//        dd($request_array);
-//        $user = $this->user::findOrFail($id);
-//        dd($request);
         $user = Auth::user();
         $data['first_name'] = $request_array['first_name'];
         $data['last_name'] = $request_array['last_name'];

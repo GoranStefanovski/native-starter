@@ -26,10 +26,10 @@ interface EventBLLInterface{
 
     /**
      * Summary of getPublicEvents
-     * @param \Illuminate\Http\Request $request
-     * @return Collection
+     * @param array $data
+     * @return array
      */
-    public function getPublicEvents(Request $request);
+    public function getPublicEvents($data);
 
     /**
      * @param array $data

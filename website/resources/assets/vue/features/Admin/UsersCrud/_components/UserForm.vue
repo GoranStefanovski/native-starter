@@ -266,13 +266,13 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.password.label')}}</label>
                       <div class="col-9">
-                        <input v-model="form.password" class="form-control" type="text" placeholder="Password" required />
+                        <input v-model="form.password" class="form-control" type="password" placeholder="Password" :required="!edit ? true : false" />
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.password.confirm')}}</label>
                       <div class="col-9">
-                        <input v-model="form.password_confirmation" class="form-control" type="text" placeholder="Password Confirmation" required />
+                        <input v-model="form.password_confirmation" class="form-control" type="password" placeholder="Password Confirmation" :required="!edit ? true : false" />
                       </div>
                     </div>
                   </div>

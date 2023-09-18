@@ -32,7 +32,7 @@ Route::group([
 //    Route::get('{id}/get', 'Controllers\UserController@getUserGuest');// TODO this route should probably not be available unless you are logged in
 //    Route::post('new', 'Controllers\UserController@storeUserGuest');
 //    Route::get('myprofile', 'Controllers\UserController@getMyProfile');// TODO Same issue as above
-//    Route::post('myprofile/{id}', 'Controllers\UserController@updateMyProfile');// TODO Same issue as above
+//    Route::post('myprofile/{id}', 'Controllers\UserController@updateProfile');// TODO Same issue as above
 //    Route::post('avatar', 'Controllers\UserController@updateMyAvatar');
 });
 
@@ -44,7 +44,7 @@ Route::group([
     Route::post('/logout', [AuthenticatedSessionController::class ,'logout']);
     Route::get('/test',[AuthenticatedSessionController::class ,'test']);
     Route::get('/user',[AuthenticatedSessionController::class ,'user']);
-    Route::post('/user/edit',[AuthenticatedSessionController::class ,'updateMyProfile']);
+    Route::post('/user/edit',[AuthenticatedSessionController::class ,'updateProfile']);
 });
 
 
@@ -63,8 +63,8 @@ Route::group([
     Route::get('{id}/get', 'Controllers\UserController@getUser');
     Route::post('shipping_info/edit', 'Controllers\UserController@editShippingInfo');
     Route::post('new', 'Controllers\UserController@storeUser')->middleware('permission:user_write', 'role:administrator');
-    Route::post('{id}/edit', 'Controllers\UserController@updateUser')->middleware('permission:user_write', 'role:administrator');
-    Route::post('edit/myprofile/{id}', 'Controllers\UserController@updateMyProfile');
+    Route::post('{id}/edit', 'Controllers\UserController@storeUser');
+    Route::post('edit/myprofile/{id}', 'Controllers\UserController@updateUser');
     Route::post('draw', 'Controllers\UserController@drawUser');
     Route::post('public/draw', 'Controllers\UserController@drawUserGuest');
     Route::post('public/export', 'Controllers\UserController@exportPublicUser');

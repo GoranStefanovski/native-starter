@@ -166,7 +166,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                 <div class="kt-section kt-section--first">
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">
-                      {{ $t('posts.post_status') }}:
+                      Event Information:
                     </h3>
                   </div>
                 </div>

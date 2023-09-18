@@ -83,8 +83,6 @@ const user: UserFormItem = {
   phone: '',
   source: 'backend',
   contact_email: '',
-  shipping_details: cloneDeep(detail),
-  billing_details: cloneDeep(detail)
 };
 
 const post: PostFormItem = {

@@ -93,8 +93,6 @@ class UserBLL implements UserBLLInterface
 
     public function editUser($request, $id){
         $request_array = $request->all();
-        $shipping_details = $request_array['shipping_details'];
-        $billing_details = $request_array['billing_details'];
         $user_data = $request_array;
         unset($user_data['password']);
         $user = $this->userDAL->getUserById($id);
@@ -102,10 +100,7 @@ class UserBLL implements UserBLLInterface
         $this->mediaDAL->save($request, $user, 'user_avatars');
         $request_array['is_disabled'] = (integer)$request_array['is_disabled'];
         $this->userDAL->editUser($user, $user_data);
-        if($request_array['roles'] == 3) {
-            $this->details->find($shipping_details['id'])->update($shipping_details);
-            $this->details->find($billing_details['id'])->update($billing_details);
-        }
+
         if(!empty($request_array['password']) || $request_array['password'] != null)
             $this->userDAL->setUserPassword($user, $request_array['password']);
         $this->userDAL->changeRoles($id, $request_array['roles']);

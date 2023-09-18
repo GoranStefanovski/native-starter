@@ -18,7 +18,7 @@
     endpoint,
     redirectRoute: homePath,
     columns: props.columns,
-    sortKey: 'first_name'
+    sortKey: 'id'
   });
 
   const options: Array<any> = [
@@ -49,9 +49,6 @@
   }
 
   const deleteUser = async (user: User, index: number): Promise<void> => {
-    if (!await dialog('general.confirm.delete', true)) {
-      return;
-    }
     axios.post(endpoint+'/'+index+'/delete')
       .then(response => {
         dialog('strings.front.deleted_successfully', false);

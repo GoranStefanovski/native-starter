@@ -14,22 +14,26 @@
     <!--kt-datatable__row&#45;&#45;even-->
 
     <TableColumn :width="columns[0].width">
+      {{ user.id }}
+    </TableColumn>
+    
+    <TableColumn :width="columns[1].width">
       {{ user.first_name }}
     </TableColumn>
 
-    <TableColumn :width="columns[1].width">
+    <TableColumn :width="columns[2].width">
       {{ user.last_name }}
     </TableColumn>
 
-    <TableColumn :width="columns[2].width">
+    <TableColumn :width="columns[3].width">
       {{ user.email }}
     </TableColumn>
 
-    <TableColumn :width="columns[3].width">
+    <TableColumn :width="columns[4].width">
       {{ user.roles }}
     </TableColumn>
 
-    <TableColumn :width="columns[4].width">
+    <TableColumn :width="columns[5].width">
       <template v-if="user.is_disabled">
         {{ $t('users.status.disabled') }}
       </template>
@@ -39,7 +43,7 @@
     </TableColumn>
 
 
-    <TableColumn :width="columns[5].width">
+    <TableColumn :width="columns[6].width">
       <router-link
         v-if="$auth.user().permissions_array.includes('user_write')"
         :to="{ name: 'edit.user', params: { userId: user.id }}"
@@ -53,7 +57,7 @@
       </router-link>
     </TableColumn>
 
-    <TableColumn :width="columns[6].width">
+    <TableColumn :width="columns[7].width">
       <i
         v-if="$auth.user().permissions_array.includes('user_write')"
         variant="link"

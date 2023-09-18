@@ -67,7 +67,7 @@ class EventBll implements EventBLLInterface
         // TODO: Implement getPostByIdNonAuth() method.
     }
 
-    public function getPublicEvents(Request $request)
+    public function getPublicEvents($request)
     {
         $query = DB::table('events')
             ->select(
@@ -84,11 +84,19 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.end_time as end_time')
             );
 
+        $search = $request['search'];
+        if($search){
+            $query->where(function($subquery) use ($search) {
+                $subquery->where('events.title', 'like', '%'.$search.'%');
+                $subquery->orWhere('events.description', 'like', '%'.$search.'%');
+                $subquery->orWhere('events.music_types', 'like', '%'.$search.'%');
+            });
+        }
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
         $query->groupBy('events.id');
-
+        
         return $query->get();
     }
 
@@ -172,6 +180,7 @@ class EventBll implements EventBLLInterface
     }
 
     public function getEventsData($data){
+
         $query = DB::table('events')
             ->select(
                 DB::raw('events.id as id'),

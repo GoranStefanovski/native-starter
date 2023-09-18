@@ -31,6 +31,7 @@ class UserDAL implements UserDALInterface
     }
 
     private const COLUMNS_MAP = [
+        'id' => 'users.id',
         'first_name' => 'users.first_name',
         'last_name' => 'users.last_name',
         'email' => 'email',
@@ -60,6 +61,8 @@ class UserDAL implements UserDALInterface
         /** @var User $user */
         $user = $this->user::findOrFail($id);
         $user['roles_array'] = $user->roles_array();
+        $user['roles'] = $user->roles_array()[0];
+        
         return $user;
     }
 

@@ -93,7 +93,7 @@ class UserController extends Controller
      * @param  integer  $id
      * @return void
      */
-    public function updateUser(UserRequest $request, $id){
+    public function updateUser($request, $id){
         $this->userBLL->editUser($request, $id);
     }
 
@@ -103,7 +103,7 @@ class UserController extends Controller
      * @param  MyProfile  $request
      * @return void
      */
-    public function updateMyProfile(MyProfile $request){
+    public function updateProfile(MyProfile $request){
         $this->userBLL->editMyProfile($request);
     }
 

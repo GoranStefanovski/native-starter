@@ -18,7 +18,7 @@ const {
   endpoint,
   redirectRoute: homePath,
   columns: props.columns,
-  sortKey: 'first_name'
+  sortKey: 'id'
 });
 
 const roles: Ref<any[]> = ref([]);
@@ -67,12 +67,12 @@ const deleteUser = async (user: User, index: number): Promise<void> => {
     :pagination="pagination"
     @onQueryUpdate="setQuery"
   >
-    <users-table-row
+    <!-- <users-table-row
       v-for="(user, index) in records"
       :index="index"
       :key="user.id"
       :columns="columns"
       :user="user"
-    />
+    /> -->
   </Datatable>
 </template>

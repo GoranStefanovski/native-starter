@@ -18,7 +18,7 @@ export const handleRequest: HandlerRequest = async (url, options, data) => {
       status
     }
   } catch (error) {
-    const message = error.response?.data?.message ?? 'Error happened: No message'
+    const message = error.response?.data?.message ?? 'No data'
     console.log(message); //TODO: Add modal to popup
     return {
       success: false,

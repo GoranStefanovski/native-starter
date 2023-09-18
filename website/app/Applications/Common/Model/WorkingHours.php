@@ -27,7 +27,7 @@ class WorkingHours extends Model
         'tuesday_working',
         'wednesday_start',
         'wednesday_end',
-        'wednseday_working',
+        'wednesday_working',
         'thursday_start',
         'thursday_end',
         'thursday_working',

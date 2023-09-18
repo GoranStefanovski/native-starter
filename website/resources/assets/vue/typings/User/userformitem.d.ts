@@ -16,6 +16,4 @@ declare interface UserFormItem {
   phone: string;
   source: string;
   contact_email: string;
-  shipping_details?: DetailsFormItem;
-  billing_details?: DetailsFormItem;
 }
