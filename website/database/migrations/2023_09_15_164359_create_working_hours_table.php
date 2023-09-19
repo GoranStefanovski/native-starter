@@ -39,8 +39,6 @@ class CreateWorkingHoursTable extends Migration
             $table->integer('sunday_working')->nullable();
             $table->integer('always_open')->nullable();
 
-            $table->foreign('location_id')->references('id')->on('locations');
-
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });

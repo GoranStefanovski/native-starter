@@ -38,6 +38,7 @@
   const fetchUri = `auth/user`;
   const locations = ref([]);
   const musicTypes = ref([]);
+  const boostedEvents = ref([]);
   const cities = ref([]);
   const {
     form,
@@ -55,6 +56,7 @@
 const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
   const locationsApi = 'common/locations/user/draw';
   const musicTypesUri = 'guest/common/music-types';
+  const boostedEventsUri = 'guest/common/all-events';
 
   const fetchCountries = async () => {
     try {
@@ -79,6 +81,15 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
       }
     } catch (error) {
       console.error(error);
+    }
+  }
+
+  const fetBoostedEvents = async () => {
+    try {
+      const response = await axios.post(boostedEventsUri);
+      console.log(response);
+    } catch (error) {
+      console.error(error, ' asdasdasdasdasdasdadasdasd');
     }
   }
 
@@ -112,9 +123,9 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
     await fetchCountries();
     await initFormFromItem();
     await fetchMusicTypes();
-
+    await fetBoostedEvents();
     if(edit) {
-      form.value.music_types = JSON.parse(form.value.music_types)
+      form.value.music_types = JSON.parse(form.value.music_types);
     }    
   })
 </script>
@@ -177,7 +188,6 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                           id="location_id"
                           v-model="form.location_id"
                           :options="locations"
-                          :getcities="true"
                           @update:modelValue="handleModelUpdate"
                         />
                       </div>

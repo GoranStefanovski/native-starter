@@ -44,4 +44,9 @@ interface EventBLLInterface{
     public function getBoostedEvents($data);
 
     public function getThisWeekEvents($data);
+
+    public function getThisMonthEvents($data);
+
+    public function getThisDayEvents($data);
+
 }

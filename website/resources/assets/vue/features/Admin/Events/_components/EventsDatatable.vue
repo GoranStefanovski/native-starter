@@ -8,7 +8,6 @@
   
   const props = defineProps(['columns']);
   const endpoint: string = 'common/events';
-  const endpointAll: string = 'guest/common/all-events';
   const store = useStore();
   const homePath = computed(() => store.state.Root.homePath);
 
@@ -42,16 +41,6 @@
       });
   }
 
-  const fetchAllEvents = () => {
-    axios.post(endpointAll)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        dialog(error.response.data.message, false);
-      });
-  }
-
   const deletePost = async (post: EventFormItem, id : number): Promise<void> => {
     console.log(post)
     // if (!await dialog('general.confirm.delete', true)) {
@@ -68,7 +57,6 @@
   }
 
   onMounted(() => {
-    fetchAllEvents();
   })
 </script>
 <template>

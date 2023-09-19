@@ -132,14 +132,6 @@ class EventBll implements EventBLLInterface
             ->where('users.sub_type', '>', 1) // Filter events where user's sub_type is greater than 1.
             ->orderByRaw('RAND()');
 
-        $search = $request['search'];
-        if($search){
-            $query->where(function($subquery) use ($search) {
-                $subquery->where('events.title', 'like', '%'.$search.'%');
-                $subquery->orWhere('events.description', 'like', '%'.$search.'%');
-                $subquery->orWhere('events.music_types', 'like', '%'.$search.'%');
-            });
-        }
 
 
         $query->whereNull('events.deleted_at');
@@ -180,6 +172,77 @@ class EventBll implements EventBLLInterface
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
         $query->whereBetween('events.start_date', [$currentDate, $nextWeekEndDate]);
+
+        return $query->get();
+    }
+
+    public function getThisMonthEvents($request)
+    {
+        $currentDate = now()->toDateString();
+        $nextMonthEndDate = now()->addMonth()->endOfMonth()->toDateString();
+
+        $query = DB::table('events')
+            ->select(
+                DB::raw('events.id as id'),
+                DB::raw('events.title as title'),
+                DB::raw('events.description as description'),
+                DB::raw('events.user_id as user_id'),
+                DB::raw('events.music_types as music_types'),
+                DB::raw('events.location_id as location_id'),
+                DB::raw('events.location_name as location_name'),
+                DB::raw('events.start_date as start_date'),
+                DB::raw('events.end_date as end_date'),
+                DB::raw('events.start_time as start_time'),
+                DB::raw('events.end_time as end_time')
+            )->leftJoin('users', 'events.user_id', '=', 'users.id') // Use leftJoin to include events without users.
+            ->orderByRaw('
+                CASE 
+                    WHEN users.sub_type = 3 THEN 1
+                    WHEN users.sub_type = 2 THEN 2
+                    WHEN users.sub_type = 1 THEN 3
+                    ELSE 4
+                END
+            ')
+            ->orderByRaw('RAND()');
+
+        $query->whereNull('events.deleted_at');
+        $query->where('events.is_active',1);
+        $query->whereBetween('events.start_date', [$currentDate, $nextMonthEndDate]);
+
+        return $query->get();
+    }
+
+    public function getThisDayEvents($request)
+    {
+        $currentDate = now()->toDateString();
+
+        $query = DB::table('events')
+            ->select(
+                DB::raw('events.id as id'),
+                DB::raw('events.title as title'),
+                DB::raw('events.description as description'),
+                DB::raw('events.user_id as user_id'),
+                DB::raw('events.music_types as music_types'),
+                DB::raw('events.location_id as location_id'),
+                DB::raw('events.location_name as location_name'),
+                DB::raw('events.start_date as start_date'),
+                DB::raw('events.end_date as end_date'),
+                DB::raw('events.start_time as start_time'),
+                DB::raw('events.end_time as end_time')
+            )->leftJoin('users', 'events.user_id', '=', 'users.id') // Use leftJoin to include events without users.
+            ->orderByRaw('
+                CASE 
+                    WHEN users.sub_type = 3 THEN 1
+                    WHEN users.sub_type = 2 THEN 2
+                    WHEN users.sub_type = 1 THEN 3
+                    ELSE 4
+                END
+            ')
+            ->orderByRaw('RAND()');
+
+        $query->whereNull('events.deleted_at');
+        $query->where('events.is_active',1);
+        $query->whereDate('events.start_date', $currentDate);
 
         return $query->get();
     }
@@ -274,8 +337,9 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.is_active as is_active'),
                 DB::raw('events.user_id as user_id'),
                 DB::raw('events.owner as owner'),
-                DB::raw('events.music_types as music_types')
-                
+                DB::raw('events.music_types as music_types'),
+                DB::raw('events.location_name as location_name'),             
+                DB::raw('events.location_id as location_id')   
             );
 
         $search = $data['search'];
