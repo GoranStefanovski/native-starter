@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 /**
@@ -141,8 +142,10 @@ class AuthenticatedSessionController extends Controller
         ]);
     }
 
-    public function editUser(Request $request){
-        $user = Auth::user();
+    public function editUser(Request $request, $id){
+        $user = $this->user::find($id);
+        $sub_name = SubTypes::where('id', $request->sub_type)->first();
+
         $data['first_name'] = $request['first_name'];
         $data['email'] = $request['email'];
         $data['last_name'] = $request['last_name'];
@@ -150,7 +153,8 @@ class AuthenticatedSessionController extends Controller
         $data['country'] = $request['country'];
         $data['company'] = $request['company'];
         $data['phone'] = $request['phone'];
-        $data['password'] = Hash::make($request['password']);
+        $data['sub_type'] = $request['sub_type'];
+        $data['sub_name'] = $sub_name->name;
         try{
             $user->update($data);
             return "User Updated";
@@ -222,22 +226,20 @@ class AuthenticatedSessionController extends Controller
 
     public function updateProfile(Request $request)
     {
+        $sub_name = SubTypes::where('id', $request->sub_type)->first();
+
         $request_array = $request->all();
         $user = Auth::user();
         $data['first_name'] = $request_array['first_name'];
         $data['last_name'] = $request_array['last_name'];
         $data['email'] = $request_array['email'];
+        $data['sub_type'] = $sub_name->name;
         //$data['company'] = $request_array['company'];//No field to edit this
 //        $data['phone'] = $request_array['phone'];//No field to edit this
         // if (array_key_exists('country_id', $request_array)) $data['country_id'] = $request_array['country_id'];
         $user->update($data);
-        $user->save();
 
         // $this->userDAL->editUser($user, $data);
-        // if($request_array['password'] && $request_array['password']!=null){
-        //     $pass = Hash::make($request_array['password']);
-        //     $user->password = $pass;
-        // }
     }
 
 }

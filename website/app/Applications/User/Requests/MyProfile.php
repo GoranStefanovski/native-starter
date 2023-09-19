@@ -35,8 +35,6 @@ class MyProfile extends ApiFormRequest
             'first_name' => 'required|max:255|min:2',
             'last_name' => 'required|max:255|min:2',
             'email' => 'required|email|min:2|max:255|unique:users,email,'.Auth::user()->id,
-            'password' => 'required_with:password_confirmation|nullable|between:6,30|confirmed',
-            'password_confirmation' => 'required_with:password|nullable|between:6,30|same:password',
             'uploaded_file' => 'file|mimes:jpeg,jpg,png,gif|max:30000',
         ];
     }
@@ -60,7 +58,6 @@ class MyProfile extends ApiFormRequest
             'roles.exists' => 'users.roles.exists',
             'password.required_with' => 'users.password.required',
             'password_confirmation.required_with' => 'users.password_confirmation.required',
-            'password.between' => 'users.password.between',
             'password.confirmed' => 'users.password.confirmed',
             'uploaded_file.file' => 'users.file.required',
             'uploaded_file.max' => 'users.file.max',

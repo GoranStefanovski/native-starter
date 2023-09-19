@@ -55,17 +55,17 @@ export let adminPaths: RouteConfig =
         meta: {
           title: Vue.i18n.translate('strings.home', null),
           auth: {
-            roles: ['user_view']
+            roles: ['admin_access']
           }
         }
       }, {
-        path: 'myprofile',
-        name: 'myprofile',
+        path: 'myprofile/:userId',
+        name: 'edit.myprofile',
         component: MyProfile,
         meta: {
           title: Vue.i18n.translate('strings.myprofile', null),
           auth: {
-            roles: ['user_view']
+            roles: ['admin_access']
           }
         }
       }, {

@@ -152,36 +152,6 @@
                   <i class="fa fa-save mr-1" />
                   {{ $t('buttons.save') }}
                 </button>
-                <button type="button" class="btn btn-brand dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <ul class="kt-nav">
-                    <li class="kt-nav__item">
-                      <a href="#" class="kt-nav__link">
-                        <i class="kt-nav__link-icon flaticon2-reload"></i>
-                        <span class="kt-nav__link-text">Save & continue</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a href="#" class="kt-nav__link">
-                        <i class="kt-nav__link-icon flaticon2-power"></i>
-                        <span class="kt-nav__link-text">Save & exit</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a href="#" class="kt-nav__link">
-                        <i class="kt-nav__link-icon flaticon2-edit-interface-symbol-of-pencil-tool"></i>
-                        <span class="kt-nav__link-text">Save & edit</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a href="#" class="kt-nav__link">
-                        <i class="kt-nav__link-icon flaticon2-add-1"></i>
-                        <span class="kt-nav__link-text">Save & add new</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </PortletHeadToolbar>
           </PortletHead>
@@ -280,8 +250,8 @@
                 </div>
 
                 <div class="kt-separator kt-separator--border-dashed kt-separator--space-lg"></div>
-
-                <div class="kt-section">
+                
+                <div v-if="!edit" class="kt-section">
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">{{ $t('users.password.new_password') }}:</h3>
                     <div class="form-group row">

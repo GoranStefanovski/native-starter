@@ -277,10 +277,11 @@
                       <label class="col-3 col-form-label">Location Image</label>
                       <div class="col-9">
                         <file-upload
-                          :id="'image'"
-                          v-model="form.image"
+                          :id="'uploaded_file'"
+                          v-model="form.uploaded_file"
                           :placeholder-image="postImg"
                           :form="form"
+                          :edit="edit"
                           component-type="image"
                         />
                       </div>

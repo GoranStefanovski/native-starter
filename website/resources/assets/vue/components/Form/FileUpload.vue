@@ -8,7 +8,9 @@
       label: {},
       form: {},
       isInline: {},
-      edit: {},
+      edit: {
+        type: Boolean
+      },
       disabled: {},
       placeholderImage: {},
       componentType: {
@@ -45,7 +47,8 @@
       },
       url() {
         if(this.edit && this.form.media[0] !== undefined){
-          return this.form.media[0].original_url
+          console.log('ASDASDASD')
+          return this.form.media[0].original_url;
         }else{
           return null
         }

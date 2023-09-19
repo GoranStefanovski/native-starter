@@ -56,7 +56,6 @@
 const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
   const locationsApi = 'common/locations/user/draw';
   const musicTypesUri = 'guest/common/music-types';
-  const boostedEventsUri = 'guest/common/this-day-events';
 
   const fetchLocations = async () => {
     try {
@@ -81,16 +80,6 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
       }
     } catch (error) {
       console.error(error);
-    }
-  }
-
-  // For Testing Purposes
-  const fetBoostedEvents = async () => {
-    try {
-      const response = await axios.post(boostedEventsUri);
-      console.log(response);
-    } catch (error) {
-      console.error(error, ' asdasdasdasdasdasdadasdasd');
     }
   }
 
@@ -124,7 +113,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
 
     await initFormFromItem();
     await fetchMusicTypes();
-    await fetBoostedEvents();
+
     if(edit) {
       form.value.music_types = JSON.parse(form.value.music_types);
     }    
@@ -220,6 +209,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
                           v-model="form.uploaded_file"
                           :placeholder-image="postImg"
                           :form="form"
+                          :edit="edit"
                           component-type="image"
                         />
                       </div>

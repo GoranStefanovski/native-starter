@@ -114,10 +114,12 @@
 
         <!--begin: Navigation -->
         <div class="kt-notification">
-          <a
-            href="#"
+          <router-link
+            :to="{ name: 'edit.myprofile', params: { userId: user.id }}"
+            exact=""
             class="kt-notification__item"
           >
+         
             <div class="kt-notification__item-icon">
               <i class="flaticon2-calendar-3 kt-font-success" />
             </div>
@@ -129,7 +131,7 @@
                 Account settings and more
               </div>
             </div>
-          </a>
+          </router-link>
 
           <div class="kt-notification__custom kt-space-between">
             <span
