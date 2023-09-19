@@ -169,8 +169,7 @@ class EventBll implements EventBLLInterface
 
     public function getThisMonthEvents($request)
     {
-        $currentDate = now()->toDateString();
-        $nextMonthEndDate = now()->addMonth()->endOfMonth()->toDateString();
+        $currentDateTime = now();
 
         $query = DB::table('events')
             ->select(
@@ -186,18 +185,31 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.start_time as start_time'),
                 DB::raw('events.end_time as end_time')
             )->leftJoin('users', 'events.user_id', '=', 'users.id') // Use leftJoin to include events without users.
-            ->orderBy('events.start_date');
+            ->orderBy('events.start_date')
+
+            ->where(function ($query) use ($currentDateTime) {
+            // Filter events happening in the next month.
+            $query->whereBetween('events.start_date', [$currentDateTime->toDateString(), $currentDateTime->addMonth()->endOfMonth()->toDateString()]);
+
+            // Filter events happening today or in the future based on both date and time.
+            $query->orWhere(function ($query) use ($currentDateTime) {
+                $query->whereDate('events.start_date', '>', $currentDateTime->toDateString())
+                    ->orWhere(function ($query) use ($currentDateTime) {
+                        $query->whereDate('events.start_date', '=', $currentDateTime->toDateString())
+                            ->whereTime('events.start_time', '>=', $currentDateTime->toTimeString());
+                    });
+            });
+        });
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
-        $query->whereBetween('events.start_date', [$currentDate, $nextMonthEndDate]);
 
         return $query->get();
     }
 
     public function getThisDayEvents($request)
     {
-        $currentDate = now()->toDateString();
+        $currentDateTime = now();
 
         $query = DB::table('events')
             ->select(
@@ -221,11 +233,18 @@ class EventBll implements EventBLLInterface
                     ELSE 4
                 END
             ')
-            ->orderByRaw('RAND()');
+            ->orderByRaw('RAND()')->where(function ($query) use ($currentDateTime) {
+                // Filter events happening today or at the current moment.
+                $query->whereDate('events.start_date', $currentDateTime->toDateString())
+                    ->orWhere(function ($query) use ($currentDateTime) {
+                        $query->whereDate('events.start_date', '<', $currentDateTime->toDateString())
+                            ->whereDate('events.end_date', '>=', $currentDateTime->toDateString())
+                            ->whereTime('events.end_time', '>=', $currentDateTime->toTimeString());
+                    });
+            });
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
-        $query->whereDate('events.start_date', $currentDate);
 
         return $query->get();
     }

@@ -56,14 +56,14 @@
 const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-event');
   const locationsApi = 'common/locations/user/draw';
   const musicTypesUri = 'guest/common/music-types';
-  const boostedEventsUri = 'guest/common/all-events';
+  const boostedEventsUri = 'guest/common/this-day-events';
 
-  const fetchCountries = async () => {
+  const fetchLocations = async () => {
     try {
       const response = await axios.post(locationsApi);
       for (let key in response.data) {
         if (response.data.hasOwnProperty(key)) {
-          locations.value.push({ id: `${response.data[key]['id']}`, name: `${response.data[key]['title']}` });
+          locations.value.push({ id: key, name: `${response.data[key]['title']}` });
         }
       }
     } catch (error) {
@@ -84,6 +84,7 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
     }
   }
 
+  // For Testing Purposes
   const fetBoostedEvents = async () => {
     try {
       const response = await axios.post(boostedEventsUri);
@@ -119,8 +120,8 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
   }
 
   onMounted(async () => {
+    await fetchLocations();
 
-    await fetchCountries();
     await initFormFromItem();
     await fetchMusicTypes();
     await fetBoostedEvents();

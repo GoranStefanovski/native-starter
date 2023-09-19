@@ -35,6 +35,8 @@
 
   const item = ref(cloneDeep(event));
   const edit = router.currentRoute.fullPath.includes('/edit/');
+  const selectedStartDate = ref(null);
+  const selectedEndDate = ref(null);
   const id = Number(router.currentRoute.params.eventId);
   const getPostUri = `guest/common/${id}/getEvent`
   const {
@@ -55,6 +57,8 @@
   const postUri = computed(() => `common/event/${id}/edit/timeline`);
 
   const beforeSubmit = (hasToRedirect = true) => {
+    form.value.start_date = formatDate(form.value.start_date)
+    form.value.end_date = formatDate(form.value.end_date)
     onSubmit(postUri.value, 'events', hasToRedirect, form.value);
   }
 
@@ -75,6 +79,14 @@
     
     const removeSection = (sectionIndex) => {
      sections.splice(sectionIndex, 1);
+    }
+  
+    const formatDate = (dateInput) => {
+      const date = new Date(dateInput);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
     }
 
   onMounted(async () => {
@@ -141,14 +153,14 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Event Start:</label>
                       <div class="col-9">
-                        <datepicker v-model="form.start_date" @update:modelValue="handleModelUpdate" format="DD/MM/YYYY" placeholder="Start Date"></datepicker>
+                        <datepicker v-model="form.start_date" @update:modelValue="handleModelUpdate" :enableTimePicker="false" format="YYYY-MM-DD" :placeholder="form.start_date ? form.start_date : 'Start Date'"></datepicker>
                         <vue-timepicker v-model="form.start_time" @update:modelValue="handleModelUpdate" format="HH:mm" placeholder="Start Time"></vue-timepicker>
                       </div>
                     </div>
                     <div class="form-group row">
                       <label class="col-3 col-form-label">Event End:</label>
                       <div class="col-9">
-                        <datepicker v-model="form.end_date" @update:modelValue="handleModelUpdate" format="DD/MM/YYYY" placeholder="End Date"></datepicker>
+                        <datepicker v-model="form.end_date" @update:modelValue="handleModelUpdate" :enableTimePicker="false" :format="'YYYY-MM-DD'" :placeholder="form.end_date ? form.end_date : 'End Date'"></datepicker>
                         <vue-timepicker v-model="form.end_time" @update:modelValue="handleModelUpdate" format="HH:mm" placeholder="End Time"></vue-timepicker>
                       </div>
                     </div>

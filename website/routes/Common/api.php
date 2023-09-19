@@ -20,13 +20,11 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'guest/common',
 ], function () {
-//    Route::get('get-handle-types', 'Controllers\TaxonomiesController@getHandleTypes');
-    Route::get('{id}/fetch', [LocationController::class,'getPostByIdNonAuth']);
+    // Taxonomies
     Route::get('get-countries', 'Controllers\TaxonomiesController@getCountries');
     Route::get('location-types', 'Controllers\TaxonomiesController@getLocationTypes');
     Route::get('sub-types', 'Controllers\TaxonomiesController@getSubTypes');
     Route::get('music-types', 'Controllers\TaxonomiesController@getMusicTypes');
-    // 
 
     // Events
     Route::get('{id}/getEvent', 'Controllers\EventController@getPostById');
@@ -56,16 +54,14 @@ Route::group([
     Route::post('locations/{id}/delete', [LocationController::class,'deleteLocation']);
     Route::post('locations/user/draw', [LocationController::class,'getLocationsCollaborator']);
 
-    // Working Hours
-    Route::get('location/{id}/get-working-hours', [WorkingHoursController::class,'getWorkingHours']);
-    Route::post('location/{id}/save-working-hours', [WorkingHoursController::class,'saveWorkingHours']);
-
     // Events
     Route::post('save-event',[EventController::class,'saveEvent']);
     Route::post('event/{id}/edit',[EventController::class,'editEvent']);
     Route::post('event/{id}/edit/timeline',[EventController::class,'editEventTimeline']);
     Route::post('events/draw', [EventController::class,'allEvents']);
-    Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);
+    Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);    
 
-    
+     // Working Hours
+     Route::get('location/{id}/get-working-hours', [WorkingHoursController::class,'getWorkingHours']);
+     Route::post('location/{id}/save-working-hours', [WorkingHoursController::class,'saveWorkingHours']);
 });
