@@ -158,16 +158,7 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.end_date as end_date'),
                 DB::raw('events.start_time as start_time'),
                 DB::raw('events.end_time as end_time')
-            )->leftJoin('users', 'events.user_id', '=', 'users.id') // Use leftJoin to include events without users.
-            ->orderByRaw('
-                CASE 
-                    WHEN users.sub_type = 3 THEN 1
-                    WHEN users.sub_type = 2 THEN 2
-                    WHEN users.sub_type = 1 THEN 3
-                    ELSE 4
-                END
-            ')
-            ->orderByRaw('RAND()');
+            )->orderBy('events.start_date');
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
@@ -195,15 +186,7 @@ class EventBll implements EventBLLInterface
                 DB::raw('events.start_time as start_time'),
                 DB::raw('events.end_time as end_time')
             )->leftJoin('users', 'events.user_id', '=', 'users.id') // Use leftJoin to include events without users.
-            ->orderByRaw('
-                CASE 
-                    WHEN users.sub_type = 3 THEN 1
-                    WHEN users.sub_type = 2 THEN 2
-                    WHEN users.sub_type = 1 THEN 3
-                    ELSE 4
-                END
-            ')
-            ->orderByRaw('RAND()');
+            ->orderBy('events.start_date');
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
