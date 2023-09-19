@@ -159,18 +159,26 @@ class LocationBLL implements LocationBLLInterface
     }
 
     public function saveLocation($request){
-        $input['title'] = $request['title'];
-        $input['description'] = $request['description'];
-        $input['country_id'] = $request['country_id'];
-        $input['is_active'] = $request['is_active'];
-        $input['address'] = $request['address'];
-        $input['user_id'] = Auth::user()->id;
-        $input['location_types'] = json_encode($request->input('location_types'));
-        $input['owner'] = Auth::user()->first_name;
-        $input['city'] = $request['city'];
-        $location = $this->location->create($input);
-        $this->mediaDAL->save($request,$location,'location_image');
+     
+        $userSubType = Auth::user()->sub_type;
 
+        $userLocationCount = $this->location->where('user_id', Auth::user()->id)->count();
+
+        if (($userSubType == 1 && $userLocationCount < 3) || ($userSubType == 2 && $userLocationCount < 8) || ($userSubType == 3)) {
+            $input['title'] = $request['title'];
+            $input['description'] = $request['description'];
+            $input['country_id'] = $request['country_id'];
+            $input['is_active'] = $request['is_active'];
+            $input['address'] = $request['address'];
+            $input['user_id'] = Auth::user()->id;
+            $input['location_types'] = json_encode($request->input('location_types'));
+            $input['owner'] = Auth::user()->first_name;
+            $input['city'] = $request['city'];
+            $location = $this->location->create($input);
+            $this->mediaDAL->save($request,$location,'location_image');
+        } else {
+            abort(403, 'You do not meet the criteria for creating a new location.');
+        }
     }
     public function editLocation($request,$id){
         $location_data = $request->all();

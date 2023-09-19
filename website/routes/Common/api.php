@@ -31,12 +31,13 @@ Route::group([
     // Events
     Route::get('{id}/getEvent', 'Controllers\EventController@getPostById');
     Route::post('all-events', [EventController::class,'allEventsPublic']);
-    Route::port('all-boosted-events', [EventController::class,'getBoostedEvents']);
+    Route::post('all-boosted-events', [EventController::class,'getBoostedEvents']);
+    Route::post('this-week-events', [EventController::class,'getThisWeekEvents']);
 
     // Locations
     Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');
     Route::post('all-locations', [LocationController::class,'allLocationsPublic']);
-    Route::port('all-boosted-locations', [LocationController::class,'getBoostedLocations']);
+    Route::post('all-boosted-locations', [LocationController::class,'getBoostedLocations']);
 
 });
 

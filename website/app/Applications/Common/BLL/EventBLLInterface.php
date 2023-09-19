@@ -42,4 +42,6 @@ interface EventBLLInterface{
      * @return array
      */
     public function getBoostedEvents($data);
+
+    public function getThisWeekEvents($data);
 }

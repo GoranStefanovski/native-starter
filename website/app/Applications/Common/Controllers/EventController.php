@@ -46,6 +46,11 @@ class EventController extends Controller
         return $this->eventBLL->getBoostedEvents($request);
     }
 
+    public function getThisWeekEvents(Request $request){
+        // dd($this->postBLL->getAllPosts());
+        return $this->eventBLL->getThisWeekEvents($request);
+    }
+
     public function getPostById($id){
         return $this->eventBLL->getPostById($id);
     }
