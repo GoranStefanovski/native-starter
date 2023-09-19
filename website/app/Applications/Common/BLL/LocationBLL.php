@@ -83,7 +83,16 @@ class LocationBLL implements LocationBLLInterface
             DB::raw('locations.contact_person_phone_second as contact_person_phone_second'),
             DB::raw('locations.contact_person_email as contact_person_email'),
             DB::raw('locations.contact_person_email_second as contact_person_email_second')
-        );
+        )->leftJoin('users', 'locations.user_id', '=', 'users.id') // Use leftJoin to include locations without users.
+        ->orderByRaw('
+            CASE 
+                WHEN users.sub_type = 3 THEN 1
+                WHEN users.sub_type = 2 THEN 2
+                WHEN users.sub_type = 1 THEN 3
+                ELSE 4
+            END
+        ')
+        ->orderByRaw('RAND()');
         
         $search = $request['search'];
         if($search){
@@ -98,7 +107,48 @@ class LocationBLL implements LocationBLLInterface
 
     $query->whereNull('locations.deleted_at');
     $query->where('locations.is_active',1);
-    $query->groupBy('locations.id');
+
+    return $query->get();
+    }
+
+    public function getBoostedLocations($request)
+    {
+        $query = DB::table('locations')
+        ->select(
+            DB::raw('locations.id as id'),
+            DB::raw('locations.title as title'),
+            DB::raw('locations.description as description'),
+            DB::raw('locations.user_id as user_id'),
+            DB::raw('locations.location_types as location_types'),
+            DB::raw('locations.city as city'),
+            DB::raw('locations.address as address'),
+            DB::raw('locations.location_types as location_types'),
+            DB::raw('locations.image as image'),
+            DB::raw('locations.website as website'),
+            DB::raw('locations.website_second as website_second'),
+            DB::raw('locations.contact_person as contact_person'),
+            DB::raw('locations.contact_person_second as contact_person_second'),
+            DB::raw('locations.contact_person_phone as contact_person_phone'),
+            DB::raw('locations.contact_person_phone_second as contact_person_phone_second'),
+            DB::raw('locations.contact_person_email as contact_person_email'),
+            DB::raw('locations.contact_person_email_second as contact_person_email_second')
+        )->join('users', 'locations.user_id', '=', 'users.id') // Join with users table.
+        ->where('users.sub_type', '>', 1) // Filter locations where user's sub_type is greater than 1.
+        ->orderByRaw('RAND()');
+        
+        $search = $request['search'];
+        if($search){
+            $query->where(function($subquery) use ($search) {
+                $subquery->where('locations.title', 'like', '%'.$search.'%');
+                $subquery->orWhere('locations.description', 'like', '%'.$search.'%');
+                $subquery->orWhere('locations.rating', 'like', '%'.$search.'%');
+                $subquery->orWhere('locations.user_id', 'like', '%'.$search.'%');
+                $subquery->orWhere('countries.full_name', 'like', '%'.$search.'%');
+            });
+        }
+
+    $query->whereNull('locations.deleted_at');
+    $query->where('locations.is_active',1);
 
     return $query->get();
     }

@@ -47,4 +47,8 @@ class TaxonomiesBLL implements TaxonomiesBLLInterface
     public function getMusicTypes() {
         return $this->taxonomiesDAL->getMusicTypes()/*->toJson()*/;
     }
+
+    public function getSubTypes() {
+        return $this->taxonomiesDAL->getSubTypes()/*->toJson()*/;
+    }
 }

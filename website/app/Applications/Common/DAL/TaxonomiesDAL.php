@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Webpatser\Countries\Countries;
 use App\Applications\Common\Model\LocationTypes;
 use App\Applications\Common\Model\MusicTypes;
+use App\Applications\Common\Model\SubTypes;
 
 /*INSERT NEW IMPORTS HERE*/
 
@@ -23,6 +24,10 @@ use App\Applications\Common\Model\MusicTypes;
  * @property MusicTypes musicTypes
  */
 
+   /**
+ * @property SubTypes subTypes
+ */
+
 class TaxonomiesDAL implements TaxonomiesDALInterface
 {
 
@@ -30,13 +35,15 @@ class TaxonomiesDAL implements TaxonomiesDALInterface
 
         Countries $countries,
         LocationTypes $locationTypes,
-        MusicTypes $musicTypes
+        MusicTypes $musicTypes,
+        SubTypes $subTypes
 
     ){
 
         $this->countries = $countries;
         $this->locationTypes = $locationTypes;
         $this->musicTypes = $musicTypes;
+        $this->subTypes = $subTypes;
 		/*SET DEPENDENCY HERE*/
     }
 
@@ -86,6 +93,10 @@ class TaxonomiesDAL implements TaxonomiesDALInterface
 
     public function getMusicTypes() {
         return $this->musicTypes->whereNull('music_types.deleted_at')->get();
+    }
+
+    public function getSubTypes() {
+        return $this->subTypes->whereNull('sub_types.deleted_at')->get();
     }
 
 }

@@ -53,4 +53,13 @@ class TaxonomiesController extends Controller
         }
     }
 
+    public function getSubTypes() {
+        try{
+            return $this->taxonomiesBLL->getSubTypes();
+        }
+        catch(Exception $e){
+            return $e;
+        }
+    }
+
 }

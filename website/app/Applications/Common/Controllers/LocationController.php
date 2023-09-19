@@ -40,6 +40,10 @@ class LocationController extends Controller
         return $this->locationBLL->getPublicLocations($request);
     }
 
+    public function getBoostedLocations(Request $request) {
+        return $this->locationBLL->getBoostedLocations($request);
+    }
+
     public function getPostById($id){
         return $this->locationBLL->getPostById($id);
     }

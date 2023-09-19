@@ -55,7 +55,9 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         'is_disabled',
         'source',
         'source_info',
-        'activation_code'
+        'activation_code',
+        'sub_type',
+        'sub_name'
     ];
 
     protected $hidden = [

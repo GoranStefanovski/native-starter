@@ -24,6 +24,8 @@ interface LocationBLLInterface{
 
     public function getPublicLocations($request);
 
+    public function getBoostedLocations($request);
+
     public function getLocationsData($data);
 
     public function getLocationsCollaborator();

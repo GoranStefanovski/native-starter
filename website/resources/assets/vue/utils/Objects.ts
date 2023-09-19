@@ -83,6 +83,8 @@ const user: UserFormItem = {
   phone: '',
   source: 'backend',
   contact_email: '',
+  sub_type: 0,
+  sub_name: ''
 };
 
 const post: PostFormItem = {

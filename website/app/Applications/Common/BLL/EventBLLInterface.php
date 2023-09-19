@@ -37,4 +37,9 @@ interface EventBLLInterface{
      */
     public function getEventsData($data);
 
+     /**
+     * @param array $data
+     * @return array
+     */
+    public function getBoostedEvents($data);
 }

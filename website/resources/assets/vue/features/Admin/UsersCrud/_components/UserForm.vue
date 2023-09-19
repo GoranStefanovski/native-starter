@@ -36,6 +36,7 @@
   const fetchUri = `/user/${id}/get`;
   const roles = ref([]);
   const countries = ref([]);
+  const subTypes = ref([]);
   const {
     form,
     messageClass,
@@ -58,6 +59,19 @@
     try {
       const response = await axios.get('user/roles/get');
       roles.value = response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchSubTypes = async () => {
+    try {
+      const response = await axios.get('guest/common/sub-types');
+      for (let key in response.data) {
+        if (response.data.hasOwnProperty(key)) {
+          subTypes.value.push({ id: `${response.data[key]['id']}`, name: `${response.data[key]['name']}` });
+        }
+      }
     } catch (error) {
       console.error(error);
     }
@@ -100,6 +114,7 @@
     initFormFromItem();
     fetchCountries();
     fetchRoles();
+    fetchSubTypes();
   })
 </script>
 
@@ -198,6 +213,12 @@
                         />
                       </span>
                       </div>
+                    </div>
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Subscription Plan:</label>
+                      <div class="col-9">
+                        <FormDropdown v-model="form.sub_type" :options="subTypes" id="sub_type" />
+                      </div>>
                     </div>
                   </div>
                 </div>

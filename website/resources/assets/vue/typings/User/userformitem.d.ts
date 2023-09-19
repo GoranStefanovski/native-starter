@@ -8,6 +8,8 @@ declare interface UserFormItem {
   roles_array?: any;
   is_disabled?: number|null;
   country_id?: number|null;
+  sub_type?: number|null;
+  sub_name?: string|null;
   uploaded_file: File|null;
   password?: string;
   password_confirmation?: string;

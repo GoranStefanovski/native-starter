@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
   import type { Ref } from 'vue'
   import dialog from '../../../../utils/dialog';
   import { useDatatable, Datatable } from "@/components/Datatables";
@@ -8,6 +8,7 @@
   
   const props = defineProps(['columns']);
   const endpoint: string = 'common/events';
+  const endpointAll: string = 'guest/common/all-events';
   const store = useStore();
   const homePath = computed(() => store.state.Root.homePath);
 
@@ -41,6 +42,16 @@
       });
   }
 
+  const fetchAllEvents = () => {
+    axios.post(endpointAll)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        dialog(error.response.data.message, false);
+      });
+  }
+
   const deletePost = async (post: EventFormItem, id : number): Promise<void> => {
     console.log(post)
     // if (!await dialog('general.confirm.delete', true)) {
@@ -55,6 +66,10 @@
         dialog(error.response.data.message, false);
       });
   }
+
+  onMounted(() => {
+    fetchAllEvents();
+  })
 </script>
 <template>
   <Datatable

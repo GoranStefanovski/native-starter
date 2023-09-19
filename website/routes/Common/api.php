@@ -24,12 +24,20 @@ Route::group([
     Route::get('{id}/fetch', [LocationController::class,'getPostByIdNonAuth']);
     Route::get('get-countries', 'Controllers\TaxonomiesController@getCountries');
     Route::get('location-types', 'Controllers\TaxonomiesController@getLocationTypes');
+    Route::get('sub-types', 'Controllers\TaxonomiesController@getSubTypes');
     Route::get('music-types', 'Controllers\TaxonomiesController@getMusicTypes');
     // 
-    Route::post('all-locations', [LocationController::class,'allLocationsPublic']);
-    Route::post('all-events', [EventController::class,'allEventsPublic']);
-    Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');
+
+    // Events
     Route::get('{id}/getEvent', 'Controllers\EventController@getPostById');
+    Route::post('all-events', [EventController::class,'allEventsPublic']);
+    Route::port('all-boosted-events', [EventController::class,'getBoostedEvents']);
+
+    // Locations
+    Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');
+    Route::post('all-locations', [LocationController::class,'allLocationsPublic']);
+    Route::port('all-boosted-locations', [LocationController::class,'getBoostedLocations']);
+
 });
 
 // Authorized routes

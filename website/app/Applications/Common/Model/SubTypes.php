@@ -5,7 +5,7 @@ namespace App\Applications\Common\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
 
-class MusicTypes extends Model 
+class SubTypes extends Model 
 {
 
     use SoftDeletes { restore as private restoreSoftDelete; }

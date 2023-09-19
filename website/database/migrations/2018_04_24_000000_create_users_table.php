@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->string('source')->nullable();
             $table->string('source_info')->nullable();
             $table->text('json_data');
+            $table->integer('sub_type')->nullable();
+            $table->string('sub_name')->nullable();
 
             // We'll need to ensure that MySQL uses the InnoDB engine to
             // support the indexes, other engines aren't affected.

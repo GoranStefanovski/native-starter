@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Applications\User\Model\Role;
 use App\Applications\User\Model\User;
+use App\Applications\Common\Model\SubTypes;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\StoreUserRequest;
@@ -27,8 +28,10 @@ class AuthenticatedSessionController extends Controller
 
     public function __construct(
         User $user,
+        SubTypes $subTypes,
     ){
         $this->user = $user;
+        $this->subTypes = $subTypes;
     }
     /**
      * Display the login view.
@@ -98,6 +101,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function register(StoreUserRequest $request)
     {
+        $sub_name = SubTypes::where('id', $request->sub_type)->first();
         $request->validated($request->all());
         // ALl this data will be editable on edit profile
         $user = User::create([
@@ -111,6 +115,8 @@ class AuthenticatedSessionController extends Controller
             'country_id' => $request->country_id,
             'country' => \Countries::find($request['country_id'])->name,
             'password' => Hash::make($request->password),
+            'sub_type' => $request->sub_type,
+            'sub_name' => $sub_name->name,
         ]);
          
         $user->roles()->attach($request->roles);
