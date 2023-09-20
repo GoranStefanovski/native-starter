@@ -19,4 +19,13 @@
             color: white;
         }
     }
+
+    &__menu-disbaled {
+        pointer-events: none;
+        border-radius: 4px;
+        background: gray;
+        & > a {
+            color: black;
+        }
+    }
 }
