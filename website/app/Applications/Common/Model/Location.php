@@ -49,6 +49,8 @@ class Location extends Model implements HasMedia
         'contact_person_phone_second',
         'contact_person_email',
         'contact_person_email_second',
+        'start_active_date',
+        'end_active_date'
     ];
 
     protected $casts = [

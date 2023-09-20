@@ -19,4 +19,6 @@ declare interface LocationFormItem {
   contact_person_phone_second: string;
   contact_person_email: string;
   contact_person_email_second: string;
+  start_active_date: null;
+  end_active_date: null;
 }

@@ -48,6 +48,7 @@ Route::group([
 ], function () {
     // Locations
     Route::post('save-location',[LocationController::class,'saveLocation']);
+    Route::post('location/{id}/edit/status',[LocationController::class,'saveLocationStatus']);
     Route::post('location/{id}/edit',[LocationController::class,'editLocation']);
     Route::post('location/{id}/edit/contact',[LocationController::class,'editLocationContact']);
     Route::post('locations/draw', [LocationController::class,'allLocations']);

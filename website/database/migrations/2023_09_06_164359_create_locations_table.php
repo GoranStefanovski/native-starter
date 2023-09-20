@@ -32,6 +32,10 @@ class CreateLocationsTable extends Migration
             $table->integer('activity_interested_total')->unsigned();
             $table->json('working_hours')->nullable();  
             
+            // Subscription
+            $table->date('start_active_date')->nullable();
+            $table->date('end_active_date')->nullable();
+            
             // Locations Contact/Owner
             $table->string('website')->nullable();
             $table->string('website_second')->nullable();

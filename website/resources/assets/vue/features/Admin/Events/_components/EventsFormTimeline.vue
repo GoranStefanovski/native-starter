@@ -8,7 +8,6 @@
   import { useForm } from '@/composables';
   import { Portlet } from '@/components';
   import FileUpload from "@/components/Form/FileUpload.vue";
-  import Multiselect from 'vue-multiselect';
   import Datepicker from 'vue2-datepicker';
   import VueTimepicker from 'vue2-timepicker';
   

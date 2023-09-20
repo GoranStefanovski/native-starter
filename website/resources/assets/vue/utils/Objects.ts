@@ -117,6 +117,8 @@ const location: LocationFormItem = {
   contact_person_phone_second: '',
   contact_person_email: '',
   contact_person_email_second: '',
+  start_active_date: null,
+  end_active_date: null,
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')
 }

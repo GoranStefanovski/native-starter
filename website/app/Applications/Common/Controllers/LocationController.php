@@ -48,9 +48,10 @@ class LocationController extends Controller
         return $this->locationBLL->getPostById($id);
     }
     public function saveLocation(LocationRequest $request){
-//         dd($request->all());
-//        dd($request);
         return $this->locationBLL->saveLocation($request);
+    }
+    public function saveLocationStatus(LocationRequest $request, $id){
+        return $this->locationBLL->saveLocationStatus($request, $id);
     }
     public function editLocation(LocationRequest $request, $id){
         return $this->locationBLL->editLocation($request,$id);

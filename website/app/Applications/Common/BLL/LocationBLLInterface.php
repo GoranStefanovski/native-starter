@@ -16,6 +16,8 @@ interface LocationBLLInterface{
 
     public function saveLocation($request);
 
+    public function saveLocationStatus($request, $id);
+
     public function editLocation($id, $request);
 
     public function editLocationContact($request, $id);

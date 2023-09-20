@@ -64,6 +64,8 @@ class LocationBLL implements LocationBLLInterface
 
     public function getPublicLocations($request)
     {
+        $currentDate = now()->toDateString();
+
         $query = DB::table('locations')
         ->select(
             DB::raw('locations.id as id'),
@@ -107,12 +109,15 @@ class LocationBLL implements LocationBLLInterface
 
     $query->whereNull('locations.deleted_at');
     $query->where('locations.is_active',1);
-
+    $query->whereDate('locations.start_active_date', '<=', $currentDate)
+      ->whereDate('locations.end_active_date', '>=', $currentDate);
     return $query->get();
     }
 
     public function getBoostedLocations($request)
     {
+        $currentDate = now()->toDateString();
+
         $query = DB::table('locations')
         ->select(
             DB::raw('locations.id as id'),
@@ -149,7 +154,8 @@ class LocationBLL implements LocationBLLInterface
 
     $query->whereNull('locations.deleted_at');
     $query->where('locations.is_active',1);
-
+    $query->whereDate('locations.start_active_date', '<=', $currentDate)
+      ->whereDate('locations.end_active_date', '>=', $currentDate);
     return $query->get();
     }
 
@@ -168,7 +174,6 @@ class LocationBLL implements LocationBLLInterface
             $input['title'] = $request['title'];
             $input['description'] = $request['description'];
             $input['country_id'] = $request['country_id'];
-            $input['is_active'] = $request['is_active'];
             $input['address'] = $request['address'];
             $input['user_id'] = Auth::user()->id;
             $input['location_types'] = json_encode($request->input('location_types'));
@@ -180,6 +185,16 @@ class LocationBLL implements LocationBLLInterface
             abort(403, 'You do not meet the criteria for creating a new location.');
         }
     }
+
+    public function saveLocationStatus($request, $id){
+        $input['is_active'] = $request['is_active'];
+        $input['start_active_date'] = $request['start_active_date'];
+        $input['end_active_date'] = $request['end_active_date'];
+
+        $location = $this->location->find($id);
+        return $location->update($input);
+    }
+
     public function editLocation($request,$id){
         $location_data = $request->all();
 //        dd($post_data);
@@ -248,7 +263,6 @@ class LocationBLL implements LocationBLLInterface
         }
 
         $query->whereNull('locations.deleted_at');
-
         $query->groupBy('locations.id');
         if (array_key_exists($data['column'], self::COLUMNS_MAP)) {
             $query->orderBy(self::COLUMNS_MAP[$data['column']], $data['dir']);

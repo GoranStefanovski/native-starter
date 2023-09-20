@@ -8,6 +8,7 @@
   import { useForm } from '@/composables';
   import { Portlet } from '@/components';
   import FileUpload from "@/components/Form/FileUpload.vue";
+  import Datepicker from 'vue2-datepicker';
   import Multiselect from 'vue-multiselect';
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
@@ -52,9 +53,19 @@
   provide('form', form.value);
   provide('labelStart', 'location');
 
-  const postUri = computed(() => `common/location/${id}/edit`);
+  const postUri = computed(() => `/common/location/${id}/edit/status`);
+
+  const formatDate = (dateInput) => {
+      const date = new Date(dateInput);
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is zero-based
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    }
 
   const beforeSubmit = (hasToRedirect = true) => {
+    form.value.start_active_date = formatDate(form.value.start_active_date)
+    form.value.end_active_date = formatDate(form.value.end_active_date)
     onSubmit(postUri.value, 'locations', hasToRedirect, form.value);
   }
 
@@ -62,28 +73,11 @@
     console.log("VALUE", value);
     console.log("input", forcities);
   }
-  const fetchUser = async () => {
-    try {
-      const response = await axios.get('/auth/user');
-      responseDataArray.push(response.data);
-    } catch (error) {
-      console.error(error);
-    }
-  }
 
   onMounted(async () => {
     await initFormFromItem();
-    fetchUser()
-
-    if (responseDataArray[0]) {
-      let myData = responseDataArray[0];
-      console.log(myData.roles[0].id)
-    }
   })
 
-  const customLabel = (option) => {
-    return option.name
-  }
 </script>
 
 <template>
@@ -102,7 +96,7 @@
         >
           <PortletHead :size="'lg'">
             <PortletHeadLabel>
-              {{ $t('posts.basic.information') }}
+              Active Period
             </PortletHeadLabel>
             <PortletHeadToolbar>
               <router-link
@@ -144,6 +138,22 @@
                           v-model="form.is_active"
                           @update:modelValue="handleModelUpdate"
                         />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="kt-section">
+                    <div class="kt-section__body">
+                      <div class="form-group row">
+                        <label class="col-3 col-form-label">Active Period Start:</label>
+                        <div class="col-9">
+                          <datepicker v-model="form.start_active_date" @update:modelValue="handleModelUpdate" :enableTimePicker="false" format="YYYY-MM-DD" :placeholder="form.start_active_date ? form.start_active_date : 'Start Date'"></datepicker>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label class="col-3 col-form-label">Active Period End:</label>
+                        <div class="col-9">
+                          <datepicker v-model="form.end_active_date" @update:modelValue="handleModelUpdate" :enableTimePicker="false" :format="'YYYY-MM-DD'" :placeholder="form.end_active_date ? form.end_active_date : 'End Date'"></datepicker>
+                        </div>
                       </div>
                     </div>
                   </div>
