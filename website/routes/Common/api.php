@@ -31,9 +31,9 @@ Route::group([
     Route::get('{id}/getEvent', 'Controllers\EventController@getPostById');
     Route::post('all-events', [EventController::class,'allEventsPublic']);
     Route::post('all-boosted-events', [EventController::class,'getBoostedEvents']);
-    Route::post('this-month-events', [EventController::class,'getThisWeekEvents']);
+    Route::post('this-month-events', [EventController::class,'getThisMonthEvents']);
     Route::post('this-day-events', [EventController::class,'getThisDayEvents']);
-    Route::post('this-week-events', [EventController::class,'getThisMonthEvents']);
+    Route::post('this-week-events', [EventController::class,'getThisWeekEvents']);
 
     // Locations
     Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');

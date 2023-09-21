@@ -257,7 +257,7 @@ class EventBll implements EventBLLInterface
 
     // Save Event Info (1)
     public function saveEvent($request){
-        $location = DB::table('locations')->where('id', $request['location_id'])->first();
+        $location = $this->location->find($request['location_id']);
         
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
@@ -296,7 +296,7 @@ class EventBll implements EventBLLInterface
 
     // Edit Event Info
     public function editEvent($request,$id){
-        $location = DB::table('locations')->where('id', $request['location_id'])->first();
+        $location = $this->location->find($request['location_id']);
         
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
