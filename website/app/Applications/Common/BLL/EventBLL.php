@@ -164,6 +164,14 @@ class EventBll implements EventBLLInterface
         $query->where('events.is_active',1);
         $query->whereBetween('events.start_date', [$currentDate, $nextWeekEndDate]);
 
+        $search = $request['search'];
+        if($search){
+            $query->where(function($subquery) use ($search) {
+                $subquery->where('events.title', 'like', '%'.$search.'%');
+                $subquery->orWhere('events.music_types', 'like', '%'.$search.'%');
+            });
+        }
+
         return $query->get();
     }
 
@@ -200,6 +208,14 @@ class EventBll implements EventBLLInterface
                     });
             });
         });
+
+        $search = $request['search'];
+        if($search){
+            $query->where(function($subquery) use ($search) {
+                $subquery->where('events.title', 'like', '%'.$search.'%');
+                $subquery->orWhere('events.music_types', 'like', '%'.$search.'%');
+            });
+        }
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
@@ -242,6 +258,14 @@ class EventBll implements EventBLLInterface
                             ->whereTime('events.end_time', '>=', $currentDateTime->toTimeString());
                     });
             });
+
+        $search = $request['search'];
+        if($search){
+            $query->where(function($subquery) use ($search) {
+                $subquery->where('events.title', 'like', '%'.$search.'%');
+                $subquery->orWhere('events.music_types', 'like', '%'.$search.'%');
+            });
+        }
 
         $query->whereNull('events.deleted_at');
         $query->where('events.is_active',1);
@@ -350,6 +374,7 @@ class EventBll implements EventBLLInterface
                 $subquery->where('events.title', 'like', '%'.$search.'%');
                 $subquery->orWhere('events.description', 'like', '%'.$search.'%');
                 $subquery->orWhere('events.user_id', 'like', '%'.$search.'%');
+                $subquery->orWhere('events.music_types', 'like', '%'.$search.'%');
             });
         }
 
