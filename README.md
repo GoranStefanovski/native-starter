@@ -26,7 +26,7 @@ of powering sophisticated Single-Page Applications when used in combination with
  ##
 #####VueRouter  
 With Vue.js, we are already composing our application with components.
-When adding [VueRouter](https://github.com/vuejs/vue-router) to the mix,
+When adding [VueRouter](https://github.com/vuejs/vue-router) to the mix,php artisan vue-i18n-custom:generate
 all we need to do is map our components to the routes and let vue-router
 know where to render them. In our applications we can manage the routes 
 in resources/assets/vue/router/index.ts .
@@ -254,7 +254,7 @@ Test:
 8. Copy website/sample-dev-env.env to website/.env
 9. Go to workbench or phpmyadmin and create database schema starter
 - import database dump from the dev server
-10. docker exec -it lamp-php72 /bin/bash
+10. docker exec -it native-starter-phph8 /bin/bash
 - run: composer install && php artisan config:cache && php artisan view:clear && php artisan route:clear && composer dump-autoload && php artisan vue-i18n-custom:generate && php artisan migrate
 11. (This step seems to not be needed) Go to website/ outside of docker and run:
 - echo $USER (Use the username output from this command for the next in place of $USER)
