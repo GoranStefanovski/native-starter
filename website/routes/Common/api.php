@@ -4,6 +4,7 @@
 use \App\Applications\Common\Controllers\LocationController;
 use \App\Applications\Common\Controllers\EventController;
 use \App\Applications\Common\Controllers\WorkingHoursController;
+use \App\Applications\Common\Controllers\LikeController;
 //
 ///*
 //|--------------------------------------------------------------------------
@@ -39,6 +40,11 @@ Route::group([
     Route::post('all-locations', [LocationController::class,'allLocationsPublic']);
     Route::post('all-boosted-locations', [LocationController::class,'getBoostedLocations']);
 
+    // Likes
+    Route::post('/locations/{location}/like', [LikeController::class,'likeLocation']);
+    Route::post('/locations/{location}/unlike', [LikeController::class,'unlikeLocation']);
+    Route::post('/events/{event}/like', [LikeController::class,'likeEvent']);
+    Route::post('/events/{event}/unlike', [LikeController::class,'unlikeEvent']);
 });
 
 // Authorized routes

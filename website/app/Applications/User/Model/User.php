@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
 use Laravel\Sanctum\HasApiTokens;
+use App\Applications\Common\Model\Like;
 
 class User extends Authenticatable implements JWTSubject, HasMedia
 {
@@ -32,9 +33,8 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 
     protected $with = [
         'country',
-        'shipping_details',
-        'billing_details',
-        'media'
+        'media',
+        'likes'
     ];
 
     protected $casts = [
@@ -79,15 +79,6 @@ class User extends Authenticatable implements JWTSubject, HasMedia
 //        return $this->hasMany(Offer::class)->doesntHave('order')->count();
 //    }
 
-    public function shipping_details()
-    {
-        return $this->hasOne(Details::class, 'user_id', 'id')->where('default', true)->where('type', '=','SHIPPING');
-    }
-
-    public function billing_details()
-    {
-        return $this->hasOne(Details::class, 'user_id', 'id')->where('default', true)->where('type', '=','BILLING');
-    }
 
     public function isAdmin()
     {
@@ -202,5 +193,10 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     public function image()
     {
         return $this->getFirstMedia('user_avatars');
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 }

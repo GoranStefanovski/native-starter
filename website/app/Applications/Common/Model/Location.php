@@ -9,7 +9,7 @@ use Webpatser\Countries\Countries;
 use App\Applications\Common\Model\LocationTypes;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Applications\Common\Model\Like;
 class Location extends Model implements HasMedia
 {
     use InteractsWithMedia;
@@ -25,6 +25,7 @@ class Location extends Model implements HasMedia
         'country',
         'media',
         'working_hours',
+        'likes'
     ];
 
 
@@ -97,4 +98,8 @@ class Location extends Model implements HasMedia
         return $this->getFirstMedia('location_image');
     }
 
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likable');
+    }
 }

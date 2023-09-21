@@ -8,7 +8,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media as MediaModel;
 use Webpatser\Countries\Countries;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Applications\Common\Model\Like;
 class Event extends Model implements HasMedia
 {
     use InteractsWithMedia;
@@ -23,6 +23,7 @@ class Event extends Model implements HasMedia
     protected $with = [
         'country',
         'media',
+        'likes'
     ];
 
 
@@ -88,4 +89,8 @@ class Event extends Model implements HasMedia
         return $this->getFirstMedia('event_image');
     }
 
+    public function likes()
+    {
+        return $this->morphMany(Like::class, 'likable');
+    }
 }

@@ -7,6 +7,8 @@ use App\Applications\Common\BLL\LocationBLL;
 use App\Applications\Common\BLL\LocationBLLInterface;
 use App\Applications\Common\BLL\EventBLL;
 use App\Applications\Common\BLL\EventBLLInterface;
+use App\Applications\Common\BLL\LikeBLL;
+use App\Applications\Common\BLL\LikeBLLInterface;
 use App\Applications\Common\BLL\WorkingHoursBLL;
 use App\Applications\Common\BLL\WorkingHoursBLLInterface;
 use App\Applications\Common\BLL\TaxonomiesBLL;
@@ -57,6 +59,7 @@ class CommonServiceProvider extends ServiceProvider
         $this->app->bind(MediaDALInterface::class, MediaDAL::class);
         $this->app->bind(EventBLLInterface::class, EventBLL::class);
         $this->app->bind(WorkingHoursBLLInterface::class, WorkingHoursBLL::class);
+        $this->app->bind(LikeBLLInterface::class, LikeBLL::class);
         $this->app->bind(LocationBLLInterface::class, LocationBLL::class);
         $this->app->bind(TaxonomiesDALInterface::class, TaxonomiesDAL::class);
         $this->app->bind(TaxonomiesBLLInterface::class, TaxonomiesBLL::class);
