@@ -99,6 +99,13 @@ class HomeController extends Controller
                 'expanded' => false,
                 'permission' => 'events_view',
             ],
+            [
+                'label' => 'strings.organization_events.label',
+                'name' => 'organization_events',
+                'link' => 'organization_events',
+                'expanded' => false,
+                'permission' => 'organization_view',
+            ],
         ];
 
         $data = [

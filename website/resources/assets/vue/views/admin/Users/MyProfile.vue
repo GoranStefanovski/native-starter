@@ -107,9 +107,11 @@
 
   const getRole = () => {
     if (form.roles === 1) {
-      roleTypeScreen = "Admin"
+      roleTypeScreen = "Admin";
     } else if (form.roles === 2) {
-      roleTypeScreen = "Collaborator"
+      roleTypeScreen = "Collaborator";
+    } else if (form.roles === 4) {
+      roleTypeScreen = "Organization";
     }
   }
 
@@ -176,7 +178,7 @@
                       <label class="col-3 col-form-label">Subscription Plan:</label>
                       <div class="col-9">
                         <input type="text" class="form-control" disabled v-model="form.sub_name" />
-                      </div>>
+                      </div>
                     </div>
                   </div>
                 </div>

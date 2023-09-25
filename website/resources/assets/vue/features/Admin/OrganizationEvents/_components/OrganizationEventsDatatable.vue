@@ -1,13 +1,13 @@
 <script setup lang="ts">
-  import { ref, computed } from 'vue';
+  import { ref, computed, onMounted } from 'vue';
   import type { Ref } from 'vue'
   import dialog from '../../../../utils/dialog';
-  import UsersTableRow from '@/views/admin/Users/UsersTableRow.vue';
   import { useDatatable, Datatable } from "@/components/Datatables";
   import { useStore } from '@/store';
-
+  import OrganizationEventsTableRow from '../../../../views/admin/OrganizationEvents/OrganizationEventsTableRow.vue';
+  
   const props = defineProps(['columns']);
-  const endpoint: string = 'user/public';
+  const endpoint: string = 'common/organization-events';
   const store = useStore();
   const homePath = computed(() => store.state.Root.homePath);
 
@@ -18,17 +18,9 @@
     endpoint,
     redirectRoute: homePath,
     columns: props.columns,
-    sortKey: 'id'
+    sortKey: 'id',
   });
 
-  const options: Array<any> = [
-    {value: '', 'label': 'All'},
-    {value: 'ADMIN', 'label': 'Admin'},
-    {value: 'COLLABORATOR', 'label': 'Colaborator'},
-    {value: 'ORGANIZATOR', 'label': 'Organization'},
-    {value: 'PUBLIC', 'label': 'Public'},
-
-  ];
   const roles: Ref<any[]> = ref([]);
   const statuses: any[] = [
     { id: 3, name: 'All status' },
@@ -45,42 +37,46 @@
           { id: 0, display_name: '- All roles -' }
         ];
       }).catch(error => {
-          console.log(error);
+        console.log(error);
       });
   }
 
-  const deleteUser = async (user: User, index: number): Promise<void> => {
-    axios.post(endpoint+'/'+index+'/delete')
+  const deletePost = async (post: OrganizationEventFormItem, id : number): Promise<void> => {
+    console.log(post)
+    // if (!await dialog('general.confirm.delete', true)) {
+    //   return;
+    // }
+    axios.post(endpoint+'/'+id+'/delete')
       .then(response => {
-        dialog('strings.front.deleted_successfully', false);
+        // dialog('strings.front.deleted_successfully', false); // TODO: dialog's Cancel and Ok functions are broken
         getData();
       })
       .catch(error => {
         dialog(error.response.data.message, false);
       });
   }
+
+  onMounted(() => {
+  })
 </script>
 <template>
   <Datatable
-    :isFilter="true"
-    :options="options"
-    :filterTitle="'Role:'"
-    :tableInfo="tableInfo"
+    :table-info="tableInfo"
     :query="query"
     :loading="loading"
     :columns="columns"
-    lang-key="users"
-    add-route-name="add.user"
+    lang-key="organization_events"
+    add-route-name="add.organization_events"
     :pagination="pagination"
     @onQueryUpdate="setQuery"
   >
-    <UsersTableRow
-      v-for="(user, index) in records"
+    <OrganizationEventsTableRow
+      v-for="(event, index) in records"
+      :key="event.id"
       :index="index"
-      :key="user.id"
       :columns="columns"
-      :user="user"
-      @delete:modelValue="deleteUser"
+      :post="event"
+      @delete:modelValue="deletePost"
     />
   </Datatable>
 </template>

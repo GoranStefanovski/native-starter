@@ -142,6 +142,24 @@ const event: EventFormItem = {
   media: createFile('image/jpg')
 }
 
+const organization_events: OrganizationEventFormItem = {
+  id: 0,
+  title: '',
+  description: '',
+  name: '',
+  is_active: null,
+  start_date: null,
+  end_date: null,
+  start_time: null,
+  end_time: null,
+  address: '',
+  city: '',
+  music_types: [],
+  country: 'Bulgaria',
+  uploaded_file: createFile('image/jpg'),
+  media: createFile('image/jpg')
+}
+
 const working_hours: WorkingHoursFormItem = {
   id: 0,
   location_id: null,
@@ -281,6 +299,7 @@ export {
   slide,
   location,
   event,
+  organization_events,
   shipping,
   lamination,
   color,

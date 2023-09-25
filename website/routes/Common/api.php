@@ -5,6 +5,7 @@ use \App\Applications\Common\Controllers\LocationController;
 use \App\Applications\Common\Controllers\EventController;
 use \App\Applications\Common\Controllers\WorkingHoursController;
 use \App\Applications\Common\Controllers\LikeController;
+use \App\Applications\Common\Controllers\OrganizationEventController;
 //
 ///*
 //|--------------------------------------------------------------------------
@@ -71,4 +72,12 @@ Route::group([
      // Working Hours
      Route::get('location/{id}/get-working-hours', [WorkingHoursController::class,'getWorkingHours']);
      Route::post('location/{id}/save-working-hours', [WorkingHoursController::class,'saveWorkingHours']);
+
+    // Organization Events
+    Route::post('save-organization-event',[OrganizationEventController::class,'saveOrganizationEvent']);
+    Route::post('organization-event/{id}/edit',[EventController::class,'editOrganizationEvent']);
+    Route::post('event/{id}/edit/timeline',[EventController::class,'editEventTimeline']);
+    Route::post('organization-events/draw', [OrganizationEventController::class,'allOrganiztaionEvents']);
+    Route::post('organization-events/{id}/delete', [EventController::class,'deleteEvent']);    
+
 });

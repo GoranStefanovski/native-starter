@@ -21,7 +21,7 @@ class RolesTableSeeder extends Seeder
         Role::create([
             'id' => 2,
             'name' => Role::COLLABORATOR,
-            'display_name' => 'System Collaborator',
+            'display_name' => 'Venue Owner',
             'description' => 'General administration role with read access to almost everything but no write access',
         ]);
         Role::create([
@@ -29,6 +29,12 @@ class RolesTableSeeder extends Seeder
             'name' => Role::PUBLIC,
             'display_name' => 'Public User',
             'description' => 'Public User that has access to the public user features',
+        ]);
+        Role::create([
+            'id' => 4,
+            'name' => Role::ORGANIZATOR,
+            'display_name' => 'Organization Owner',
+            'description' => 'General administration role with read access to almost everything but no write access',
         ]);
     }
 }

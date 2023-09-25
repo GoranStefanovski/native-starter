@@ -33,7 +33,7 @@
 
       // this.setData();
 
-      if (data.roles_array.includes(1) || data.roles_array.includes(2)) {
+      if (data.roles_array.includes(1) || data.roles_array.includes(2) || data.roles_array.includes(4)) {
         window.location.assign('/admin');
       }
       if (data.roles_array.includes(3)) {

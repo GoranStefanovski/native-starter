@@ -265,7 +265,7 @@ class UserDAL implements UserDALInterface
     public function getAdmins($count, $search){
         $users = $this->user->select( DB::raw("id as admin_id"), DB::raw("CONCAT(id,' - ',IFNULL(email,''),' (',IFNULL(first_name,''),' ',IFNULL(last_name,''),')') as name"))
             ->whereHas('roles', function($q){
-                $q->whereIn('name', [Role::COLLABORATOR,Role::ADMIN,Role::PUBLIC]);
+                $q->whereIn('name', [Role::COLLABORATOR,Role::ADMIN,Role::PUBLIC,Role::ORGANIZATOR]);
             })
             ->where(function ($query) use ($search){
                 return $query->where('email', 'LIKE', '%'.$search.'%')

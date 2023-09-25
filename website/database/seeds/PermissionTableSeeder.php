@@ -69,9 +69,24 @@ class PermissionTableSeeder extends Seeder
             'description' => 'Gives the user the role to access the admin panel'
         ]);
 
+        // Organization Events Permissions
+         Permission::create([
+            'id' => 9,
+            'name' => 'organization_write',
+            'display_name' => 'organization Write',
+            'description' => 'Gives the user the role to add/edit/delete users on a system level'
+        ]);
+
+        Permission::create([
+            'id' => 10,
+            'name' => 'organization_view',
+            'display_name' => 'organization View',
+            'description' => 'Gives the user the role to view users on a system level'
+        ]);
+
         // Admin permissions (all permissions)
 
-        $arrayAdmin = [1,2,4,5,6,7,8];
+        $arrayAdmin = [1,2,4,5,6,7,8,9,10];
         foreach ($arrayAdmin as $value){
             DB::table('permission_role')->insert([
                 'permission_id' => $value,
@@ -93,5 +108,15 @@ class PermissionTableSeeder extends Seeder
             'permission_id' => 3,
             'role_id' => 3,
         ]);
+
+
+        // Collaborator permissions (just view permissions)
+        $array = [4,8,9,10];
+        foreach ($array as $value){
+            DB::table('permission_role')->insert([
+                'permission_id' => $value,
+                'role_id' => 4,
+            ]);
+        }
     }
 }

@@ -97,6 +97,13 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return $this->roles()->pluck('id')->contains(3);
     }
 
+
+    public function isOrganizator()
+    {
+        return $this->roles()->pluck('id')->contains(4); // We need to take this function off
+//        return true;
+    }
+
     public function isNormal()
     {
         return !$this->roles()->pluck('id')->contains(1);

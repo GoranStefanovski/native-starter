@@ -26,7 +26,9 @@ const StaticContent = () => import(/* webpackChunkName: "StaticContent" */ '../f
 const Example = () =>  import('../features/Admin/Examples/Example.vue');
 const Portlets = () => import(/* webpackChunkName: "Portlets" */ '../views/admin/Portlets/Portlets.vue');
 
-/*INSERT NEW IMPORTS HERE*/
+// Organization Events
+const OrganizationEvents = () => import(/* webpackChunkName: "OrganizationEvents" */ '../views/admin/OrganizationEvents/OrganizationEvents.vue'); 
+const OrganizationEventsForm = () => import(/* webpackChunkName: "OrganizationEventsForm" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsForm.vue'); 
 
 export let adminPaths: RouteConfig =
   {
@@ -305,5 +307,73 @@ export let adminPaths: RouteConfig =
           ],
       },
       /*INSERT NEW CONFIGURATOR OPTIONS HERE*/
+      {
+        path: 'organization_events',
+        name: 'organization_events',
+        component: OrganizationEvents,
+        meta: {
+          title: Vue.i18n.translate('events.title', null),
+          auth: {
+            roles: ['organization_write','organization_view'],
+          }
+        }
+      },
+      {
+        path: 'organization_events/new',
+        name: 'add.organization_events',
+        component: OrganizationEventsForm,
+        meta: {
+          title: Vue.i18n.translate('users.add.post', null),
+          auth: {
+            roles: ['organization_write']
+          }
+        }
+      }, {
+        path: 'organization_events/:organizationEventId/edit',
+        name: 'edit.organization_events.wrapper',
+        component: EventsFormWrapper,
+        meta: {
+          title: Vue.i18n.translate('users.edit_post', null),
+          auth: {
+            roles: ['organization_write']
+          }
+        },
+        children: 
+          [
+            {
+              path: 'info',
+              name: 'edit.event.info',
+              component: EventsForm,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['organization_write']
+                }
+              },
+            },
+            {
+              path: 'timeline',
+              name: 'edit.event.timeline',
+              component: EventsFormTimeline,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['organization_write']
+                }
+              },
+            },
+            {
+              path: 'status',
+              name: 'edit.event.status',
+              component: EventsFormStatus,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['organization_write']
+                }
+              },
+            },
+          ],
+      },
     ]
   };
