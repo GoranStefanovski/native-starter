@@ -29,6 +29,8 @@ const Portlets = () => import(/* webpackChunkName: "Portlets" */ '../views/admin
 // Organization Events
 const OrganizationEvents = () => import(/* webpackChunkName: "OrganizationEvents" */ '../views/admin/OrganizationEvents/OrganizationEvents.vue'); 
 const OrganizationEventsForm = () => import(/* webpackChunkName: "OrganizationEventsForm" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsForm.vue'); 
+const OrganizationEventsFormTimeline = () => import(/* webpackChunkName: "OrganizationEventsFormTimeline" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormTimeline.vue'); 
+const OrganizationEventsFormStatus = () => import(/* webpackChunkName: "OrganizationEventsFormStatus" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormStatus.vue'); 
 
 export let adminPaths: RouteConfig =
   {
@@ -342,8 +344,8 @@ export let adminPaths: RouteConfig =
           [
             {
               path: 'info',
-              name: 'edit.event.info',
-              component: EventsForm,
+              name: 'edit.organization_events.info',
+              component: OrganizationEventsForm,
               meta: {
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {
@@ -353,8 +355,8 @@ export let adminPaths: RouteConfig =
             },
             {
               path: 'timeline',
-              name: 'edit.event.timeline',
-              component: EventsFormTimeline,
+              name: 'edit.organization_events.timeline',
+              component: OrganizationEventsFormTimeline,
               meta: {
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {
@@ -364,8 +366,8 @@ export let adminPaths: RouteConfig =
             },
             {
               path: 'status',
-              name: 'edit.event.status',
-              component: EventsFormStatus,
+              name: 'edit.organization_events.status',
+              component: OrganizationEventsFormStatus,
               meta: {
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {

@@ -46,7 +46,7 @@ const emit = defineEmits(['delete:modelValue']);
     <TableColumn :width="columns[5].width">
       <router-link
         v-if="$auth.user().permissions_array.includes('organization_write')"
-        :to="{ name: 'edit.event.info', params: { organizationEventId: post.id}}"
+        :to="{ name: 'edit.organization_events.info', params: { organizationEventId: post.id}}"
         exact=""
       >
         <i

@@ -21,7 +21,7 @@
     CustomForm
   } from '@/components/Form';
   import { getPhotoPath } from '@/utils/imageProcessing';
-  import { event } from '@/utils/Objects';
+  import { organization_events } from '@/utils/Objects';
 
   const router = useRouter();
   const store = useStore();
@@ -32,12 +32,12 @@
   const setMenu = (url) => store.dispatch('Root/setMenu', url);
   const setActiveClasses = (obj) => store.dispatch('Root/setActiveClasses', obj);
 
-  const item = ref(cloneDeep(event));
+  const item = ref(cloneDeep(organization_events));
   const edit = router.currentRoute.fullPath.includes('/edit/');
   const selectedStartDate = ref(null);
   const selectedEndDate = ref(null);
   const id = Number(router.currentRoute.params.organizationEventId);
-  const getPostUri = `guest/common/${id}/getEvent`
+  const getPostUri = `guest/common/${id}/getOrganizationEvent`
   const {
     form,
     messageClass,
@@ -46,7 +46,7 @@
     onSubmit,
     initFormFromItem,
     clearErrors
-  } = useForm(getPostUri, event);
+  } = useForm(getPostUri, organization_events);
 
   provide('form', form.value);
   provide('labelStart', 'event');

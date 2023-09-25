@@ -46,6 +46,10 @@ Route::group([
     Route::post('/locations/{location}/unlike', [LikeController::class,'unlikeLocation']);
     Route::post('/events/{event}/like', [LikeController::class,'likeEvent']);
     Route::post('/events/{event}/unlike', [LikeController::class,'unlikeEvent']);
+
+    // Organization
+    Route::get('{id}/getOrganizationEvent', [OrganizationEventController::class,'getPostById']);
+
 });
 
 // Authorized routes
@@ -78,6 +82,6 @@ Route::group([
     Route::post('organization-event/{id}/edit',[EventController::class,'editOrganizationEvent']);
     Route::post('event/{id}/edit/timeline',[EventController::class,'editEventTimeline']);
     Route::post('organization-events/draw', [OrganizationEventController::class,'allOrganiztaionEvents']);
-    Route::post('organization-events/{id}/delete', [EventController::class,'deleteEvent']);    
+    Route::post('organization-events/{id}/delete', [OrganizationEventController::class,'deleteOrganiztaionEvent']);    
 
 });

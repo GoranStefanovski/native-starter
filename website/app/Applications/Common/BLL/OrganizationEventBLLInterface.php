@@ -22,7 +22,7 @@ interface OrganizationEventBLLInterface{
 
     public function editOrganizationEvent($id, $request);
 
-    public function deleteEvent($id);
+    public function deleteOrganiztaionEvent($id);
 
     /**
      * Summary of getPublicEvents

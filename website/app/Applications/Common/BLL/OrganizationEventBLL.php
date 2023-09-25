@@ -325,7 +325,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
         return $organizationEvent->update($input);
     }
 
-    public function deleteEvent($id){
+    public function deleteOrganiztaionEvent($id){
         return $this->organizationEvent
             ->where('id', $id)
             ->delete();

@@ -75,7 +75,7 @@ class OrganizationEventController extends Controller
     public function editOrganizationEvent(OrganizationEventRequest $request, $id){
         return $this->eventBLL->editOrganizationEvent($request,$id);
     }
-    public function deleteEvent($id){
-        return $this->eventBLL->deleteEvent($id);
+    public function deleteOrganiztaionEvent($id){
+        return $this->eventBLL->deleteOrganiztaionEvent($id);
     }
 }

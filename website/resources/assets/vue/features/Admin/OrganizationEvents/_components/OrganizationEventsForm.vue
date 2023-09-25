@@ -34,7 +34,7 @@
   const item = ref(cloneDeep(organization_events));
   const edit = router.currentRoute.fullPath.includes('/edit/');
   const id = Number(router.currentRoute.params.organizationEventId);
-  const getPostUri = `guest/common/${id}/getEvent`
+  const getPostUri = `guest/common/${id}/getOrganizationEvent`
   const fetchUri = `auth/user`;
   const locations = ref([]);
   const musicTypes = ref([]);
