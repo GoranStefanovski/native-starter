@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import 'bootstrap';
   import { useRouter } from 'vue-router/composables';
-  import "./EventsForm.scss";
+  import "./OrganizationEventsForm.scss";
   const router = useRouter();
 
   const menuItems = [

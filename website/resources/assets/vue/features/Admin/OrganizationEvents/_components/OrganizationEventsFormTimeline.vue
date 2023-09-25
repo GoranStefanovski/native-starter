@@ -53,7 +53,7 @@
 
   const sections: Array<any> = [{ name: 'Hall 1', inputs: [{ value: '' }] }]
 
-  const postUri = computed(() => `common/event/${id}/edit/timeline`);
+  const postUri = computed(() => `common/organization-event/${id}/edit/timeline`);
 
   const beforeSubmit = (hasToRedirect = true) => {
     form.value.start_date = formatDate(form.value.start_date)

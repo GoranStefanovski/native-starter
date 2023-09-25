@@ -49,6 +49,7 @@ Route::group([
 
     // Organization
     Route::get('{id}/getOrganizationEvent', [OrganizationEventController::class,'getPostById']);
+    Route::post('all-organiztaion-events', [OrganizationEventController::class,'allOrganiztaionEventsPublic']);
 
 });
 
@@ -79,8 +80,8 @@ Route::group([
 
     // Organization Events
     Route::post('save-organization-event',[OrganizationEventController::class,'saveOrganizationEvent']);
-    Route::post('organization-event/{id}/edit',[EventController::class,'editOrganizationEvent']);
-    Route::post('event/{id}/edit/timeline',[EventController::class,'editEventTimeline']);
+    Route::post('organization-event/{id}/edit',[OrganizationEventController::class,'editOrganizationEvent']);
+    Route::post('organization-event/{id}/edit/timeline',[OrganizationEventController::class,'editOrganizationEventTimeline']);
     Route::post('organization-events/draw', [OrganizationEventController::class,'allOrganiztaionEvents']);
     Route::post('organization-events/{id}/delete', [OrganizationEventController::class,'deleteOrganiztaionEvent']);    
 

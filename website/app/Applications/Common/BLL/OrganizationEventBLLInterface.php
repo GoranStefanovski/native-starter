@@ -18,18 +18,18 @@ interface OrganizationEventBLLInterface{
 
     public function saveOrganizationEvent($request);
 
-    public function editEventTimeline($request, $id);
+    public function editOrganizationEventTimeline($request, $id);
 
     public function editOrganizationEvent($id, $request);
 
     public function deleteOrganiztaionEvent($id);
 
     /**
-     * Summary of getPublicEvents
+     * Summary of getPublicOrganizationEvents
      * @param array $data
      * @return array
      */
-    public function getPublicEvents($data);
+    public function getPublicOrganizationEvents($data);
 
     /**
      * @param array $data

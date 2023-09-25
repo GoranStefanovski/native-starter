@@ -52,7 +52,7 @@
   provide('form', form.value);
   provide('labelStart', 'event');
 
-  const postUri = computed(() => `common/event/${id}/edit`);
+  const postUri = computed(() => `common/organization-event/${id}/edit`);
 
   const beforeSubmit = (hasToRedirect = true) => {
     onSubmit(postUri.value, 'organization_events', hasToRedirect, form.value);

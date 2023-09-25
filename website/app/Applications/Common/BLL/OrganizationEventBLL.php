@@ -63,7 +63,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
         // TODO: Implement getPostByIdNonAuth() method.
     }
 
-    public function getPublicEvents($request)
+    public function getPublicOrganizationEvents($request)
     {
         $currentDate = now()->toDateString();
      
@@ -295,7 +295,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
     }
 
     // Edit Event Timeline & Halls (2)
-    public function editEventTimeline($request, $id){
+    public function editOrganizationEventTimeline($request, $id){
         $input['start_date'] = $request['start_date'];
         $input['end_date'] = $request['end_date'];
         $input['start_time'] = $request['start_time'];
@@ -309,9 +309,10 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
     public function editOrganizationEvent($request,$id){
         $input['title'] = $request['title'];
         $input['description'] = $request['description'];
-        $input['location_id'] = $request['location_id'];
         $input['name'] = $request['name'];
         $input['is_active'] = $request['is_active'];
+        $input['city'] = $request['city'];
+        $input['address'] = $request['address'];
         $input['user_id'] = Auth::user()->id;
         $input['user_username'] = Auth::user()->username;
         $input['owner'] = Auth::user()->first_name;

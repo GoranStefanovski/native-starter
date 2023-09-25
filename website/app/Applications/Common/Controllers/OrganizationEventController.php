@@ -36,9 +36,9 @@ class OrganizationEventController extends Controller
         return $this->eventBLL->getOrganizationEventsData($request);
     }
 
-    public function allEventsPublic(Request $request){
+    public function allOrganiztaionEventsPublic(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getPublicEvents($request);
+        return $this->eventBLL->getPublicOrganizationEvents($request);
     }
 
     public function getBoostedEvents(Request $request){
@@ -68,8 +68,8 @@ class OrganizationEventController extends Controller
         return $this->eventBLL->saveOrganizationEvent($request);
     }
 
-    public function editEventTimeline(EventTimelineRequest $request, $id){
-        return $this->eventBLL->editEventTimeline($request, $id);
+    public function editOrganizationEventTimeline(EventTimelineRequest $request, $id){
+        return $this->eventBLL->editOrganizationEventTimeline($request, $id);
     }
     
     public function editOrganizationEvent(OrganizationEventRequest $request, $id){

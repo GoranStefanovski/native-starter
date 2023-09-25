@@ -31,6 +31,7 @@ const OrganizationEvents = () => import(/* webpackChunkName: "OrganizationEvents
 const OrganizationEventsForm = () => import(/* webpackChunkName: "OrganizationEventsForm" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsForm.vue'); 
 const OrganizationEventsFormTimeline = () => import(/* webpackChunkName: "OrganizationEventsFormTimeline" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormTimeline.vue'); 
 const OrganizationEventsFormStatus = () => import(/* webpackChunkName: "OrganizationEventsFormStatus" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormStatus.vue'); 
+const OrganizationEventsFormWrapper = () => import(/* webpackChunkName: "OrganizationEventsFormWrapper" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormWrapper.vue'); 
 
 export let adminPaths: RouteConfig =
   {
@@ -333,7 +334,7 @@ export let adminPaths: RouteConfig =
       }, {
         path: 'organization_events/:organizationEventId/edit',
         name: 'edit.organization_events.wrapper',
-        component: EventsFormWrapper,
+        component: OrganizationEventsFormWrapper,
         meta: {
           title: Vue.i18n.translate('users.edit_post', null),
           auth: {
@@ -371,7 +372,7 @@ export let adminPaths: RouteConfig =
               meta: {
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {
-                roles: ['organization_write']
+                roles: ['organization_write', 'user_write']
                 }
               },
             },
