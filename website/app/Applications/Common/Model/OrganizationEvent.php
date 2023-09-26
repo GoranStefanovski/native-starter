@@ -47,6 +47,7 @@ class OrganizationEvent extends Model implements HasMedia
         'start_time',
         'end_time',
         'is_active',
+        'is_boosted',
         'music_types',
     ];
 

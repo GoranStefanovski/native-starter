@@ -24,6 +24,7 @@ class CreateOrganizationEventTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->json('music_types')->nullable();
             $table->integer('is_active')->nullable();
+            $table->integer('is_boosted')->nullalbe();
             $table->string('address')->nullable(false);
             $table->string('city')->nullable(false);
 

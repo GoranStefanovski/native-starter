@@ -24,10 +24,11 @@
     { id: 0, width: '10%', label: 'ID', name: 'id', sortable: true },
     { id: 1, width: '15%', label: 'Title', name: 'title', sortable: true },
     { id: 2, width: '10%', label: 'Active', name: 'is_active', sortable: true },
-    { id: 3, width: '35%', label: 'Description', name: 'description', sortable: true },
-    { id: 4, width: '5%', label: 'Owner', name: 'creator', sortable: true },
-    { id: 5, width: '10%', label: 'strings.actions', name: 'actions', sortable: false },
-    { id: 6, width: '10%', label: 'strings.delete', name: 'actions', sortable: false }
+    { id: 3, width: '10%', label: 'Boosted', name: 'is_boosted', sortable: true },
+    { id: 4, width: '10%', label: 'Description', name: 'description', sortable: true },
+    { id: 5, width: '10%', label: 'Owner', name: 'creator', sortable: true },
+    { id: 6, width: '10%', label: 'strings.actions', name: 'actions', sortable: false },
+    { id: 7, width: '10%', label: 'strings.delete', name: 'actions', sortable: false }
   ];
 </script>
 

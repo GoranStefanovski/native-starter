@@ -30,10 +30,14 @@ const emit = defineEmits(['delete:modelValue']);
     </TableColumn>
 
     <TableColumn :width="columns[3].width">
-      {{ postDescription(post.description) }}
+      {{ post.is_active == 1 ? "Boosted" : "Not Boosted" }}
     </TableColumn>
 
     <TableColumn :width="columns[4].width">
+      {{ postDescription(post.description) }}
+    </TableColumn>
+
+    <TableColumn :width="columns[5].width">
       <!--      <template v-if="user.is_disabled">-->
       <!--        {{ $t('users.status.disabled') }}-->
       <!--      </template>-->
@@ -43,7 +47,7 @@ const emit = defineEmits(['delete:modelValue']);
       {{post.owner}}
     </TableColumn>
 
-    <TableColumn :width="columns[5].width">
+    <TableColumn :width="columns[6].width">
       <router-link
         v-if="$auth.user().permissions_array.includes('organization_write')"
         :to="{ name: 'edit.organization_events.info', params: { organizationEventId: post.id}}"
@@ -57,7 +61,7 @@ const emit = defineEmits(['delete:modelValue']);
       </router-link>
     </TableColumn>
 
-    <TableColumn :width="columns[6].width">
+    <TableColumn :width="columns[7].width">
       <i
         v-if="$auth.user().permissions_array.includes('organization_write')"
         variant="link"

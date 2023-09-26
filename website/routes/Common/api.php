@@ -83,6 +83,6 @@ Route::group([
     Route::post('organization-event/{id}/edit',[OrganizationEventController::class,'editOrganizationEvent']);
     Route::post('organization-event/{id}/edit/timeline',[OrganizationEventController::class,'editOrganizationEventTimeline']);
     Route::post('organization-events/draw', [OrganizationEventController::class,'allOrganiztaionEvents']);
-    Route::post('organization-events/{id}/delete', [OrganizationEventController::class,'deleteOrganiztaionEvent']);    
-
+    Route::post('organization-events/{id}/delete', [OrganizationEventController::class,'deleteOrganiztaionEvent']);   
+    
 });

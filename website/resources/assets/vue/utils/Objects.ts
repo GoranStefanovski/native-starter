@@ -148,6 +148,7 @@ const organization_events: OrganizationEventFormItem = {
   description: '',
   name: '',
   is_active: null,
+  is_boosted: null,
   start_date: null,
   end_date: null,
   start_time: null,

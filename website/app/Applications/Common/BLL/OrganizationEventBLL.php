@@ -32,6 +32,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
         'id' => 'organization_events.id',
         'title' => 'organization_events.title',
         'is_active' => 'organization_events.is_active',
+        'is_boosted' => 'organization_events.is_boosted',
         'description' => 'organization_events.description',
         'user_id' => 'organization_events.user_id',
         'owner' => 'organization_events.owner'
@@ -109,7 +110,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
     }
 
 
-    public function getBoostedEvents($request)
+    public function getBoostedOrganizationEvents($request)
     {
         $query = DB::table('organization_events')
             ->select(
@@ -132,6 +133,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
 
         $query->whereNull('organization_events.deleted_at');
         $query->where('organization_events.is_active',1);
+        $query->where('organization_events.is_boosted',1);
         
         return $query->get();
     }
@@ -311,6 +313,7 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
         $input['description'] = $request['description'];
         $input['name'] = $request['name'];
         $input['is_active'] = $request['is_active'];
+        $input['is_boosted'] = $request['is_boosted'];
         $input['city'] = $request['city'];
         $input['address'] = $request['address'];
         $input['user_id'] = Auth::user()->id;

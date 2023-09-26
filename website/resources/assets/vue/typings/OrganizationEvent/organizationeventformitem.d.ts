@@ -9,6 +9,7 @@ declare interface OrganizationEventFormItem {
   media: File|null;
   location_id?: number|null; 
   is_active?: number|null;
+  is_boosted?: number|null;
   music_types?: Array<any>;
   start_date: null;
   end_date: null;

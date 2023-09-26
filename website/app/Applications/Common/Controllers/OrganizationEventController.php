@@ -41,9 +41,9 @@ class OrganizationEventController extends Controller
         return $this->eventBLL->getPublicOrganizationEvents($request);
     }
 
-    public function getBoostedEvents(Request $request){
+    public function getBoostedOrganizationEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getBoostedEvents($request);
+        return $this->eventBLL->getBoostedOrganizationEvents($request);
     }
 
     public function getThisWeekEvents(Request $request){

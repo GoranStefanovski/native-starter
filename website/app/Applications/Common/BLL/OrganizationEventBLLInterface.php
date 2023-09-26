@@ -41,7 +41,7 @@ interface OrganizationEventBLLInterface{
      * @param array $data
      * @return array
      */
-    public function getBoostedEvents($data);
+    public function getBoostedOrganizationEvents($data);
 
     public function getThisWeekEvents($data);
 
