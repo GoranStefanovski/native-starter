@@ -331,7 +331,8 @@ export let adminPaths: RouteConfig =
             roles: ['organization_write']
           }
         }
-      }, {
+      }, 
+      {
         path: 'organization_events/:organizationEventId/edit',
         name: 'edit.organization_events.wrapper',
         component: OrganizationEventsFormWrapper,
@@ -372,7 +373,32 @@ export let adminPaths: RouteConfig =
               meta: {
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {
-                roles: ['organization_write', 'user_write']
+                roles: ['organization_write']
+                }
+              },
+            },
+          ],
+      },
+      {
+        path: 'artist/:artistId/edit',
+        name: 'edit.artist.wrapper',
+        component: OrganizationEventsFormWrapper,
+        meta: {
+          title: Vue.i18n.translate('users.edit_post', null),
+          auth: {
+            roles: ['artist_write']
+          }
+        },
+        children: 
+          [
+            {
+              path: 'info',
+              name: 'edit.artist.info',
+              component: OrganizationEventsForm,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['artist_write']
                 }
               },
             },

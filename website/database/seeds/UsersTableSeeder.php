@@ -66,10 +66,10 @@ class UsersTableSeeder extends Seeder
         /** @var User $Organizator */
         $Organizator = User::create([
             'id' => 4,
-            'username' => 'GOKIO',
-            'first_name' => 'Goran',
-            'last_name' => 'Stefanovskio',
-            'email' => 'tevidma@example.com',
+            'username' => 'Organizator User',
+            'first_name' => 'Organizator',
+            'last_name' => 'User',
+            'email' => 'organizator@example.com',
             'is_disabled' => 0,
             'sub_type' => 3,
             'password' => bcrypt('password'),
@@ -78,6 +78,22 @@ class UsersTableSeeder extends Seeder
             'user_id' => 4,
             'role_id' => 4,
         ]);
+
+        /** @var User $Artist */
+        $Artist = User::create([
+            'id' => 5,
+            'username' => 'Artist User',
+            'first_name' => 'Artist',
+            'last_name' => 'User',
+            'email' => 'artist@example.com',
+            'is_disabled' => 0,
+            'password' => bcrypt('password'),
+        ]);
+        DB::table('role_user')->insert([
+            'user_id' => 5,
+            'role_id' => 5,
+        ]);
+        
 
 
         // foreach (range(3, 50) as $index) {
@@ -123,6 +139,7 @@ class UsersTableSeeder extends Seeder
             $Admin->addMedia(public_path() . '/images/avatar.jpg')->preservingOriginal()->toMediaCollection('user_avatars');
             $Organizator->addMedia(public_path() . '/images/bag-size-1.jpg')->preservingOriginal()->toMediaCollection('user_avatars');
             $Colaborator->addMedia(public_path() . '/images/bag-size-1.jpg')->preservingOriginal()->toMediaCollection('user_avatars');
+            $Artist->addMedia(public_path() . '/images/bag-size-1.jpg')->preservingOriginal()->toMediaCollection('user_avatars');
             $Public->addMedia(public_path() . '/images/custom-bag-size.jpg')->preservingOriginal()->toMediaCollection('user_avatars');
         } catch (Exception $e) {
             echo ($e);

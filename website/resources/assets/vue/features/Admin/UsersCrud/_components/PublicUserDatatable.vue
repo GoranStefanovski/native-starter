@@ -26,6 +26,7 @@
     {value: 'ADMIN', 'label': 'Admin'},
     {value: 'COLLABORATOR', 'label': 'Colaborator'},
     {value: 'ORGANIZATOR', 'label': 'Organization'},
+    {value: 'ARTIST', 'label': 'Artist'},
     {value: 'PUBLIC', 'label': 'Public'},
 
   ];

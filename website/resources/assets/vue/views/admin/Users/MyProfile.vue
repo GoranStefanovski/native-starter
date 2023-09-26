@@ -33,7 +33,7 @@
   const item = ref(cloneDeep(user));
   const id = Number(router.currentRoute.params.userId);
   const fetchUri = `/user/${id}/get`;
-  let roleTypeScreen = "";
+  let roleTypeScreen = "";;
   const roles = ref([]);
   const countries = ref([]);
   const subTypes = ref([]);
@@ -105,13 +105,15 @@
     onSubmit(postUri.value, redirectRoute.value, hasToRedirect, form);
   }
 
-  const getRole = () => {
-    if (form.roles === 1) {
+  const getRole = async () => {
+    if (form.roles == 1) {
       roleTypeScreen = "Admin";
-    } else if (form.roles === 2) {
+    } else if (form.roles == 2) {
       roleTypeScreen = "Collaborator";
-    } else if (form.roles === 4) {
+    } else if (form.roles == 4) {
       roleTypeScreen = "Organization";
+    } else if (form.roles == 5) {
+      roleTypeScreen = "Artist";
     }
   }
 
@@ -119,6 +121,7 @@
     initFormFromItem();
     fetchCountries();
     fetchRoles();
+    getRole();
     fetchSubTypes();
   })
 </script>
@@ -171,7 +174,7 @@
                     <div class="form-group row">
                       <label class="col-3 col-form-label">{{$t('users.roles.label')}}</label>
                       <div class="col-9">
-                        <input type="text" class="form-control" disabled :value="form.roles == 1 ? 'Admin' : 'Collaborator'" />
+                        <input type="text" class="form-control" disabled :placeholder="roleTypeScreenget" />
                       </div>
                     </div>
                     <div class="form-group row">

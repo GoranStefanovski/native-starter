@@ -36,5 +36,11 @@ class RolesTableSeeder extends Seeder
             'display_name' => 'Organization Owner',
             'description' => 'General administration role with read access to almost everything but no write access',
         ]);
+        Role::create([
+            'id' => 5,
+            'name' => Role::ARTIST,
+            'display_name' => 'Artist Profile',
+            'description' => 'General administration role with read access to almost everything but no write access',
+        ]);
     }
 }

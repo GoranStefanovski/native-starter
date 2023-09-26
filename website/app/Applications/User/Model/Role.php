@@ -14,6 +14,8 @@ class Role extends Model
 
     const ORGANIZATOR = 'organizator';
 
+    const ARTIST = 'artist';
+
     public function users()
     {
         return $this->belongsToMany(User::class);

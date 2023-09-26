@@ -84,9 +84,16 @@ class PermissionTableSeeder extends Seeder
             'description' => 'Gives the user the role to view users on a system level'
         ]);
 
+        Permission::create([
+            'id' => 11,
+            'name' => 'artist_write',
+            'display_name' => 'Artist Write',
+            'description' => 'Gives the user the role to view users on a system level'
+        ]);
+
         // Admin permissions (all permissions)
 
-        $arrayAdmin = [1,2,4,5,6,7,8,9,10];
+        $arrayAdmin = [1,2,4,5,6,7,8,9,10,11];
         foreach ($arrayAdmin as $value){
             DB::table('permission_role')->insert([
                 'permission_id' => $value,
@@ -116,6 +123,14 @@ class PermissionTableSeeder extends Seeder
             DB::table('permission_role')->insert([
                 'permission_id' => $value,
                 'role_id' => 4,
+            ]);
+        }
+
+        $array = [8,11];
+        foreach ($array as $value){
+            DB::table('permission_role')->insert([
+                'permission_id' => $value,
+                'role_id' => 5,
             ]);
         }
     }
