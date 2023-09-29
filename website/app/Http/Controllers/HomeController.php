@@ -63,6 +63,27 @@ class HomeController extends Controller
                     ],
                 ]
             ],
+            [
+                'label' => 'Posts',
+                'name' => 'posts',
+                'link' => 'posts',
+                'expanded' => false,
+                'permission' => 'user_view',
+                'subcategories' => [
+                    [
+                        'label' => 'Blog Posts',
+                        'name' => 'posts',
+                        'link' => 'posts',
+                        'permission' => 'user_view',
+                    ],
+                    [
+                        'label' => 'Short Posts',
+                        'name' => 'short_posts',
+                        'link' => 'short_posts',
+                        'permission' => 'user_view',
+                    ],
+                ]
+            ],
             // [
             //     'label' => 'pagebuilder.menu.label',
             //     'name' => 'page.builder',
@@ -98,13 +119,6 @@ class HomeController extends Controller
                 'link' => 'events',
                 'expanded' => false,
                 'permission' => 'events_view',
-            ],
-            [
-                'label' => 'Blog Posts',
-                'name' => 'posts',
-                'link' => 'posts',
-                'expanded' => false,
-                'permission' => 'user_view',
             ],
             [
                 'label' => 'Organization Events',
