@@ -1,26 +1,12 @@
 import Vue from 'vue';
 import { RouteConfig } from 'vue-router';
-// Authenticated user routes
+
 const DefaultPage = () => import(/* webpackChunkName: "DefaultPage" */ '../views/layouts/admin/DefaultPage.vue');
 const Dashboard = () => import(/* webpackChunkName: "AdminDashboard" */ '../views/admin/Dashboard.vue');
 const Users = () => import(/* webpackChunkName: "Users" */ '../views/admin/Users/Users.vue');
 const PublicUsers = () => import(/* webpackChunkName: "PublicUsers" */ '../views/admin/Users/PublicUsers.vue');
-const Locations = () => import(/* webpackChunkName: "Locations" */ '../views/admin/Locations/Locations.vue');
-const Events = () => import(/* webpackChunkName: "Events" */ '../views/admin/Events/Events.vue');
-const LocationsForm = () => import(/* webpackChunkName: "LocationsForm" */ '../features/Admin/Locations/_components/LocationsForm.vue'); 
-const LocationsFormWrapper = () => import(/* webpackChunkName: "LocationsFormWrapper" */ '../features/Admin/Locations/_components/LocationsFormWrapper.vue'); 
-const LocationsFormContact = () => import(/* webpackChunkName: "LocationsFormContact" */ '../features/Admin/Locations/_components/LocationsFormContact.vue'); 
-const LocationsFormStatus = () => import(/* webpackChunkName: "LocationsFormStatus" */ '../features/Admin/Locations/_components/LocationsFormStatus.vue'); 
-const LocationsFormWorkingHours = () => import(/* webpackChunkName: "LocationsFormWorkingHours" */ '../features/Admin/Locations/_components/LocationsFormWorkingHours.vue'); 
-const EventsForm = () => import(/* webpackChunkName: "EventsForm" */ '../features/Admin/Events/_components/EventsForm.vue'); 
-const EventsFormWrapper = () => import(/* webpackChunkName: "EventsFormWrapper" */ '../features/Admin/Events/_components/EventsFormWrapper.vue'); 
-const EventsFormTimeline = () => import(/* webpackChunkName: "EventsFormTimeline" */ '../features/Admin/Events/_components/EventsFormTimeline.vue'); 
-const EventsFormStatus = () => import(/* webpackChunkName: "EventsFormStatus" */ '../features/Admin/Events/_components/EventsFormStatus.vue'); 
 const MyProfile = () => import(/* webpackChunkName: "MyProfile" */ '../views/admin/Users/MyProfile.vue');
-// const AddUser = () => import(/* webpackChunkName: "AddUser" */ '../views/admin/Users/AddUser.vue');
-// const EditUser = () => import(/* webpackChunkName: "EditUser" */ '../views/admin/Users/EditUser.vue');
 const UserForm = () => import(/* webpackChunkName: "UserForm" */ '../features/Admin/UsersCrud/_components/UserForm.vue');
-const PostForm = () => import(/* webpackChunkName: "UserForm" */ '../features/Admin/PostsCrud/_components/PostsForm.vue');
 const NotFound = () => import(/* webpackChunkName: "AdminNotFound" */ '../components/Admin/NotFound.vue');
 const StaticContent = () => import(/* webpackChunkName: "StaticContent" */ '../features/Admin/StaticContent.vue');
 const Example = () =>  import('../features/Admin/Examples/Example.vue');
@@ -38,6 +24,28 @@ const Posts = () => import(/* webpackChunkName: "Posts" */ '../views/admin/Posts
 const PostsForm = () => import(/* webpackChunkName: "PostsForm" */ '../features/Admin/Posts/_components/PostsForm.vue'); 
 const PostsFormWrapper = () => import(/* webpackChunkName: "PostsFormWrapper" */ '../features/Admin/Posts/_components/PostsFormWrapper.vue'); 
 const PostsFormStatus = () => import(/* webpackChunkName: "PostsFormStatus" */ '../features/Admin/Posts/_components/PostsFormStatus.vue'); 
+
+//Shorts Posts
+const ShortsPosts = () => import(/* webpackChunkName: "ShortsPosts" */ '../views/admin/ShortsPosts/ShortsPosts.vue');
+const ShortsPostsForm = () => import(/* webpackChunkName: "ShortsPostsForm" */ '../features/Admin/ShortsPosts/_components/ShortsPostsForm.vue'); 
+const ShortsPostsFormWrapper = () => import(/* webpackChunkName: "ShortsPostsFormWrapper" */ '../features/Admin/ShortsPosts/_components/ShortsPostsFormWrapper.vue'); 
+const ShortsPostsFormStatus = () => import(/* webpackChunkName: "ShortsPostsFormStatus" */ '../features/Admin/ShortsPosts/_components/ShortsPostsFormStatus.vue'); 
+
+
+// Locations
+const Locations = () => import(/* webpackChunkName: "Locations" */ '../views/admin/Locations/Locations.vue');
+const LocationsForm = () => import(/* webpackChunkName: "LocationsForm" */ '../features/Admin/Locations/_components/LocationsForm.vue'); 
+const LocationsFormWrapper = () => import(/* webpackChunkName: "LocationsFormWrapper" */ '../features/Admin/Locations/_components/LocationsFormWrapper.vue'); 
+const LocationsFormContact = () => import(/* webpackChunkName: "LocationsFormContact" */ '../features/Admin/Locations/_components/LocationsFormContact.vue'); 
+const LocationsFormStatus = () => import(/* webpackChunkName: "LocationsFormStatus" */ '../features/Admin/Locations/_components/LocationsFormStatus.vue'); 
+const LocationsFormWorkingHours = () => import(/* webpackChunkName: "LocationsFormWorkingHours" */ '../features/Admin/Locations/_components/LocationsFormWorkingHours.vue'); 
+
+// Events
+const Events = () => import(/* webpackChunkName: "Events" */ '../views/admin/Events/Events.vue');
+const EventsForm = () => import(/* webpackChunkName: "EventsForm" */ '../features/Admin/Events/_components/EventsForm.vue'); 
+const EventsFormWrapper = () => import(/* webpackChunkName: "EventsFormWrapper" */ '../features/Admin/Events/_components/EventsFormWrapper.vue'); 
+const EventsFormTimeline = () => import(/* webpackChunkName: "EventsFormTimeline" */ '../features/Admin/Events/_components/EventsFormTimeline.vue'); 
+const EventsFormStatus = () => import(/* webpackChunkName: "EventsFormStatus" */ '../features/Admin/Events/_components/EventsFormStatus.vue'); 
 
 export let adminPaths: RouteConfig =
   {
@@ -167,6 +175,7 @@ export let adminPaths: RouteConfig =
           }
         }
       },
+      // Locations
       {
         path: 'locations',
         name: 'locations',
@@ -247,6 +256,7 @@ export let adminPaths: RouteConfig =
             },
           ],
       },
+      // Events
       {
         path: 'events',
         name: 'events',
@@ -315,6 +325,7 @@ export let adminPaths: RouteConfig =
             },
           ],
       },
+      // Blog Posts
       {
         path: 'posts',
         name: 'posts',
@@ -373,7 +384,65 @@ export let adminPaths: RouteConfig =
             },
           ],
       },
-      /*INSERT NEW CONFIGURATOR OPTIONS HERE*/
+      // Shorts Posts
+      {
+        path: 'posts_short',
+        name: 'posts_short',
+        component: ShortsPosts,
+        meta: {
+          title: Vue.i18n.translate('posts.title', null),
+          auth: {
+            roles: ['user_write'],
+          }
+        }
+      },
+      {
+        path: 'post_short/new',
+        name: 'add.post_short',
+        component: ShortsPostsForm,
+        meta: {
+          title: Vue.i18n.translate('users.add.post_short', null),
+          auth: {
+            roles: ['user_write']
+          }
+        }
+      }, {
+        path: 'post_short/:shortsPostId/edit',
+        name: 'edit.post_short',
+        component: ShortsPostsFormWrapper,
+        meta: {
+          title: Vue.i18n.translate('users.edit_post', null),
+          auth: {
+            roles: ['user_write']
+          }
+        },
+        children: 
+          [
+            {
+              path: 'info',
+              name: 'edit.post_short.info',
+              component: ShortsPostsForm,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['user_write']
+                }
+              },
+            },
+            {
+              path: 'status',
+              name: 'edit.post_short.status',
+              component: ShortsPostsFormStatus,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['user_write']
+                }
+              },
+            },
+          ],
+      },
+      // Organization Events
       {
         path: 'organization_events',
         name: 'organization_events',
@@ -443,6 +512,7 @@ export let adminPaths: RouteConfig =
             },
           ],
       },
+      // Artists
       {
         path: 'artist/:artistId/edit',
         name: 'edit.artist.wrapper',

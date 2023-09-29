@@ -7,6 +7,8 @@ use App\Applications\Common\BLL\LocationBLL;
 use App\Applications\Common\BLL\LocationBLLInterface;
 use App\Applications\Common\BLL\PostBLL;
 use App\Applications\Common\BLL\PostBLLInterface;
+use App\Applications\Common\BLL\PostShortBLL;
+use App\Applications\Common\BLL\PostShortBLLInterface;
 use App\Applications\Common\BLL\EventBLL;
 use App\Applications\Common\BLL\EventBLLInterface;
 use App\Applications\Common\BLL\LikeBLL;
@@ -67,6 +69,7 @@ class CommonServiceProvider extends ServiceProvider
         $this->app->bind(LikeBLLInterface::class, LikeBLL::class);
         $this->app->bind(LocationBLLInterface::class, LocationBLL::class);
         $this->app->bind(PostBLLInterface::class, PostBLL::class);
+        $this->app->bind(PostShortBLLInterface::class, PostShortBLL::class);
         $this->app->bind(TaxonomiesDALInterface::class, TaxonomiesDAL::class);
         $this->app->bind(TaxonomiesBLLInterface::class, TaxonomiesBLL::class);
 		/*INSERT NEW BINDINGS HERE*/

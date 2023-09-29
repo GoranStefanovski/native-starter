@@ -1,7 +1,7 @@
-declare interface ShortsPostFormItem {
+declare interface PostFormItem {
   id?: number;
   title?: string;
-  link?: string;
+  description?: string;
   event_id?: number|null;
   location_id?: number|null;
   artist_id?: number|null;
@@ -10,4 +10,6 @@ declare interface ShortsPostFormItem {
   location_types?: Array<any>;
   start_active_date?: null;
   end_active_date?: null;
+  uploaded_file: File|null;
+  media: File|null;
 }

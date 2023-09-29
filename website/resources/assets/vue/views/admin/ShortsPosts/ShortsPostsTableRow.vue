@@ -4,8 +4,8 @@ const props = defineProps(['value', 'columns', 'post', 'index']);
 const isEvenRow = props.index % 2 === 0;
 const emit = defineEmits(['delete:modelValue']);
 
-  const postDescription = (description) => {
-    return description.slice(0,7).concat(" . . . ");
+  const postDescription = (link) => {
+    return link.slice(0,30).concat(" . . . ");
   }
 
   const emitValue = (post,post_id) => {
@@ -25,7 +25,7 @@ const emit = defineEmits(['delete:modelValue']);
     </TableColumn>
 
     <TableColumn :width="columns[2].width">
-      {{post.description}}
+      {{post.link}}
     </TableColumn>
 
     <TableColumn :width="columns[3].width">
@@ -35,7 +35,7 @@ const emit = defineEmits(['delete:modelValue']);
     <TableColumn :width="columns[4].width">
       <router-link
         v-if="$auth.user().permissions_array.includes('user_write')"
-        :to="{ name: 'edit.post.info', params: { postId: post.id}}"
+        :to="{ name: 'edit.post_short.info', params: { shortsPostId: post.id}}"
         exact=""
       >
         <i

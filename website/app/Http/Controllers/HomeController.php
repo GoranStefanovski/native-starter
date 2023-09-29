@@ -78,8 +78,8 @@ class HomeController extends Controller
                     ],
                     [
                         'label' => 'Short Posts',
-                        'name' => 'short_posts',
-                        'link' => 'short_posts',
+                        'name' => 'posts_short',
+                        'link' => 'posts_short',
                         'permission' => 'user_view',
                     ],
                 ]

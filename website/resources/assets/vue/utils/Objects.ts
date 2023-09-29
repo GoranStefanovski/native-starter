@@ -103,6 +103,21 @@ const post: PostFormItem = {
   media: createFile('image/jpg')
 }
 
+
+const shorts_post: ShortsPostFormItem = {
+  id: 0,
+  title: '',
+  link: '',
+  event_id: null,
+  location_id: null,
+  artist_id: null,
+  is_active: null,
+  music_types: [],
+  location_types: [],
+  start_active_date: null,
+  end_active_date: null,
+}
+
 const location: LocationFormItem = {
   id: 0,
   title: '',
@@ -301,6 +316,7 @@ export {
   cliche,
   user,
   post,
+  shorts_post,
   slide,
   location,
   event,

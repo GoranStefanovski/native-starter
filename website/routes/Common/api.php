@@ -7,6 +7,8 @@ use \App\Applications\Common\Controllers\WorkingHoursController;
 use \App\Applications\Common\Controllers\LikeController;
 use \App\Applications\Common\Controllers\OrganizationEventController;
 use \App\Applications\Common\Controllers\PostController;
+use \App\Applications\Common\Controllers\PostShortController;
+
 //
 ///*
 //|--------------------------------------------------------------------------
@@ -45,6 +47,8 @@ Route::group([
     // Blog Post
     Route::get('{id}/getBlogPost', [PostController::class,'getPostById']);
 
+    // Shorts Post
+    Route::get('{id}/getShortsPost', [PostShortController::class,'getPostById']);
 
     // Likes
     Route::post('/locations/{location}/like', [LikeController::class,'likeLocation']);
@@ -79,6 +83,13 @@ Route::group([
     Route::post('blog-posts/draw', [PostController::class,'allPosts']);
     Route::post('blog-posts/{id}/delete', [PostController::class,'deletePost']);
 
+    // Shorts Posts
+    Route::post('save-short-post',[PostShortController::class,'savePost']);
+    Route::post('short-post/{id}/edit/status',[PostShortController::class,'savePostStatus']);
+    Route::post('short-post/{id}/edit',[PostShortController::class,'editPost']);
+    Route::post('short-posts/draw', [PostShortController::class,'allPosts']);
+    Route::post('short-posts/{id}/delete', [PostShortController::class,'deletePost']);
+
     // Events
     Route::post('save-event',[EventController::class,'saveEvent']);
     Route::post('event/{id}/edit',[EventController::class,'editEvent']);
@@ -86,9 +97,9 @@ Route::group([
     Route::post('events/draw', [EventController::class,'allEvents']);
     Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);    
 
-     // Working Hours
-     Route::get('location/{id}/get-working-hours', [WorkingHoursController::class,'getWorkingHours']);
-     Route::post('location/{id}/save-working-hours', [WorkingHoursController::class,'saveWorkingHours']);
+    // Working Hours
+    Route::get('location/{id}/get-working-hours', [WorkingHoursController::class,'getWorkingHours']);
+    Route::post('location/{id}/save-working-hours', [WorkingHoursController::class,'saveWorkingHours']);
 
     // Organization Events
     Route::post('save-organization-event',[OrganizationEventController::class,'saveOrganizationEvent']);
