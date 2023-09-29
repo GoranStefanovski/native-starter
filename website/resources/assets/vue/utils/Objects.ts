@@ -91,10 +91,14 @@ const post: PostFormItem = {
   id: 0,
   title: '',
   description: '',
-  country_id: 0,
-  country: '',
-  city: '',
-  is_disabled: 0,
+  event_id: null,
+  location_id: null,
+  artist_id: null,
+  is_active: null,
+  music_types: [],
+  location_types: [],
+  start_active_date: null,
+  end_active_date: null,
   uploaded_file: createFile('image/jpg'),
   media: createFile('image/jpg')
 }

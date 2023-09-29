@@ -86,21 +86,28 @@ class HomeController extends Controller
             //     ]
             // ],
             [
-                'label' => 'strings.locations.label',
+                'label' => 'Locations',
                 'name' => 'locations',
                 'link' => 'locations',
                 'expanded' => false,
                 'permission' => 'locations_view',
             ],
             [
-                'label' => 'strings.events.label',
+                'label' => 'Events',
                 'name' => 'events',
                 'link' => 'events',
                 'expanded' => false,
                 'permission' => 'events_view',
             ],
             [
-                'label' => 'strings.organization_events.label',
+                'label' => 'Blog Posts',
+                'name' => 'posts',
+                'link' => 'posts',
+                'expanded' => false,
+                'permission' => 'user_view',
+            ],
+            [
+                'label' => 'Organization Events',
                 'name' => 'organization_events',
                 'link' => 'organization_events',
                 'expanded' => false,

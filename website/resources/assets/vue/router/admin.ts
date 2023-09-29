@@ -33,6 +33,12 @@ const OrganizationEventsFormTimeline = () => import(/* webpackChunkName: "Organi
 const OrganizationEventsFormStatus = () => import(/* webpackChunkName: "OrganizationEventsFormStatus" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormStatus.vue'); 
 const OrganizationEventsFormWrapper = () => import(/* webpackChunkName: "OrganizationEventsFormWrapper" */ '../features/Admin/OrganizationEvents/_components/OrganizationEventsFormWrapper.vue'); 
 
+// Posts
+const Posts = () => import(/* webpackChunkName: "Posts" */ '../views/admin/Posts/Posts.vue');
+const PostsForm = () => import(/* webpackChunkName: "PostsForm" */ '../features/Admin/Posts/_components/PostsForm.vue'); 
+const PostsFormWrapper = () => import(/* webpackChunkName: "PostsFormWrapper" */ '../features/Admin/Posts/_components/PostsFormWrapper.vue'); 
+const PostsFormStatus = () => import(/* webpackChunkName: "PostsFormStatus" */ '../features/Admin/Posts/_components/PostsFormStatus.vue'); 
+
 export let adminPaths: RouteConfig =
   {
     path: '/admin',
@@ -304,6 +310,64 @@ export let adminPaths: RouteConfig =
                 title: Vue.i18n.translate('users.edit_post', null),
                 auth: {
                 roles: ['admin_access']
+                }
+              },
+            },
+          ],
+      },
+      {
+        path: 'posts',
+        name: 'posts',
+        component: Posts,
+        meta: {
+          title: Vue.i18n.translate('posts.title', null),
+          auth: {
+            roles: ['user_write'],
+            // forbiddenRedirect: '/'
+          }
+        }
+      },
+      {
+        path: 'post/new',
+        name: 'add.post',
+        component: PostsForm,
+        meta: {
+          title: Vue.i18n.translate('users.add.post', null),
+          auth: {
+            roles: ['user_write']
+          }
+        }
+      }, {
+        path: 'post/:postId/edit',
+        name: 'edit.post',
+        component: PostsFormWrapper,
+        meta: {
+          title: Vue.i18n.translate('users.edit_post', null),
+          auth: {
+            roles: ['user_write']
+          }
+        },
+        children: 
+          [
+            {
+              path: 'info',
+              name: 'edit.post.info',
+              component: PostsForm,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['user_write']
+                }
+              },
+            },
+            {
+              path: 'status',
+              name: 'edit.post.status',
+              component: PostsFormStatus,
+              meta: {
+                title: Vue.i18n.translate('users.edit_post', null),
+                auth: {
+                roles: ['user_write']
                 }
               },
             },

@@ -6,6 +6,7 @@ use \App\Applications\Common\Controllers\EventController;
 use \App\Applications\Common\Controllers\WorkingHoursController;
 use \App\Applications\Common\Controllers\LikeController;
 use \App\Applications\Common\Controllers\OrganizationEventController;
+use \App\Applications\Common\Controllers\PostController;
 //
 ///*
 //|--------------------------------------------------------------------------
@@ -41,6 +42,10 @@ Route::group([
     Route::post('all-locations', [LocationController::class,'allLocationsPublic']);
     Route::post('all-boosted-locations', [LocationController::class,'getBoostedLocations']);
 
+    // Blog Post
+    Route::get('{id}/getBlogPost', [PostController::class,'getPostById']);
+
+
     // Likes
     Route::post('/locations/{location}/like', [LikeController::class,'likeLocation']);
     Route::post('/locations/{location}/unlike', [LikeController::class,'unlikeLocation']);
@@ -66,6 +71,13 @@ Route::group([
     Route::post('locations/draw', [LocationController::class,'allLocations']);
     Route::post('locations/{id}/delete', [LocationController::class,'deleteLocation']);
     Route::post('locations/user/draw', [LocationController::class,'getLocationsCollaborator']);
+
+    // Blog Posts
+    Route::post('save-blog-post',[PostController::class,'savePost']);
+    Route::post('blog-post/{id}/edit/status',[PostController::class,'savePostStatus']);
+    Route::post('blog-post/{id}/edit',[PostController::class,'editPost']);
+    Route::post('blog-posts/draw', [PostController::class,'allPosts']);
+    Route::post('blog-posts/{id}/delete', [PostController::class,'deletePost']);
 
     // Events
     Route::post('save-event',[EventController::class,'saveEvent']);
