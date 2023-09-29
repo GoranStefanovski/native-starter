@@ -124,7 +124,7 @@
         >
           <PortletHead :size="'lg'">
             <PortletHeadLabel>
-              {{ $t('posts.basic.information') }}
+              Shorts Post Data
             </PortletHeadLabel>
             <PortletHeadToolbar>
               <router-link

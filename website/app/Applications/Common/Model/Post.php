@@ -32,6 +32,7 @@ class Post extends Model implements HasMedia
         'location_id',
         'artist_id',
         'is_active',
+        'is_boosted',
         'music_types',
         'location_types',
         'start_active_date',

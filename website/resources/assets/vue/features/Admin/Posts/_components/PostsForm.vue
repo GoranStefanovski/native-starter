@@ -136,7 +136,7 @@
         >
           <PortletHead :size="'lg'">
             <PortletHeadLabel>
-              {{ $t('posts.basic.information') }}
+              Post Data
             </PortletHeadLabel>
             <PortletHeadToolbar>
               <router-link

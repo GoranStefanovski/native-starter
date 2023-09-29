@@ -22,6 +22,7 @@ class CreateShortsPostTable extends Migration
             $table->integer('location_id')->nullable();
             $table->integer('artist_id')->nullable();
             $table->integer('is_active')->nullable();
+            $table->integer('is_boosted')->nullalbe();
             $table->json('music_types')->nullable();
             $table->json('location_types')->nullable();
             $table->date('start_active_date')->nullable();

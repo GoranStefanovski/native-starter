@@ -136,7 +136,7 @@
         >
           <PortletHead :size="'lg'">
             <PortletHeadLabel>
-              {{ $t('posts.basic.information') }}
+              Location Information
             </PortletHeadLabel>
             <PortletHeadToolbar>
               <router-link
@@ -157,53 +157,6 @@
                   <i class="fa fa-save mr-1" />
                   {{ $t('buttons.save') }}
                 </button>
-                <button
-                  type="button"
-                  class="btn btn-brand dropdown-toggle dropdown-toggle-split"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                />
-                <div class="dropdown-menu dropdown-menu-right">
-                  <ul class="kt-nav">
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-reload" />
-                        <span class="kt-nav__link-text">Save & continue</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-power" />
-                        <span class="kt-nav__link-text">Save & exit</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-edit-interface-symbol-of-pencil-tool" />
-                        <span class="kt-nav__link-text">Save & edit</span>
-                      </a>
-                    </li>
-                    <li class="kt-nav__item">
-                      <a
-                        href="#"
-                        class="kt-nav__link"
-                      >
-                        <i class="kt-nav__link-icon flaticon2-add-1" />
-                        <span class="kt-nav__link-text">Save & add new</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </PortletHeadToolbar>
           </PortletHead>

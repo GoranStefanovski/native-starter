@@ -114,6 +114,7 @@ class PostBLL implements PostBLLInterface
 
     public function savePostStatus($request, $id){
         $input['is_active'] = $request['is_active'];
+        $input['is_boosted'] = $request['is_boosted'];
         $input['start_active_date'] = $request['start_active_date'];
         $input['end_active_date'] = $request['end_active_date'];
 

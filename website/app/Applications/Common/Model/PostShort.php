@@ -26,6 +26,7 @@ class PostShort extends Model
         'location_id',
         'artist_id',
         'is_active',
+        'is_boosted',
         'music_types',
         'location_types',
         'start_active_date',

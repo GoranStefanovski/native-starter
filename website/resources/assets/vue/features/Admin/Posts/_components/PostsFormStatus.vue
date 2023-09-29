@@ -140,6 +140,20 @@
                         />
                       </div>
                     </div>
+
+                    <div class="form-group row">
+                      <label class="col-3 col-form-label">Boosted</label>
+                      <div class="col-9">
+                        <input
+                          id="Boosted"
+                          type="checkbox"
+                          class="form-control"
+                          placeholder="Boosted"
+                          v-model="form.is_boosted"
+                          @update:modelValue="handleModelUpdate"
+                        />
+                      </div>
+                    </div>
                   </div>
                   <div class="kt-section">
                     <div class="kt-section__body">

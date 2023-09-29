@@ -6,6 +6,7 @@ declare interface ShortsPostFormItem {
   location_id?: number|null;
   artist_id?: number|null;
   is_active?: number|null;
+  is_boosted?: number|null;
   music_types?: Array<any>;
   location_types?: Array<any>;
   start_active_date?: null;
