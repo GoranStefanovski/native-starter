@@ -53,6 +53,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         'password',
         'country_id',
         'is_disabled',
+        'is_artist',
         'source',
         'source_info',
         'activation_code',

@@ -110,6 +110,7 @@ class AuthenticatedSessionController extends Controller
             'last_name' => $request->last_name,
             'username' => $request->first_name,
             'is_disabled' => $request->is_disabled,
+            'is_artist' => $request->roles == '5' ? true : false,
             'company' => $request->company,
             'email' => $request->email,
             'phone' => $request->phone,
@@ -162,6 +163,30 @@ class AuthenticatedSessionController extends Controller
             return $e;
         }
 //        $user = User::where('email', $request['email'])->firstOrFail();
+    }
+
+    public function getArtists() {
+        $query = DB::table('users')
+        ->select(
+            DB::raw('users.id as id'),
+            DB::raw('users.username as username'),
+            DB::raw('users.first_name as first_name'),
+            DB::raw('users.last_name as last_name'),
+        )->orderByRaw('
+            CASE 
+                WHEN users.sub_type = 3 THEN 1
+                WHEN users.sub_type = 2 THEN 2
+                WHEN users.sub_type = 1 THEN 3
+                ELSE 4
+            END
+        ')
+        ->orderByRaw('RAND()');
+
+        $query->whereNull('users.deleted_at');
+        $query->where('users.is_artist',1);
+        $query->where('users.is_disabled',0);
+
+        return $query->get();
     }
 
     public function logout(Request $request){

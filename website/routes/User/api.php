@@ -27,6 +27,7 @@ Route::group([
     Route::post('/login', [AuthenticatedSessionController::class,'login']);
     Route::post('/register', [AuthenticatedSessionController::class, 'register']);
     Route::post('/edit/{id}', [AuthenticatedSessionController::class, 'editUser']);
+    Route::post('/artists', [AuthenticatedSessionController::class,'getArtists']);
     Route::post('/sanctum/token', [AuthenticatedSessionController::class,'getToken']);
     Route::post('activate', 'Controllers\UserController@userActivate');
     Route::post('draw', 'Controllers\UserController@drawUserGuest');

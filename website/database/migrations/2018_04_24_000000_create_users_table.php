@@ -25,6 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('contact_email')->nullable();
             $table->string('password');
             $table->string('activation_code')->nullable();
+            $table->boolean('is_artist')->nullable()->default(0);
             $table->boolean('is_disabled')->nullable()->default(1);
             $table->integer('country_id')->nullable();
             $table->string('source')->nullable();
