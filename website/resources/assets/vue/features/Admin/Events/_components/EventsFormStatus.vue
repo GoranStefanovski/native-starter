@@ -66,6 +66,7 @@
   onMounted(async () => {
 
     await initFormFromItem();
+    form.value.music_types = JSON.parse(form.value.music_types);
 
   })
   

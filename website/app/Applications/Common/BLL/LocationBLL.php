@@ -84,9 +84,15 @@ class LocationBLL implements LocationBLLInterface
             DB::raw('locations.contact_person_phone as contact_person_phone'),
             DB::raw('locations.contact_person_phone_second as contact_person_phone_second'),
             DB::raw('locations.contact_person_email as contact_person_email'),
-            DB::raw('locations.contact_person_email_second as contact_person_email_second')
-        )->leftJoin('users', 'locations.user_id', '=', 'users.id') // Use leftJoin to include locations without users.
-        ->orderByRaw('
+            DB::raw('locations.contact_person_email_second as contact_person_email_second'),
+            DB::raw('media.file_name as file_name'),
+            DB::raw('media.id as model_id')
+        )->leftJoin('users', 'locations.user_id', '=', 'users.id') 
+        ->leftJoin('media', function ($join) {
+            $join->on('locations.id', '=', 'media.model_id')
+            ->where('media.model_type', '=','App\\Applications\\Common\\Model\\Location')
+            ->where('media.collection_name', '=', 'location_image');
+        })->orderByRaw('
             CASE 
                 WHEN users.sub_type = 3 THEN 1
                 WHEN users.sub_type = 2 THEN 2
