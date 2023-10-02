@@ -12,6 +12,7 @@ use App\Http\Requests\StoreUserRequest;
 use App\Providers\RouteServiceProvider;
 use App\Traits\HttpResponses;
 use Illuminate\Http\Request;
+use App\Applications\Common\DAL\MediaDALInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -19,7 +20,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 /**
- *
+ * @property MediaDALInterface $mediaDAL
  * @property User $user
  */
 class AuthenticatedSessionController extends Controller
@@ -30,9 +31,11 @@ class AuthenticatedSessionController extends Controller
     public function __construct(
         User $user,
         SubTypes $subTypes,
+        MediaDALInterface $mediaDAL,
     ){
         $this->user = $user;
         $this->subTypes = $subTypes;
+        $this->mediaDAL = $mediaDAL;
     }
     /**
      * Display the login view.
@@ -108,7 +111,7 @@ class AuthenticatedSessionController extends Controller
         $user = User::create([
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
-            'username' => $request->first_name,
+            'username' => $request->username,
             'is_disabled' => $request->is_disabled,
             'is_artist' => $request->roles == '5' ? true : false,
             'company' => $request->company,
@@ -122,6 +125,7 @@ class AuthenticatedSessionController extends Controller
         ]);
          
         $user->roles()->attach($request->roles);
+        $this->mediaDAL->save($request,$user,'user_avatars');
 
         return $this->success([
             'user' => $user,
@@ -172,7 +176,13 @@ class AuthenticatedSessionController extends Controller
             DB::raw('users.username as username'),
             DB::raw('users.first_name as first_name'),
             DB::raw('users.last_name as last_name'),
-        )->orderByRaw('
+            DB::raw('media.file_name as file_name'),
+            DB::raw('media.id as model_id')
+        )->leftJoin('media', function ($join) {
+            $join->on('users.id', '=', 'media.model_id')
+            ->where('media.model_type', '=','App\\Applications\\User\\Model\\User')
+            ->where('media.collection_name', '=', 'user_avatars');
+        })->orderByRaw('
             CASE 
                 WHEN users.sub_type = 3 THEN 1
                 WHEN users.sub_type = 2 THEN 2

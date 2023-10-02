@@ -78,6 +78,7 @@ const user: UserFormItem = {
   is_disabled: 1,
   country_id: '',
   uploaded_file: createFile('image/jpg'),
+  media: createFile('image/jpg'),
   json_data: '',
   company: '',
   phone: '',

@@ -11,6 +11,7 @@ declare interface UserFormItem {
   sub_type?: number|null;
   sub_name?: string|null;
   uploaded_file: File|null;
+  media: File|null;
   password?: string;
   password_confirmation?: string;
   json_data?: string;

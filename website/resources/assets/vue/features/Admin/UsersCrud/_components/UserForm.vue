@@ -8,6 +8,7 @@
   import { useForm } from '@/composables';
   import { Portlet } from '@/components';
   import axios from 'axios';
+  import FileUpload from "@/components/Form/FileUpload.vue";
 
   import {
     PortletFoot, PortletBody, PortletHeadLabel, PortletHead, PortletHeadToolbar
@@ -91,7 +92,7 @@
   }
 
   const avatar = computed(() => {
-    const { media } = item.value;
+    const { media } = form.value.media[0];
     if (media != undefined) {
       const userAvatar = media.find(o => o.collection_name === 'user_avatars');
       if (!!userAvatar) {
@@ -199,6 +200,19 @@
                   <div class="kt-section__body">
                     <h3 class="kt-section__title kt-section__title-lg">Customer Info:</h3>
                     <div class="form-group row">
+                      <label class="col-3 col-form-label">Event Image</label>
+                      <div class="col-9">
+                        <file-upload
+                          :id="'uploaded_file'"
+                          v-model="form.uploaded_file"
+                          :placeholder-image="avatar"
+                          :form="form"
+                          :edit="edit"
+                          component-type="image"
+                        />
+                      </div>
+                      </div>
+                      <div class="form-group row">
                       <label class="col-3 col-form-label">Username</label>
                       <div class="col-9">
                         <input v-model="form.username" class="form-control" type="text" placeholder="Username" required  />
