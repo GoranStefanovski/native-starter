@@ -72,8 +72,8 @@ const webpackConfig = {
                 ]
             },
             {
-                test: /\.vue$/,
-                loader: 'vue-loader'
+              test: /\.vue$/,
+              loader: 'vue-loader'
             },
             {
                 test: /\.sass$/,
@@ -103,10 +103,10 @@ const webpackConfig = {
     resolve: {
         extensions: ['*', '.js', '.jsx', '.vue', '.ts', '.tsx', '.css', '.scss', '.sass'],
         alias: {
-            'vue$': (process.env.NODE_ENV !== 'production')? 'vue/dist/vue.esm.js': 'vue/dist/vue.runtime.esm.js',
-            styles: path.resolve(__dirname, 'resources/assets/sass'),
-            '@': path.resolve(__dirname, 'resources/assets/vue'),
-            '@styles': path.resolve(__dirname, 'resources/assets/sass')
+            // 'vue$': (process.env.NODE_ENV !== 'production')? 'vue/dist/vue.esm.js': 'vue/dist/vue.runtime.esm.js',
+            styles: path.resolve(__dirname, 'client/sass'),
+            '@': path.resolve(__dirname, 'client/src'),
+            '@styles': path.resolve(__dirname, 'client/sass')
         }
     }
 };
@@ -199,7 +199,7 @@ const sassConfig = {
 
 const vueConfig = {
     extractStyles: false,
-    globalStyles: 'resources/assets/sass/webpack-resources.scss'
+    globalStyles: 'client/sass/webpack-resources.scss'
 }
 
 mix.webpackConfig(webpackConfig);
@@ -209,10 +209,10 @@ mix.disableSuccessNotifications();
 mix.sourceMaps();
 mix.version();
 
-mix.sass('resources/assets/sass/app.scss', 'public/css', sassConfig).purgeCss(purgeCssConfig);
-mix.sass('resources/assets/sass/app-admin.scss', 'public/css', sassConfig).purgeCss(purgeCssConfig);
+mix.sass('client/sass/app.scss', 'public/css', sassConfig).purgeCss(purgeCssConfig);
+mix.sass('client/sass/app-admin.scss', 'public/css', sassConfig).purgeCss(purgeCssConfig);
 
-mix.js('resources/assets/vue/app.ts', 'public/js').vue(vueConfig);
+mix.js('client/src/app.ts', 'public/js').vue(vueConfig);
 // mix.js('resources/assets/vue/app_admin.ts', 'public/js');
 
-mix.copyDirectory('resources/assets/fonts', 'public/fonts');
+mix.copyDirectory('client/fonts', 'public/fonts');

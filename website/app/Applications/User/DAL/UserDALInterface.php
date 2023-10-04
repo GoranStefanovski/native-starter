@@ -18,11 +18,6 @@ interface UserDALInterface
     public function getAll();
 
     /**
-     * @return Collection
-     */
-    public function getPublicUsers();
-
-    /**
      * @param integer $id
      * @return User
      */

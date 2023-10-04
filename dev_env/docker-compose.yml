@@ -17,12 +17,11 @@ services:
       - ${DOCUMENT_ROOT-./www}:/var/www/html/starter
       - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/php.ini
       - ${VHOSTS_DIR-./config/vhosts}:/etc/apache2/sites-enabled
-      - ${LOG_DIR-./logs/apache2}:/var/log/apache2
+      - ${APACHE_LOG_DIR-./logs/apache2}:/var/log/apache2
     environment:
       APACHE_DOCUMENT_ROOT: ${APACHE_DOCUMENT_ROOT-/var/www/html}
       PMA_PORT: ${HOST_MACHINE_PMA_PORT}
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-
   node:
     build:
       context: ./bin/node
@@ -32,6 +31,7 @@ services:
     tty: true
     ports:
       - "3030:3030"
+      - "24678:24678"
     links:
       - "webserver:starter.test"
     networks:
@@ -41,14 +41,13 @@ services:
     working_dir: /usr/app
     environment:
       HOST: 0.0.0.0
-
   database:
     build:
       context: "./bin/${DATABASE}"
     container_name: '${COMPOSE_PROJECT_NAME}-database'
     restart: 'always'
     ports:
-      - "${HOST_MACHINE_MYSQL_PORT}:3306"
+      - "127.0.0.1:${HOST_MACHINE_MYSQL_PORT}:3306"
     networks:
       - main
     volumes:
@@ -61,7 +60,26 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_TCP_PORT: 3306
-
+#  mongo:
+#    build:
+#      context: ./bin/mongo
+#    container_name: '${COMPOSE_PROJECT_NAME}-mongo'
+#    environment:
+#      MONGO_INITDB_DATABASE: admin
+#      MONGO_INITDB_ROOT_USERNAME: ${MONGO_DB_ROOT_USER}
+#      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_DB_ROOT_PASSWORD}
+#    restart: unless-stopped
+#    ports:
+#      - "${MONGO_DB_PORT}:${MONGO_DB_PORT}"
+#    networks:
+#      - main
+#    volumes:
+#      - ${MONGO_DATA_DIR}/data/db:/data/db
+#      - ${MONGO_DATA_DIR}/Databases/dev.archive:/Databases/dev.archive
+#      - ${MONGO_DATA_DIR}/Databases/production:/Databases/production
+#      - ${MONGO_LOG_DIR}/var/log/mongodb:/var/log/mongodb
+#      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+#    command: [--auth]
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: '${COMPOSE_PROJECT_NAME}-phpmyadmin'
@@ -90,7 +108,6 @@ services:
     # volumes:
     #   - /sessions
     #   - ${PHP_INI-./config/php/php.ini}:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
-
   redis:
     container_name: '${COMPOSE_PROJECT_NAME}-redis'
     image: redis:latest

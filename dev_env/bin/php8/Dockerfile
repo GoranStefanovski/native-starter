@@ -2,7 +2,7 @@ FROM php:8.0.3-apache-buster
 
 # Surpresses debconf complaints of trying to install apt packages interactively
 # https://github.com/moby/moby/issues/4032#issuecomment-192327844
- 
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update
@@ -10,6 +10,13 @@ RUN apt-get -y update --fix-missing && \
     apt-get upgrade -y && \
     apt-get --no-install-recommends install -y apt-utils && \
     rm -rf /var/lib/apt/lists/*
+
+# Create the cache directory
+RUN mkdir -p /var/www/html/starter/website/bootstrap/cache
+
+# Set directory permissions
+RUN chown -R www-data:www-data /var/www/html/starter/website/bootstrap/cache
+RUN chmod -R 775 /var/www/html/starter/website/bootstrap/cache
 
 
 # Install useful tools and install important libaries
@@ -26,7 +33,7 @@ libicu-dev && \
 build-essential \
 git \
 curl \
-libonig-dev && \ 
+libonig-dev && \
     apt-get -y --no-install-recommends install --fix-missing libcurl4 \
 libcurl4-openssl-dev \
 zip \
@@ -78,10 +85,11 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install exif
 
 
-# Install Freetype 
+# Install Freetype
 RUN apt-get -y update && \
     apt-get --no-install-recommends install -y libfreetype6-dev \
 libjpeg62-turbo-dev \
+libmemcached-dev \
 libpng-dev && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-configure gd --enable-gd --with-freetype --with-jpeg && \
@@ -93,6 +101,14 @@ RUN a2enmod rewrite headers
 # --------------------
 RUN a2enmod proxy_http
 RUN a2enmod proxy
+
+# Install Memcached for php 7.4
+RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/refs/tags/v3.1.5.tar.gz" \
+    && mkdir -p /usr/src/php/ext/memcached \
+    && tar -C /usr/src/php/ext/memcached -zxvf /tmp/memcached.tar.gz --strip 1 \
+    && docker-php-ext-configure memcached --disable-memcached-sasl \
+    && docker-php-ext-install memcached \
+    && rm /tmp/memcached.tar.gz
 
 # Cleanup
 RUN rm -rf /usr/src/*

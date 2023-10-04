@@ -1,0 +1,27 @@
+@use './mixin' as mixin;
+
+@include mixin.kt-grid-generate(general);
+
+@include kt-desktop {
+	@include mixin.kt-grid-generate(desktop);
+}
+
+@include kt-desktop-xl {
+	@include mixin.kt-grid-generate(desktop-xl);
+}
+
+@include kt-desktop-and-tablet {
+	@include mixin.kt-grid-generate(desktop-and-tablet);
+}
+
+@include kt-tablet {
+	@include mixin.kt-grid-generate(tablet);
+}
+
+@include kt-tablet-and-mobile {
+	@include mixin.kt-grid-generate(tablet-and-mobile);
+}
+
+@include kt-mobile {
+	@include mixin.kt-grid-generate(mobile);
+}

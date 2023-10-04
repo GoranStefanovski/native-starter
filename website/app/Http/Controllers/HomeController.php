@@ -46,49 +46,55 @@ class HomeController extends Controller
                 'label' => 'strings.dashboard',
                 'name' => 'item_dashboard',
                 'link' => 'dashboard',
-                'permission' => 'user_view', // Change to dashboard_view
+                'permission' => 'read-users', // Change to dashboard_view
             ],
             [
                 'label' => 'strings.users.main',
                 'name' => 'item_users',
                 'link' => 'users',
                 'expanded' => false,
-                'permission' => 'user_view',
+                'permission' => 'read-users',
                 'subcategories' => [
                     [
                         'label' => 'strings.users.admin',
                         'name' => 'item_users',
                         'link' => 'users',
-                        'permission' => 'user_view',
+                        'permission' => 'read-users',
                     ],
                     [
                         'label' => 'strings.users.public',
                         'name' => 'item_users_public',
                         'link' => 'users.public',
-                        'permission' => 'user_view',
+                        'permission' => 'read-users',
                     ],
                 ]
             ],
             [
-                'label' => 'pagebuilder.menu.label',
-                'name' => 'page.builder',
-                'link' => 'page.builder',
+                'label' => 'pages.menu.label',
+                'name' => 'pages',
+                'link' => 'pages',
                 'expanded' => false,
-                'permission' => 'user_view',
+                'permission' => 'read-users',
             ],
             [
                 'label' => 'components.label',
                 'name' => 'components',
                 'link' => 'components',
                 'expanded' => false,
-                'permission' => 'user_view',
+                'permission' => 'read-users',
                 'subcategories' => [
                     [
                         'label' => 'components.portlets.label',
                         'name' => 'components.portlets',
                         'link' => 'components.portlets',
-                        'permission' => 'user_view',
+                        'permission' => 'read-users',
                     ],
+                    [
+                        'label' => 'components.buttons.label',
+                        'name' => 'components.buttons',
+                        'link' => 'components.buttons',
+                        'permission' => 'read-users',
+                    ]
                 ]
             ]
         ];

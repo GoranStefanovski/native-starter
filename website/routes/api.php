@@ -31,7 +31,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => ['jwt.renew'],
+    'middleware' => ['api','jwt.renew'],
 ], function () {
     Route::get('vue', 'HomeController@vue');
 });

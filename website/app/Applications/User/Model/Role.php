@@ -2,12 +2,13 @@
 
 namespace App\Applications\User\Model;
 
-use App\Applications\User\Model\User;
-use App\Applications\User\Model\Permission;
-use Zizaco\Entrust\EntrustRole;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Shanmuga\LaravelEntrust\Models\EntrustRole;
 
 class Role extends EntrustRole
 {
+    use HasFactory;
+
     const ADMIN = 'administrator';
     const COLLABORATOR = 'collaborator';
     const PUBLIC = 'public';
