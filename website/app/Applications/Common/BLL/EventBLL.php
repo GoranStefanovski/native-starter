@@ -58,7 +58,6 @@ class EventBll implements EventBLLInterface
 
 
     public function getPostById($id){
-//        dd($this->post->find($id));
         return $this->event::find($id);
     }
 
@@ -66,6 +65,40 @@ class EventBll implements EventBLLInterface
     {
         // TODO: Implement getPostByIdNonAuth() method.
     }
+    public function getPublicEventsLocation($request, $id)
+    {
+        $currentDate = now()->toDateString();
+    
+        $query = DB::table('events')
+            ->select(
+                DB::raw('events.id as id'),
+                DB::raw('events.title as title'),
+                DB::raw('events.description as description'),
+                DB::raw('events.user_id as user_id'),
+                DB::raw('events.music_types as music_types'),
+                DB::raw('events.location_id as location_id'),
+                DB::raw('events.location_name as location_name'),
+                DB::raw('events.start_date as start_date'),
+                DB::raw('events.end_date as end_date'),
+                DB::raw('events.start_time as start_time'),
+                DB::raw('events.end_time as end_time'),
+                DB::raw('media.file_name as file_name'),
+                DB::raw('media.id as model_id')
+            )->leftJoin('users', 'events.user_id', '=', 'users.id') // Use leftJoin to include events without users.
+            ->leftJoin('media', function ($join) {
+                $join->on('events.id', '=', 'media.model_id')
+                ->where('media.model_type', '=','App\\Applications\\Common\\Model\\Event')
+                ->where('media.collection_name', '=', 'event_image');
+            })->orderByRaw('RAND()');
+
+        $query->where('events.location_id', $id);
+        $query->whereNull('events.deleted_at');
+        $query->where('events.is_active',1);
+        $query->where('events.end_date', '>=', $currentDate);
+
+        return $query->get();
+    }
+
 
     public function getPublicEvents($request)
     {
@@ -115,9 +148,9 @@ class EventBll implements EventBLLInterface
         $query->where('events.is_active',1);
         $query->where('events.end_date', '>=', $currentDate);
 
-        return $query->get();
+        $paginator = $query->paginate($request['length']);
+        return $this->prepareDatatablesData($paginator, $request);
     }
-
 
     public function getBoostedEvents($request)
     {

@@ -50,8 +50,7 @@
   provide('form', form.value);
   provide('labelStart', 'user');
 
-  const postUri = computed(() => '/usersanct/user/edit');
-  const redirectRoute = computed(() => [1,2].includes(form.roles) ? 'initial_dashboard' : 'initial_dashboard');
+  const postUri = computed(() => `user/edit/myprofile/${id}`);
 
   const optionsIsDisabled: Array<any> = [{'id': 0, 'name':'Enabled'},{'id': 1, 'name':'Disabled'}];
 
@@ -102,7 +101,7 @@
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    onSubmit(postUri.value, redirectRoute.value, hasToRedirect, form);
+    onSubmit(postUri.value, 'initial_dashboard' , hasToRedirect, form);
   }
 
   const getRole = async () => {

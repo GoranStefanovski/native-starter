@@ -41,6 +41,10 @@ class EventController extends Controller
         return $this->eventBLL->getPublicEvents($request);
     }
 
+    public function allEventsLocationPublic(Request $request, $id){
+        return $this->eventBLL->getPublicEventsLocation($request, $id);
+    }
+
     public function getBoostedEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
         return $this->eventBLL->getBoostedEvents($request);

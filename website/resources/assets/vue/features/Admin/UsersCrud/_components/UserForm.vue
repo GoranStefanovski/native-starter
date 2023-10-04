@@ -91,12 +91,12 @@
     }
   }
 
-  const avatar = computed(() => {
+  const avatar = (() => {
     const { media } = form.value.media[0];
     if (media != undefined) {
-      const userAvatar = media.find(o => o.collection_name === 'user_avatars');
-      if (!!userAvatar) {
-        return getPhotoPath(userAvatar, 400);
+      const postImage = media.find(o => o.collection_name === 'event_image');
+      if (!!postImage) {
+        return getPhotoPath(postImage, 400);
       }
     }
     return '';

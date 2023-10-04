@@ -38,6 +38,7 @@ Route::group([
     Route::post('this-month-events', [EventController::class,'getThisMonthEvents']);
     Route::post('this-day-events', [EventController::class,'getThisDayEvents']);
     Route::post('this-week-events', [EventController::class,'getThisWeekEvents']);
+    Route::post('location/{id}/all-events', [EventController::class,'allEventsLocationPublic']);
 
     // Locations
     Route::get('{id}/getLocation', 'Controllers\LocationController@getPostById');

@@ -23,10 +23,10 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'guest/user',
 ], function () {
+    // Register Global
+    Route::post('/register', [AuthenticatedSessionController::class, 'register']);
     Route::post('/tokens/create', [AuthenticatedSessionController::class,'createUserToken']);
     Route::post('/login', [AuthenticatedSessionController::class,'login']);
-    Route::post('/register', [AuthenticatedSessionController::class, 'register']);
-    Route::post('/edit/{id}', [AuthenticatedSessionController::class, 'editUser']);
     Route::post('/artists', [AuthenticatedSessionController::class,'getArtists']);
     Route::post('/sanctum/token', [AuthenticatedSessionController::class,'getToken']);
     Route::post('activate', 'Controllers\UserController@userActivate');
@@ -47,6 +47,7 @@ Route::group([
     Route::get('/test',[AuthenticatedSessionController::class ,'test']);
     Route::get('/user',[AuthenticatedSessionController::class ,'user']);
     Route::post('/user/edit',[AuthenticatedSessionController::class ,'updateProfile']);
+    Route::post('/edit/myprofile/{id}', 'Controllers\UserController@updateProfile');
 });
 
 
@@ -55,6 +56,10 @@ Route::group([
     'middleware' => ['api','jwt.renew'],
     'prefix' => 'user',
 ], function () {
+    // My Profile Edit ADMIN PANEL 
+    Route::post('edit/myprofile/{id}', 'Controllers\UserController@updateProfile');
+    Route::post('{id}/edit', 'Controllers\UserController@updateUser');
+
     Route::get('all', 'Controllers\UserController@allUsers');
     Route::get('roles/get', 'Controllers\UserController@getUserRoles');
     Route::get('myprofile', 'Controllers\UserController@getMyProfile');
@@ -65,8 +70,6 @@ Route::group([
     Route::get('{id}/get', 'Controllers\UserController@getUser');
     Route::post('shipping_info/edit', 'Controllers\UserController@editShippingInfo');
     Route::post('new', 'Controllers\UserController@storeUser')->middleware('permission:user_write', 'role:administrator');
-    Route::post('{id}/edit', 'Controllers\UserController@storeUser');
-    Route::post('edit/myprofile/{id}', 'Controllers\UserController@updateUser');
     Route::post('draw', 'Controllers\UserController@drawUser');
     Route::post('public/draw', 'Controllers\UserController@drawUserGuest');
     Route::post('public/export', 'Controllers\UserController@exportPublicUser');

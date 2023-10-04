@@ -32,6 +32,14 @@ interface EventBLLInterface{
     public function getPublicEvents($data);
 
     /**
+     * Summary of getPublicEventsLocation
+     * @param array $data
+     * @param number $id
+     * @return array
+     */
+    public function getPublicEventsLocation($data, $id);
+
+    /**
      * @param array $data
      * @return array
      */

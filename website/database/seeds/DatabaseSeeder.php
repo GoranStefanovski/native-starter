@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MusicTypesTableSeeder::class);
         $this->call(LocationTypesTableSeeder::class);
         $this->call(SubTypesTableSeeder::class);
+        $this->call(EventsTableSeeder::class);
         //Migration of data from legacy system
 //        $this->call(DataMigrationSeeder::class);
     }

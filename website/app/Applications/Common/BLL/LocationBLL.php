@@ -117,7 +117,9 @@ class LocationBLL implements LocationBLLInterface
     $query->where('locations.is_active',1);
     $query->whereDate('locations.start_active_date', '<=', $currentDate)
       ->whereDate('locations.end_active_date', '>=', $currentDate);
-    return $query->get();
+    
+      $paginator = $query->paginate($request['length']);
+        return $this->prepareDatatablesData($paginator, $request);
     }
 
     public function getBoostedLocations($request)

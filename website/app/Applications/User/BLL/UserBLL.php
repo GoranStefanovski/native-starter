@@ -110,11 +110,6 @@ class UserBLL implements UserBLLInterface
         $request_array = $request->all();
         $user = $this->userDAL->getUserById(Auth::user()->id);
         $this->mediaDAL->save($request, $user, 'user_avatars');
-        $data['first_name'] = $request_array['first_name'];
-        $data['last_name'] = $request_array['last_name'];
-        $data['email'] = $request_array['email'];
-        //$data['company'] = $request_array['company'];//No field to edit this
-//        $data['phone'] = $request_array['phone'];//No field to edit this
         if (array_key_exists('country_id', $request_array)) $data['country_id'] = $request_array['country_id'];
         $this->userDAL->editUser($user, $data);
         if($request_array['password']!=null)
