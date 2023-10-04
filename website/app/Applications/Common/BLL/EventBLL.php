@@ -357,6 +357,13 @@ class EventBll implements EventBLLInterface
         return $event->update($input);
     }
 
+    public function saveEventStatus($request, $id){
+        $input['is_active'] = $request['is_active'];
+
+        $event = $this->event->find($id);
+        return $event->update($input);
+    }
+
     // Edit Event Info
     public function editEvent($request,$id){
         $location = $this->location->find($request['location_id']);

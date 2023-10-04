@@ -20,6 +20,8 @@ interface EventBLLInterface{
 
     public function editEventTimeline($request, $id);
 
+    public function saveEventStatus($request, $id);
+
     public function editEvent($id, $request);
 
     public function deleteEvent($id);

@@ -76,6 +76,10 @@ class EventController extends Controller
         return $this->eventBLL->editEventTimeline($request, $id);
     }
     
+    public function saveEventStatus(Request $request, $id){
+        return $this->eventBLL->saveEventStatus($request, $id);
+    }
+
     public function editEvent(EventRequest $request, $id){
         return $this->eventBLL->editEvent($request,$id);
     }

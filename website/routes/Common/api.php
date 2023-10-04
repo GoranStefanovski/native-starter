@@ -95,6 +95,7 @@ Route::group([
     Route::post('save-event',[EventController::class,'saveEvent']);
     Route::post('event/{id}/edit',[EventController::class,'editEvent']);
     Route::post('event/{id}/edit/timeline',[EventController::class,'editEventTimeline']);
+    Route::post('event/{id}/edit/status',[EventController::class,'saveEventStatus']);
     Route::post('events/draw', [EventController::class,'allEvents']);
     Route::post('events/{id}/delete', [EventController::class,'deleteEvent']);    
 

@@ -52,7 +52,7 @@
   provide('form', form.value);
   provide('labelStart', 'event');
 
-  const postUri = computed(() => `common/event/${id}/edit`);
+  const postUri = computed(() => `common/event/${id}/edit/status`);
 
   const beforeSubmit = (hasToRedirect = true) => {
     onSubmit(postUri.value, 'events', hasToRedirect, form.value);
@@ -66,7 +66,6 @@
   onMounted(async () => {
 
     await initFormFromItem();
-    form.value.music_types = JSON.parse(form.value.music_types);
 
   })
   
