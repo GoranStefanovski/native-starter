@@ -4,8 +4,8 @@ namespace App\Applications\Common\BLL;
 
 use App\Applications\Common\Model\UserSession;
 use App\Http\Requests\ApiFormRequest;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 
 /**

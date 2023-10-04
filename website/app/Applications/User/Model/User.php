@@ -2,18 +2,13 @@
 
 namespace App\Applications\User\Model;
 
-use App\Applications\Booking\Model\Appointment;
-
-
-//use App\Applications\Product\Model\Offer;
-//use App\Applications\Product\Model\Product;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\MediaLibrary\Models\Media as MediaModel;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media as MediaModel;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Notifications\Notifiable;
 use Webpatser\Countries\Countries;
-use Zizaco\Entrust\Traits\EntrustUserTrait;
+use Shanmuga\LaravelEntrust\Traits\LaravelEntrustUserTrait;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +16,8 @@ use Illuminate\Support\Facades\DB;
 class User extends Authenticatable implements JWTSubject, HasMedia
 {
     use Notifiable;
-    use HasMediaTrait;
-    use EntrustUserTrait { restore as private restoreEntrust; }
+    use InteractsWithMedia;
+    use LaravelEntrustUserTrait { restore as private restoreEntrust; }
     use SoftDeletes { restore as private restoreSoftDelete; }
 
     protected $appends = [
@@ -45,6 +40,7 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         'username',
         'phone',
         'company',
+        'name',
         'first_name',
         'last_name',
         'email',
@@ -166,13 +162,13 @@ class User extends Authenticatable implements JWTSubject, HasMedia
         return ucfirst($this->first_name) . ' ' . ucfirst($this->last_name);
     }
 
-    public function registerMediaCollections()
+    public function registerMediaCollections(): void
     {
         $this->addMediaCollection('user_avatars')
             ->singleFile();
     }
 
-    public function registerMediaConversions(MediaModel $media = null)
+    public function registerMediaConversions(MediaModel $media = null): void
     {
         $this->addMediaConversion('400')
             ->fit('max', 400, 0)
@@ -189,10 +185,4 @@ class User extends Authenticatable implements JWTSubject, HasMedia
     {
         return $this->getFirstMedia('user_avatars');
     }
-
-    /* THESE ARE FREJA RULES */
-//    public function appointments()
-//    {
-//        return $this->belongsToMany(Appointment::class,'appointments');
-//    }
 }

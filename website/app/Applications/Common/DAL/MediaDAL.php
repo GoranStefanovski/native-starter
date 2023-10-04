@@ -2,7 +2,7 @@
 
 namespace App\Applications\Common\DAL;
 
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  */

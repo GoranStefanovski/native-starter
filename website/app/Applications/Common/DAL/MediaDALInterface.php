@@ -5,8 +5,8 @@ namespace App\Applications\Common\DAL;
 use App\Http\Requests\ApiFormRequest;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\Models\Media;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 /**
  * Interface MediaDALInterface

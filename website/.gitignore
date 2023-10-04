@@ -20,11 +20,12 @@ yarn-error.log
 .env.testing
 .settings
 package-lock.json
+mix-manifest.json
 
 /tests-jest.xml
 /tests-phpunit.xml
 .vscode/
 public/js
 public/css
-resources/assets/vue/vue-i18n-locales.generated.js
 website/public/images/vendor
+bootstrap/cache

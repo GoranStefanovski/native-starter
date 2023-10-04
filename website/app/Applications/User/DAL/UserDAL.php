@@ -42,11 +42,6 @@ class UserDAL implements UserDALInterface
         return $this->user::all();
     }
 
-    public function getPublicUsers(){
-        return $this->user::whereHas('roles', function($q){
-            $q->where('id', 3);
-        })->get();
-    }
     /**
      *
      * @return object or end with 404 termination
@@ -75,7 +70,7 @@ class UserDAL implements UserDALInterface
         return $user->update($input);
     }
 
-    function prepareDatatablesData($paginator, $data){
+    private function prepareDatatablesData($paginator, $data){
         $last_page = $paginator->lastPage();
         $limit = $paginator->perPage();
         $current_page = $paginator->currentPage();
@@ -96,7 +91,7 @@ class UserDAL implements UserDALInterface
         ];
     }
 
-    public function getDataTablesReady($data){
+    private function prepareDatatableQuery($data, array $roles) {
         // TODO: Refactor this segment
         $query = DB::table('users')
             ->select(
@@ -109,7 +104,7 @@ class UserDAL implements UserDALInterface
             )
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->whereIn('roles.name', [Role::ADMIN, Role::COLLABORATOR]);
+            ->whereIn('roles.name', $roles);
 
         $search = $data['search'];
         if($search){
@@ -128,53 +123,20 @@ class UserDAL implements UserDALInterface
         $query->whereNull('users.deleted_at');
 
         $paginator = $query->paginate($data['length']);
+        return $paginator;
+    }
+
+    public function getDataTablesReady($data){
+        $paginator = $this->prepareDatatableQuery($data, [Role::ADMIN, Role::COLLABORATOR]);
         return $this->prepareDatatablesData($paginator, $data);
     }
 
     public function getDataTablesReadyPublic($data){
-        // TODO: Refactor this segment
-        $query = DB::table('users')
-            ->select(
-                DB::raw('users.id as id'),
-                DB::raw('users.first_name as first_name'),
-                DB::raw('users.last_name as last_name'),
-                DB::raw("IFNULL(users.email,users.contact_email) as email"),
-                DB::raw('GROUP_CONCAT(DISTINCT roles.display_name) AS roles'),
-                DB::raw('users.is_disabled as is_disabled'),
-                DB::raw('users.source as source'),
-                DB::raw('users.source_info as source_info')
-            )
-            ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->whereIn('roles.name', [Role::PUBLIC]);
-
-        $search = $data['search'];
-        if($search){
-            $query->where(function($subquery) use ($search) {
-                $subquery->where('users.first_name', 'like', '%'.$search.'%');
-                $subquery->orWhere('users.last_name', 'like', '%'.$search.'%');
-                $subquery->orWhere('users.email', 'like', '%'.$search.'%');
-                $subquery->orWhere('users.contact_email', 'like', '%'.$search.'%');
-                $subquery->orWhere('roles.display_name', 'like', '%'.$search.'%');
-            });
-        }
-
-        if(isset($data['source']) && $data['source'] != '' && $data['source'] != 'all'){
-            $query->where('users.source','=',$data['source']);
-        }
-
-        $query->whereNull('users.deleted_at');
-
-        $query->groupBy('users.id');
-        if (array_key_exists($data['column'], self::COLUMNS_MAP)) {
-            $query->orderBy(self::COLUMNS_MAP[$data['column']], $data['dir']);
-        }
-
-        $paginator = $query->paginate($data['length']);
+        $paginator = $this->prepareDatatableQuery($data, [Role::PUBLIC]);
         return $this->prepareDatatablesData($paginator, $data);
     }
 
-    public function getDataExportPublic($data){
+    private function prepareQueryForDataExport($data, array $roles){
         // TODO: Refactor this segment
         $query = DB::table('users')
             ->select(
@@ -189,7 +151,7 @@ class UserDAL implements UserDALInterface
             )
             ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
             ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->whereIn('roles.name', [Role::PUBLIC]);
+            ->whereIn('roles.name', $roles);
 
         $search = $data['search'];
         if($search){
@@ -211,46 +173,17 @@ class UserDAL implements UserDALInterface
         $query->groupBy('users.id');
         $query->orderBy($data['columns'][$data['column']], $data['dir']);
 
+        return $query;
+    }
+
+    public function getDataExportPublic($data){
+        $query = $this->prepareQueryForDataExport($data, [Role::PUBLIC]);
         $data = $query->get();
         return $this->dataExport->array_to_csv_download($data,'public_users.csv',';');
     }
 
     public function getDataExportAdmin($data){
-        $query = DB::table('users')
-            ->select(
-                DB::raw('users.id as id'),
-                DB::raw('users.first_name as first_name'),
-                DB::raw('users.last_name as last_name'),
-                DB::raw("IFNULL(users.email,users.contact_email) as email"),
-                DB::raw('GROUP_CONCAT(DISTINCT roles.display_name) AS roles'),
-                DB::raw('users.is_disabled as is_disabled'),
-                DB::raw('users.source as source'),
-                DB::raw('users.source_info as source_info')
-            )
-            ->leftJoin('role_user', 'role_user.user_id', '=', 'users.id')
-            ->leftJoin('roles', 'role_user.role_id', '=', 'roles.id')
-            ->whereNotIn('roles.name', [Role::PUBLIC]);
-
-        $search = $data['search'];
-        if($search){
-            $query->where(function($subquery) use ($search) {
-                $subquery->where('users.first_name', 'like', '%'.$search.'%');
-                $subquery->orWhere('users.last_name', 'like', '%'.$search.'%');
-                $subquery->orWhere('users.email', 'like', '%'.$search.'%');
-                $subquery->orWhere('users.contact_email', 'like', '%'.$search.'%');
-                $subquery->orWhere('roles.display_name', 'like', '%'.$search.'%');
-            });
-        }
-
-        $query->whereNull('users.deleted_at');
-
-        if(isset($data['source']) && $data['source'] != '' && $data['source'] != 'all'){
-            $query->where('users.source','=',$data['source']);
-        }
-
-        $query->groupBy('users.id');
-        $query->orderBy($data['columns'][$data['column']], $data['dir']);
-
+        $query = $this->prepareQueryForDataExport($data, [Role::COLLABORATOR, Role::ADMIN]);
         $data = $query->get();
         return $this->dataExport->array_to_csv_download($data,'admin_users.csv',';');
     }
@@ -288,16 +221,6 @@ class UserDAL implements UserDALInterface
         $user->save();
     }
 
-    function makeSalt() {
-		$ret="";
-		for($i=0;$i<16;$i++) $ret.=bin2hex(chr(mt_rand(0,255)));
-		return $ret;
-    }
-
-    function bestAvailAlgo() {
-		return 2;
-	}
-
     public function delete($id){
         return $this->user
             ->where('id', $id)
@@ -320,13 +243,21 @@ class UserDAL implements UserDALInterface
     public function editShippingInfo($shipping_details){
         $shipping_details['type'] = 'SHIPPING';
         $shipping_details['default'] = true;
-        return $this->user->find(Auth::user()->id)->shipping_details()->updateOrCreate(['user_id' => Auth::user()->id],$shipping_details);
+        return $this
+            ->user
+            ->find(Auth::user()->id)
+            ->shipping_details()
+            ->updateOrCreate(['user_id' => Auth::user()->id],$shipping_details);
     }
 
     public function editBillingInfo($billing_details){
         $billing_details['type'] = 'BILLING';
         $billing_details['default'] = true;
-        return $this->user->find(Auth::user()->id)->billing_details()->updateOrCreate(['user_id' => Auth::user()->id],$billing_details);
+        return $this
+            ->user
+            ->find(Auth::user()->id)
+            ->billing_details()
+            ->updateOrCreate(['user_id' => Auth::user()->id],$billing_details);
     }
 
     public function findUserByActivationCode($token){

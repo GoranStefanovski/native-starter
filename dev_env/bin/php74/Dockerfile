@@ -2,7 +2,7 @@ FROM php:7.4.2-apache-buster
 
 # Surpresses debconf complaints of trying to install apt packages interactively
 # https://github.com/moby/moby/issues/4032#issuecomment-192327844
- 
+
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Update
@@ -11,8 +11,14 @@ RUN apt-get -y update --fix-missing && \
     apt-get --no-install-recommends install -y apt-utils && \
     rm -rf /var/lib/apt/lists/*
 
+# Create the cache directory
+RUN mkdir -p /var/www/html/starter/website/bootstrap/cache
 
-# Install useful tools and install important libaries
+# Set directory permissions
+RUN chown -R www-data:www-data /var/www/html/starter/website/bootstrap/cache
+RUN chmod -R 775 /var/www/html/starter/website/bootstrap/cache
+
+# Install useful tools and install important libraries
 RUN apt-get -y update && \
     apt-get -y --no-install-recommends install nano wget \
 dialog \
@@ -26,13 +32,13 @@ libicu-dev && \
 build-essential \
 git \
 curl \
-libonig-dev && \ 
+libonig-dev && \
     apt-get -y --no-install-recommends install --fix-missing libcurl4 \
 libcurl4-openssl-dev \
 zip \
 openssl && \
     rm -rf /var/lib/apt/lists/* && \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --1
+    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --2
 
 # Install xdebug
 RUN pecl install xdebug-2.8.0 && \
@@ -63,8 +69,14 @@ RUN docker-php-ext-install pdo_mysql && \
     docker-php-ext-install gettext && \
     docker-php-ext-install exif
 
+# RUN apt-get update
+# RUN apt-get install -y libcurl4-openssl-dev pkg-config libssl-dev
 
-# Install Freetype 
+# Install mongodb
+# RUN pecl install mongodb
+# RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
+
+# Install Freetype
 RUN apt-get -y update && \
     apt-get --no-install-recommends install -y libfreetype6-dev \
 libjpeg62-turbo-dev \
@@ -80,18 +92,18 @@ RUN a2enmod rewrite headers
 RUN a2enmod proxy_http
 RUN a2enmod proxy
 
-# ... 
+# ...
 
-RUN apt-get update && apt-get install -y vim 
+RUN apt-get update && apt-get install -y vim
 
-# ... 
+# ...
 
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     libmemcached-dev \
     curl
 
-# ... 
+# ...
 
 # Install Memcached for php 7.4
 RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-memcached/archive/refs/tags/v3.1.5.tar.gz" \
@@ -100,6 +112,6 @@ RUN curl -L -o /tmp/memcached.tar.gz "https://github.com/php-memcached-dev/php-m
     && docker-php-ext-configure memcached --disable-memcached-sasl \
     && docker-php-ext-install memcached \
     && rm /tmp/memcached.tar.gz
-    
+
 # Cleanup
 RUN rm -rf /usr/src/*

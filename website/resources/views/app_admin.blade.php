@@ -53,7 +53,7 @@
 </head>
 
 <body class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-aside--enabled">
-    <div id="app">
+    <div id="app" style="min-height:100%;">
       Loading...
     </div>
     {{--replace below with app_admin.js if we enable multiple entrypoints through webpack--}}

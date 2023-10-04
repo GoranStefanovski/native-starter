@@ -99,11 +99,6 @@ return [
         'title' => 'Verify Registration',
         'verification_email_text' => 'You have been sent a verification email. Please verify the email address by visiting the link you have received.',
     ],
-    'public_user_logout' => [
-        'title' => 'Forbidden Access',
-        'text' => 'You do not have the proper permissions to access the admin section.',
-        'message' => 'Try logging out and logging in as an admin user.',
-    ],
     'footer' => [
         'get_in_touch' => 'Get in touch',
         'contact_details' => 'Contact details',
@@ -127,6 +122,10 @@ return [
     ],
     'static' => [
         'buttons' => 'Buttons',
-    ]
+    ],
+    'menu' => [
+        'label' => 'Pages'
+    ],
+    'title' => 'Pages'
 
 ];

@@ -1,0 +1,13 @@
+{
+  "name": "my-app",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "generate": "nuxt generate",
+    "start": "nuxt start"
+  },
+  "dependencies": {
+    "@nuxthq/ui": "^2.7.0",
+    "nuxt": "^3.4.3"
+  }
+}
