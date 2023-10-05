@@ -10,72 +10,72 @@ use App\Applications\Common\Requests\EventTimelineRequest;
 use App\Applications\Common\Requests\EventContactRequest;
 
 /**
- * @property OrganizationEventBLLInterface $eventBLL
+ * @property OrganizationEventBLLInterface $organizationEventBLL
  */
 class OrganizationEventController extends Controller
 {
     public function __construct(
-        OrganizationEventBLLInterface $eventBLL
+        OrganizationEventBLLInterface $organizationEventBLL
     ){
-        $this->eventBLL = $eventBLL;
+        $this->organizationEventBLL = $organizationEventBLL;
     }
 
     public function index(){
 
-        return $this->eventBLL->index();
+        return $this->organizationEventBLL->index();
 
     }
     public function getScrolldownPosts(Request $request){
-        $data = $this->eventBLL->getScrolldownPosts($request);
+        $data = $this->organizationEventBLL->getScrolldownPosts($request);
         // dd($data);
         return $data;
     }
 
     public function allOrganiztaionEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getOrganizationEventsData($request);
+        return $this->organizationEventBLL->getOrganizationEventsData($request);
     }
 
     public function allOrganiztaionEventsPublic(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getPublicOrganizationEvents($request);
+        return $this->organizationEventBLL->getPublicOrganizationEvents($request);
     }
 
     public function getBoostedOrganizationEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getBoostedOrganizationEvents($request);
+        return $this->organizationEventBLL->getBoostedOrganizationEvents($request);
     }
 
     public function getThisWeekEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getThisWeekEvents($request);
+        return $this->organizationEventBLL->getThisWeekEvents($request);
     }
 
     public function getThisMonthEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getThisMonthEvents($request);
+        return $this->organizationEventBLL->getThisMonthEvents($request);
     }
 
     public function getThisDayEvents(Request $request){
         // dd($this->postBLL->getAllPosts());
-        return $this->eventBLL->getThisDayEvents($request);
+        return $this->organizationEventBLL->getThisDayEvents($request);
     }
 
     public function getPostById($id){
-        return $this->eventBLL->getPostById($id);
+        return $this->organizationEventBLL->getPostById($id);
     }
     public function saveOrganizationEvent(OrganizationEventRequest $request){
-        return $this->eventBLL->saveOrganizationEvent($request);
+        return $this->organizationEventBLL->saveOrganizationEvent($request);
     }
 
     public function editOrganizationEventTimeline(EventTimelineRequest $request, $id){
-        return $this->eventBLL->editOrganizationEventTimeline($request, $id);
+        return $this->organizationEventBLL->editOrganizationEventTimeline($request, $id);
     }
     
     public function editOrganizationEvent(OrganizationEventRequest $request, $id){
-        return $this->eventBLL->editOrganizationEvent($request,$id);
+        return $this->organizationEventBLL->editOrganizationEvent($request,$id);
     }
     public function deleteOrganiztaionEvent($id){
-        return $this->eventBLL->deleteOrganiztaionEvent($id);
+        return $this->organizationEventBLL->deleteOrganiztaionEvent($id);
     }
 }

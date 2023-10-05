@@ -54,7 +54,7 @@
   const postUri = computed(() => `common/location/${id}/edit/contact`);
 
   const beforeSubmit = (hasToRedirect = true ) => {
-    onSubmit(postUri.value, 'locations', hasToRedirect, form.value);
+    onSubmit(postUri.value, 'edit.location.working_hours', hasToRedirect, form.value);
   }
 
   const handleModelUpdate = (value, forcities) => {

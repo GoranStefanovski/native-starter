@@ -100,7 +100,8 @@ const postUri = computed(() => edit ? `common/event/${id}/edit` : '/common/save-
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    onSubmit(postUri.value, 'events', hasToRedirect, form.value);
+    let redirectRoute = edit ? 'edit.event.timeline' : 'events'
+    onSubmit(postUri.value, redirectRoute, hasToRedirect, form.value);
   }
 
   const handleModelUpdate = (value, forcities) => {

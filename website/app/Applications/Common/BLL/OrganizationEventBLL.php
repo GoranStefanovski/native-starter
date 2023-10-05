@@ -74,15 +74,20 @@ class OrganizationEventBLL implements OrganizationEventBLLInterface
                 DB::raw('organization_events.title as title'),
                 DB::raw('organization_events.description as description'),
                 DB::raw('organization_events.user_id as user_id'),
+                DB::raw('organization_events.owner as owner'),
                 DB::raw('organization_events.music_types as music_types'),
-                DB::raw('organization_events.location_id as location_id'),
-                DB::raw('organization_events.location_name as location_name'),
                 DB::raw('organization_events.start_date as start_date'),
                 DB::raw('organization_events.end_date as end_date'),
                 DB::raw('organization_events.start_time as start_time'),
-                DB::raw('organization_events.end_time as end_time')
+                DB::raw('organization_events.end_time as end_time'),
+                DB::raw('media.file_name as file_name'),
+                DB::raw('media.id as model_id')
             )->leftJoin('users', 'organization_events.user_id', '=', 'users.id') // Use leftJoin to include organization_events without users.
-            ->orderByRaw('
+            ->leftJoin('media', function ($join) {
+                $join->on('organization_events.id', '=', 'media.model_id')
+                ->where('media.model_type', '=','App\\Applications\\Common\\Model\\OrganizationEvent')
+                ->where('media.collection_name', '=', 'organization_events_image');
+            })->orderByRaw('
                 CASE 
                     WHEN users.sub_type = 3 THEN 1
                     WHEN users.sub_type = 2 THEN 2

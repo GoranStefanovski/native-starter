@@ -55,6 +55,7 @@
   const postUri = computed(() => edit ? `common/location/${id}/edit` : '/common/save-location');
   const countriesUri = 'guest/common/get-countries';
   const locationTypesUri = 'guest/common/location-types';
+  const OrgEventsUri = 'guest/common/all-organiztaion-events';
 
   const fetchCountries = async () => {
     try {
@@ -82,6 +83,15 @@
     }
   }
 
+  const fetchOrgEvents = async () => {
+    try {
+      const response = await axios.post(OrgEventsUri);
+      console.log('All Organization Events', response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   const postImg = (() => {
     console.log(form.value.media[0]);
     const { media } = form.value.media[0];
@@ -95,7 +105,8 @@
   })
 
   const beforeSubmit = (hasToRedirect = true) => {
-    onSubmit(postUri.value, 'locations', hasToRedirect, form.value);
+    let redirectRoute = edit ? 'edit.location.contact' : 'locations';
+    onSubmit(postUri.value, redirectRoute, hasToRedirect, form.value);
   }
 
   const handleModelUpdate = (value, forcities) => {
@@ -108,7 +119,7 @@
     await fetchCountries();
     await initFormFromItem();
     await fetchLocationTypes();
-
+    await fetchOrgEvents();
     if(edit) {
       form.value.location_types = JSON.parse(form.value.location_types)
     } 
